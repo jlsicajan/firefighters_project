@@ -44,6 +44,23 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
+                        <li><a href="">Control general</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Unidades<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">UNIDAD A21</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">UNIDAD RD 19</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">UNIDAD MDP-22</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">UNIDAD TDP-22</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">UNIDAD EE-22</a></li>
+                                <li role="separator" class="divider"></li>
+                                <img src="/images/unitys/MDP-22.jpg" style="margin: 10px; height: 250px; width: 350px" class="navimg">
+                            </ul>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
