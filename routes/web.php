@@ -18,5 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/combustible', 'ExpensesController@gas');
+Route::get('/estacion', 'ExpensesController@station');
 Route::get('/unidades/{unidad}', ['as' => 'unidad',
     'uses' => 'UnityController@index']);
+

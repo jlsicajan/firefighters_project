@@ -64,6 +64,16 @@
                                      class="navimg">
                             </ul>
                         </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="true">Gastos<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url('combustible') }}">Gastos de combustible</a></li>
+                                <li><a href="{{ url('estacion') }}">Gastos de la estacion</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ url('libro_novedades') }}">Libro de novedades</a></li>
+                        <li><a href="{{ url('inventario_recaudaciones') }}">Inventario de recaudaciones</a></li>
                     @endif
                 </ul>
 
