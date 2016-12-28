@@ -12,8 +12,7 @@
                         <form action="#" autocomplete="off" method="POST" id="form_station">
                             <div class="form-group">
                                 <label for="bill_number">Numero de la factura</label>
-                                <input type="number" class="form-control" name="bill_number" id="bill_number"
-                                       required/>
+                                <input type="number" class="form-control" name="bill_number" id="bill_number"/>
                             </div>
                             <div class="form-group">
                                 <label for="station_spend">Ingrese la cantidad que gasto</label>

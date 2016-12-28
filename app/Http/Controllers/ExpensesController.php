@@ -29,9 +29,6 @@ class ExpensesController extends Controller
      */
     public function gas(Request $request)
     {
-        if($request->ajax()){
-            print_r('lol ajax');die();
-        }
         $unities = Unity::all();
         $data = array('unities' => $unities);
         return view('gas.index')->with($data);
@@ -41,7 +38,7 @@ class ExpensesController extends Controller
         return view('station.index');
     }
 
-    public function saveGas(){
+    public function saveGas(Request $request){
         $unity = Unity::findByCode(Input::get('unity'));
         $gas_spend = new GasSpend();
         $gas_spend->unity_id = $unity['id'];
@@ -53,7 +50,7 @@ class ExpensesController extends Controller
         $gas_spend->save();
         return 'Gasto ingresado correctamente Q' . $gas_spend->gas_spend;
     }
-    public function saveStation(){
+    public function saveStation(Request $request){
         $station_spend = new StationSpend();
         $station_spend->user_id = Auth::user()->id;
         $station_spend->bill_number = Input::get('bill_number');
