@@ -16,10 +16,17 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+//      PRINCIPAL PAGES
 Route::get('/home', 'HomeController@index');
 Route::get('/combustible', 'ExpensesController@gas');
 Route::get('/estacion', 'ExpensesController@station');
-Route::get('/unidades/{unidad}', ['as' => 'unidad',
-    'uses' => 'UnityController@index']);
+Route::get('/libro_novedades', 'NewsController@index');
+Route::get('/inventario_recaudaciones', 'CollectionController@index');
+
+//      SAVE DATA
+Route::post('/combustible/save', ['as'   => 'save.gas',
+                                  'uses' => 'ExpensesController@saveGas']);
+
+Route::get('/unidades/{unidad}', ['as'   => 'unidad',
+                                  'uses' => 'UnityController@index']);
 

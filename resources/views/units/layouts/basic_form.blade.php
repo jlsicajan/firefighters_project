@@ -1,4 +1,4 @@
-<form>
+<form  autocomplete="off">
     <div class="form-group">
         <label for="date">Fecha</label>
         <input type="date" class="form-control" name="date" id="date" required/>
