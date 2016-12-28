@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\GasSpend;
 use App\Providers\AuthServiceProvider;
+use App\StationSpend;
 use App\Unity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -40,7 +41,7 @@ class ExpensesController extends Controller
         return view('station.index');
     }
 
-    public function saveGas(Request $request){
+    public function saveGas(){
         $unity = Unity::findByCode(Input::get('unity'));
         $gas_spend = new GasSpend();
         $gas_spend->unity_id = $unity['id'];
@@ -51,5 +52,14 @@ class ExpensesController extends Controller
         $gas_spend->note_gas = Input::get('note_gas');
         $gas_spend->save();
         return 'Gasto ingresado correctamente Q' . $gas_spend->gas_spend;
+    }
+    public function saveStation(){
+        $station_spend = new StationSpend();
+        $station_spend->user_id = Auth::user()->id;
+        $station_spend->bill_number = Input::get('bill_number');
+        $station_spend->station_spend = Input::get('station_spend');
+        $station_spend->description = Input::get('description');
+        $station_spend->save();
+        return 'Gasto ingresado correctamente Q' . $station_spend->station_spend;
     }
 }

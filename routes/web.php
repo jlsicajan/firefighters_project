@@ -24,8 +24,10 @@ Route::get('/libro_novedades', 'NewsController@index');
 Route::get('/inventario_recaudaciones', 'CollectionController@index');
 
 //      SAVE DATA
-Route::post('/combustible/save', ['as'   => 'save.gas',
+Route::post('/combustible/gas', ['as'   => 'save.gas',
                                   'uses' => 'ExpensesController@saveGas']);
+Route::post('/combustible/station', ['as'   => 'save.station',
+                                  'uses' => 'ExpensesController@saveStation']);
 
 Route::get('/unidades/{unidad}', ['as'   => 'unidad',
                                   'uses' => 'UnityController@index']);

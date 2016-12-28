@@ -8,7 +8,8 @@
                     <div class="panel-heading">Gastos de la estacion</div>
 
                     <div class="panel-body">
-                        <form>
+                        <meta name="csrf-token" content="{{ csrf_token() }}" />
+                        <form action="#" autocomplete="off" method="POST" id="form_station">
                             <div class="form-group">
                                 <label for="bill_number">Numero de la factura</label>
                                 <input type="number" class="form-control" name="bill_number" id="bill_number"
@@ -34,7 +35,23 @@
 @endsection
 @section('after_scripts')
     <script>
-        //        alert('it works');
-        //        $('#patient_phone').hide();
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $('#form_station').on('submit', function (e) {
+            $.ajax({
+                type: "POST",
+                url: '{{ URL::route('save.station') }}',
+                data: {
+                    bill_number: $('input#bill_number').val(),
+                    station_spend: $('input#station_spend').val(),
+                    description: $('textarea#station_description').val(),
+                    _token: CSRF_TOKEN
+                },
+                success: function (data) {
+                    alert(data);
+                    $('#form_station').trigger("reset");
+                }
+            });
+            return false;
+        });
     </script>
 @endsection

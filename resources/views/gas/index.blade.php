@@ -21,8 +21,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="bill_number">Numero de la factura</label>
-                                <input type="number" class="form-control" name="bill_number" id="bill_number"
-                                       required/>
+                                <input type="number" class="form-control" name="bill_number" id="bill_number"/>
                             </div>
                             <div class="form-group">
                                 <label for="gas_name">Nombre de la gasolinera</label>
