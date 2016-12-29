@@ -33,6 +33,7 @@ class ExpensesController extends Controller
         $data = array('unities' => $unities);
         return view('gas.index')->with($data);
     }
+
     public function station()
     {
         return view('station.index');
@@ -50,6 +51,7 @@ class ExpensesController extends Controller
         $gas_spend->save();
         return 'Gasto ingresado correctamente Q' . $gas_spend->gas_spend;
     }
+
     public function saveStation(Request $request){
         $station_spend = new StationSpend();
         $station_spend->user_id = Auth::user()->id;

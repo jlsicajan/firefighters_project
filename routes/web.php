@@ -30,7 +30,8 @@ Route::post('/combustible/station', ['as'   => 'save.station',
                                      'uses' => 'ExpensesController@saveStation']);
 Route::post('/novedades/save', ['as'   => 'save.news',
                                 'uses' => 'NewsController@saveNew']);
-
+Route::post('/recaudaciones/save', ['as'   => 'save.collections',
+                                'uses' => 'CollectionController@saveCollection']);
 Route::get('/unidades/{unidad}', ['as'   => 'unidad',
                                   'uses' => 'UnityController@index']);
 
