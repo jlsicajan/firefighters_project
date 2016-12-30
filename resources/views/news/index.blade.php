@@ -53,6 +53,7 @@
                 success: function (data) {
                     alert(data);
                     $('#form_news').trigger("reset");
+                    $('#date').val(today);
                 }
             });
             return false;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class UnityController extends Controller
@@ -13,6 +14,12 @@ class UnityController extends Controller
 
     public function index($unity)
     {
-        return view('units.' . $unity);
+        $official = User::all();
+        $data = array('officials' => $official);
+        return view('units.' . $unity)->with($data);
+    }
+
+    public function save(Request $request){
+        return 'Guardado correctamente';
     }
 }

@@ -60,8 +60,8 @@
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ route('unidad', ['unidad' => 'ee22']) }}">UNIDAD EE-22</a></li>
                                 <li role="separator" class="divider"></li>
-                                <img src="/images/unitys/MDP-22.jpg" style="margin: 10px; height: 250px; width: 350px"
-                                     class="navimg">
+                                {{--<img src="/images/unitys/MDP-22.jpg" style="margin: 10px; height: 250px; width: 350px"--}}
+                                     {{--class="navimg">--}}
                             </ul>
                         </li>
                         <li class="dropdown">

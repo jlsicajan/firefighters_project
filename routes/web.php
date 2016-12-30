@@ -34,4 +34,5 @@ Route::post('/recaudaciones/save', ['as'   => 'save.collections',
                                 'uses' => 'CollectionController@saveCollection']);
 Route::get('/unidades/{unidad}', ['as'   => 'unidad',
                                   'uses' => 'UnityController@index']);
-
+Route::post('/saveunidades/', ['as'   => 'unidad.save',
+                                  'uses' => 'UnityController@save']);
