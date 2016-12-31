@@ -118,7 +118,6 @@
 
 <!-- Scripts -->
 <script src="/js/app.js"></script>
-<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"/>
 @yield('after_scripts')
 <script>
     $(document).ready(function(){
@@ -173,5 +172,6 @@
         }
     });
 </script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"/>
 </body>
 </html>
