@@ -120,6 +120,8 @@
 <script src="/js/app.js"></script>
 @yield('after_scripts')
 <script>
+    $("#name_responsible_div").hide();
+    $("#div_phone_patient").hide();
     $(document).ready(function(){
         $('#unity').DataTable({
             "language": {
@@ -127,9 +129,16 @@
             }
         });
     });
-    $("#name_responsible_div").hide();
-    $("#div_phone_patient").hide();
+    $('#patient_name_check').click(function() {
+        if( $(this).is(':checked')) {
+            $("#name_patient_div").show();
 
+            $("input#patient_responsible").prop('required',false);
+            $("input#patient_name").prop('required',true);
+
+            $("#name_responsible_div").hide();
+        }
+    });
     $('#patient_responsible_check').click(function() {
         if( $(this).is(':checked')) {
             $("#name_responsible_div").show();
@@ -140,16 +149,6 @@
             $("#name_patient_div").hide();
         }
     });
-    $('#patient_name_check').click(function() {
-        if( $(this).is(':checked')) {
-            $("#name_patient_div").show();
-
-            $("input#patient_responsible").prop('required',false);
-            $("input#patient_name").prop('required',true);
-
-            $("#div_phone_patient").hide();
-        }
-    });
 
     $('#yes_input').click(function() {
         if( $(this).is(':checked')) {
@@ -158,7 +157,7 @@
             $("input#patient_input").prop('required',true);
             $("input#patient_phone").prop('required',false);
 
-            $("#name_patient_div").hide();
+            $("#div_phone_patient").hide();
         }
     });
     $('#no_input').click(function() {
@@ -172,6 +171,5 @@
         }
     });
 </script>
-<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"/>
 </body>
 </html>

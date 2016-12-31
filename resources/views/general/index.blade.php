@@ -52,6 +52,7 @@
     </div>
 @endsection
 @section('after_scripts')
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"/>
     <script>
     </script>
 @endsection
