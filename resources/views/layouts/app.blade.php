@@ -46,7 +46,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     &nbsp;@if (Auth::check())
-                        @if (Auth::user()->name == 'edvin' | Auth::user()->name == 'fabian'| Auth::user()->name == 'Administrador')
+                        @if (Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian'| Auth::user()->name == 'Administrador')
                         <li><a href="{{ url('general') }}">Control general</a></li>
                         @endif
                         <li class="dropdown">
