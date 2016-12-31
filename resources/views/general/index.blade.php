@@ -54,5 +54,12 @@
 @section('after_scripts')
     <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"/>
     <script>
+        $(document).ready(function(){
+            $('#unity').DataTable({
+                "language": {
+                    "url": "/datatable/language/spanish.json"
+                }
+            });
+        });
     </script>
 @endsection

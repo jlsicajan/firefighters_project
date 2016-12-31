@@ -122,13 +122,6 @@
 <script>
     $("#name_responsible_div").hide();
     $("#div_phone_patient").hide();
-    $(document).ready(function(){
-        $('#unity').DataTable({
-            "language": {
-                "url": "/datatable/language/spanish.json"
-            }
-        });
-    });
     $('#patient_name_check').click(function() {
         if( $(this).is(':checked')) {
             $("#name_patient_div").show();
