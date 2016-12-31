@@ -95,7 +95,7 @@ class UserTableSeeder extends Seeder
                 'username' => $username[$i],
                 'number' => $number[$i],
                 'password' => 'null',
-                'email' => $name[$i]
+                'email' => $username[$i]
             ]);
         }
     }

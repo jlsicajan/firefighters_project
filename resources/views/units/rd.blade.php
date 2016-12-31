@@ -19,11 +19,11 @@
                         <div class="tab-content">
                             <div id="enfermedadcomun" class="tab-pane fade in active">
                                 <h3>Ingrese los datos para enfermedad comun</h3>
-                                @include('units.layouts.basic_form')
+                                @include('units.layouts.basic_form', ['unity_set' => 'RD19'])
                             </div>
                             <div id="accidente" class="tab-pane fade">
                                 <h3>Ingrese los datos para accidente</h3>
-                                @include('units.layouts.basic_form')
+                                @include('units.layouts.basic_form', ['unity_set' => 'RD19'])
                             </div>
                         </div>
                     </div>
@@ -54,6 +54,23 @@
                 type: "POST",
                 url: '{{ URL::route('unidad.save') }}',
                 data: {
+                    date: $('input#date').val(),
+                    timeout: $('input#timeout').val(),
+                    timein: $('input#timein').val(),
+                    kmout: $('input#kmout').val(),
+                    kmin: $('input#kmin').val(),
+                    patient_name: $('input#patient_name').val(),
+                    patient_responsible: $('input#patient_responsible').val(),
+                    patient_age: $('input#patient_age').val(),
+                    patient_case: $('textarea#patient_case').val(),
+                    patient_address: $('input#patient_address').val(),
+                    patient_address_from: $('input#patient_address_from').val(),
+                    patient_destiny: $('input#patient_destiny').val(),
+                    patient_phone: $('input#patient_phone').val(),
+                    patient_input: $('input#patient_input').val(),
+                    asistant_id: $('select#asistant').val(),
+                    pilot_id: $('select#pilot').val(),
+                    unity_id: $('input#unity_id').val(),
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
