@@ -14,7 +14,8 @@ class UnityController extends Controller
 
     public function index($unity)
     {
-        $official = User::all();
+        $official = User::all()->toArray();
+        print_r($official);die();
         $data = array('officials' => $official);
         return view('units.' . $unity)->with($data);
     }

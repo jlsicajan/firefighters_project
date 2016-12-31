@@ -1,16 +1,16 @@
 <form action="#" autocomplete="off" method="POST" class="form_basic">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <div class="form-group">
         <label for="date">Fecha</label>
         <input type="date" class="form-control date" name="date" id="date" required/>
     </div>
     <div class="form-group">
         <label for="kmout">Hora salida</label>
-        <input type="text" class="form-control" name="timeout" id="timeout" required/>
+        <input type="text" class="form-control" name="timeout" id="timeout" required placeholder="00:00"/>
     </div>
     <div class="form-group">
         <label for="kmout">Hora entrada</label>
-        <input type="text" class="form-control" name="timein" id="timein" required/>
+        <input type="text" class="form-control" name="timein" id="timein" required placeholder="00:00"/>
     </div>
     <div class="form-group">
         <label for="kmout">Kilometraje salida</label>
@@ -21,24 +21,46 @@
         <input type="number" class="form-control" name="kmin" id="kmin" required/>
     </div>
     <div class="form-group">
+        Paciente<label class="checkbox-inline">
+            <input type="radio" class="form-check-input" name="patient_check"
+                   id="patient_name_check" value="yes" checked>
+            Nombre del paciente
+        </label>
+        <label class="checkbox-inline">
+            <input type="radio" class="form-check-input" name="patient_check"
+                   id="patient_responsible_check" value="no">
+            Encargado o responsable del paciente
+        </label>
+    </div>
+    <div class="form-group">
         <label for="patient_name">Nombre del paciente</label>
         <input type="text" class="form-control" name="patient_name" id="patient_name"
                required/>
     </div>
     <div class="form-group">
+        <label for="patient_responsible">Responsable o encargado del paciente</label>
+        <input type="text" class="form-control" name="patient_responsible" id="patient_responsible"
+               required/>
+    </div>
+    <div class="form-group">
         <label for="patient_age">Edad del paciente</label>
-        <input type="number" class="form-control" name="patient_age" id="patient_age"
+        <input type="text" placeholder="edad del paciente" class="form-control" name="patient_age" id="patient_age"
                required/>
     </div>
     <div class="form-group">
         <label for="patient_case">Caso del paciente</label>
         <textarea class="form-control" id="patient_case" name="patient_case" rows="2"
-                  required></textarea>
+                  required placeholder="Descripcion de lo que le sucedio al paciente"></textarea>
     </div>
     <div class="form-group">
         <label for="patient_address">Direccion del paciente</label>
         <input type="text" class="form-control" name="patient_address"
                id="patient_address" required/>
+    </div>
+    <div class="form-group">
+        <label for="patient_address_from">Lugar de donde salio el paciente</label>
+        <input type="text" class="form-control" name="patient_address_from"
+               id="patient_address_from" required/>
     </div>
     <div class="form-group">
         <label for="patient_destiny">Lugar al que se traslado el paciente</label>
@@ -58,7 +80,7 @@
         </label>
     </div>
     <div class="form-group">
-        <label for="patient_phone">Ingrese numero del paciente</label>
+        <label for="patient_phone">Ingrese el numero de telefono del paciente</label>
         <input type="number" class="form-control" name="patient_phone" id="patient_phone"/>
     </div>
     <div class="form-group">
@@ -69,6 +91,7 @@
         <label for="unity">Asistente</label>
         <select class="form-control" id="unity" name="unity">
             <option value="null" selected disabled>-- Seleccion el asistente --</option>
+            <option value="no_one">NINGUN ASISTENTE</option>
             @foreach($officials as $official)
                 <option value="{{ $official->number }}">{{ $official->name }}</option>
             @endforeach

@@ -15,10 +15,10 @@ class UserTableSeeder extends Seeder
             'name' => 'Administrador',
             'username' => 'admin',
             'number' => '2013124',
-            'password' => bcrypt('NeZPJp8Wc'),
+            'password' => bcrypt('235689/jlsc'),
             'email' => 'admin'
         ]);
-        $quantity = 19;
+        $quantity = 21;
         $name = [
             'Jose Luis Sicajan Coy',
             'Fabian Sicajan Coy',
@@ -32,14 +32,15 @@ class UserTableSeeder extends Seeder
             'Sandra Leticia Upun Tzirin',
             'Rodrigo Lopez Lucas',
             'Narciso Raquec Mutzutz',
-            'Josefina Queche',
+            'Josefina Raquec',
             'Pascual Catu Aju',
             'Kimberly Ramirez Upun',
             'Faustino Sicajan',
-            'David Marroquin Jochola',
+            'David Sule Marroquin Jochola',
             'Rosendo Tzay Batz',
             'Osman Catu',
-            'Reina Catu Raquec'
+            'Reina Catu Raquec',
+            'Katerin Castillo'
         ];
         $username = [
             'admin@sicajan.com',
@@ -62,8 +63,10 @@ class UserTableSeeder extends Seeder
             'rosendo',
             'osman',
             'reina',
+            'katerincastillo'
         ];
         $number = [
+//            0000 are brigade
             '3128',
             '0415',
             '1059',
@@ -76,14 +79,15 @@ class UserTableSeeder extends Seeder
             '1489',
             '2104',
             '1056',
-            '1489',
+            '1811',
             '0405',
             '0000',
             '0000',
             '1490',
             '0406',
             '0000',
-            '1111',
+            '434',
+            '2545'
         ];
         for ($i = 0; $i < $quantity; $i++) {
             DB::table('users')->insert([
@@ -91,7 +95,7 @@ class UserTableSeeder extends Seeder
                 'username' => $username[$i],
                 'number' => $number[$i],
                 'password' => 'null',
-                'email' => $username[$i]
+                'email' => $name[$i]
             ]);
         }
     }
