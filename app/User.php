@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function getNameById($id){
+        $user = User::where('id', '=', $id)->select('name')->first();
+        return $user['name'];
+    }
 }

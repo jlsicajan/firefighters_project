@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -46,7 +47,7 @@
                 <ul class="nav navbar-nav">
                     &nbsp;@if (Auth::check())
                         @if (Auth::user()->name == 'edvin' | Auth::user()->name == 'fabian'| Auth::user()->name == 'Administrador')
-                        <li><a href="">Control general</a></li>
+                        <li><a href="{{ url('general') }}">Control general</a></li>
                         @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -117,8 +118,16 @@
 
 <!-- Scripts -->
 <script src="/js/app.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"/>
 @yield('after_scripts')
 <script>
+    $(document).ready(function(){
+        $('#unity').DataTable({
+            "language": {
+                "url": "/datatable/language/spanish.json"
+            }
+        });
+    });
     $("#name_responsible_div").hide();
     $("#div_phone_patient").hide();
 
