@@ -24,11 +24,13 @@ class UnityController extends Controller
             ->orWhere('username', '=', 'byron')
             ->orWhere('username', '=', 'isabel')
             ->get();
-        $data = array('officials' => $official, 'pilots' => $pilots);
+        $data = ['officials' => $official, 'pilots' => $pilots];
+
         return view('units.' . $unity)->with($data);
     }
 
-    public function save(Request $request){
+    public function save(Request $request)
+    {
         $unity = Unity::findByCode(Input::get('unity_id'));
 
         $unity_data = new UnityData();
@@ -47,7 +49,9 @@ class UnityController extends Controller
         $unity_data->patient_destiny = Input::get('patient_destiny');
         $unity_data->patient_phone = Input::get('patient_phone');
         $unity_data->patient_input = Input::get('patient_input');
-        $unity_data->asistant_id = Input::get('asistant_id');
+        if (Input::get('asistant_id') != 'no_one') {
+            $unity_data->asistant_id = Input::get('asistant_id');
+        }
         $unity_data->pilot_id = Input::get('pilot_id');
         $unity_data->unity_id = $unity['id'];
         $unity_data->user_id = Auth::user()->id;

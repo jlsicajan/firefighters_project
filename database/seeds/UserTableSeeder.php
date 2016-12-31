@@ -15,7 +15,7 @@ class UserTableSeeder extends Seeder
             'name' => 'Administrador',
             'username' => 'admin',
             'number' => '2013124',
-            'password' => bcrypt('235689/jlsc'),
+            'password' => bcrypt('NeZPJp8Wc'),
             'email' => 'admin'
         ]);
         $quantity = 21;
@@ -94,7 +94,7 @@ class UserTableSeeder extends Seeder
                 'name' => $name[$i],
                 'username' => $username[$i],
                 'number' => $number[$i],
-                'password' => 'null',
+                'password' => bcrypt($number[$i]),
                 'email' => $username[$i]
             ]);
         }

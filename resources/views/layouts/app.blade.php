@@ -45,7 +45,9 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     &nbsp;@if (Auth::check())
+                        @if (Auth::user()->name == 'edvin' | Auth::user()->name == 'fabian'| Auth::user()->name == 'Administrador')
                         <li><a href="">Control general</a></li>
+                        @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="true">Unidades<span class="caret"></span></a>
@@ -116,5 +118,51 @@
 <!-- Scripts -->
 <script src="/js/app.js"></script>
 @yield('after_scripts')
+<script>
+    $("#name_responsible_div").hide();
+    $("#div_phone_patient").hide();
+
+    $('#patient_responsible_check').click(function() {
+        if( $(this).is(':checked')) {
+            $("#name_responsible_div").show();
+
+            $("input#patient_responsible").prop('required',true);
+            $("input#patient_name").prop('required',false);
+
+            $("#name_patient_div").hide();
+        }
+    });
+    $('#patient_name_check').click(function() {
+        if( $(this).is(':checked')) {
+            $("#name_patient_div").show();
+
+            $("input#patient_responsible").prop('required',false);
+            $("input#patient_name").prop('required',true);
+
+            $("#div_phone_patient").hide();
+        }
+    });
+
+    $('#yes_input').click(function() {
+        if( $(this).is(':checked')) {
+            $("#div_patient_input").show();
+
+            $("input#patient_input").prop('required',true);
+            $("input#patient_phone").prop('required',false);
+
+            $("#name_patient_div").hide();
+        }
+    });
+    $('#no_input').click(function() {
+        if( $(this).is(':checked')) {
+            $("#div_phone_patient").show();
+
+            $("input#patient_phone").prop('required',false);
+            $("input#patient_input").prop('required',true);
+
+            $("#div_patient_input").hide();
+        }
+    });
+</script>
 </body>
 </html>

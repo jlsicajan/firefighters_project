@@ -39,16 +39,14 @@
         </label>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" id="name_patient_div">
         <label for="patient_name">Nombre del paciente</label>
-        <input type="text" class="form-control" name="patient_name" id="patient_name"
-               required/>
+        <input type="text" class="form-control" name="patient_name" id="patient_name"/>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" id="name_responsible_div">
         <label for="patient_responsible">Responsable o encargado del paciente</label>
-        <input type="text" class="form-control" name="patient_responsible" id="patient_responsible"
-               required/>
+        <input type="text" class="form-control" name="patient_responsible" id="patient_responsible"/>
     </div>
 
     <div class="form-group">
@@ -83,23 +81,23 @@
 
     <div class="form-group">
         Aporto algo el paciente<label class="checkbox-inline">
-            <input type="radio" class="form-check-input" name="optionsRadios"
-                   id="optionsRadios1" value="yes" checked>
+            <input type="radio" class="form-check-input" name="input_patient"
+                   id="yes_input" value="yes" checked>
             Si
         </label>
         <label class="checkbox-inline">
-            <input type="radio" class="form-check-input" name="optionsRadios"
-                   id="optionsRadios2" value="no">
+            <input type="radio" class="form-check-input" name="input_patient"
+                   id="no_input" value="no">
             No
         </label>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" id="div_phone_patient">
         <label for="patient_phone">Ingrese el numero de telefono del paciente</label>
         <input type="number" class="form-control" name="patient_phone" id="patient_phone"/>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" id="div_patient_input">
         <label for="patient_input">Ingrese la cantidad que aporto</label>
         <input type="number" class="form-control" name="patient_input" id="patient_input"/>
     </div>
