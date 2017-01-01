@@ -1,6 +1,7 @@
 <form action="#" autocomplete="off" method="POST" class="form_basic">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <input type="hidden" name="unity_id" id="unity_id" value="{{ $unity_set }}"/>
+    <input type="hidden" name="general_case" id="general_case" value="{{ $general_case }}"/>
     <div class="form-group">
         <label for="date">Fecha</label>
         <input type="date" class="form-control date" name="date" id="date" required/>

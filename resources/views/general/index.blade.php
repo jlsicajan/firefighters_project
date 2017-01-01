@@ -17,7 +17,8 @@
                                 <th>Piloto</th>
                                 <th>Asistente</th>
                                 <th>Oficial que reporta</th>
-                                <th>Paciente aporte</th>
+                                <th>Paciente aporte / telefono</th>
+                                <th>Caso</th>
                             </tr>
                             </thead>
                             <tfoot>
@@ -28,7 +29,8 @@
                                 <th>Piloto</th>
                                 <th>Asistente</th>
                                 <th>Oficial que reporta</th>
-                                <th>Paciente aporte</th>
+                                <th>Paciente aporte / telefono</th>
+                                <th>Caso</th>
                             </tr>
                             </tfoot>
                             <tbody>
@@ -40,7 +42,8 @@
                                     <td>{{  App\User::getNameById($unity_data->pilot_id) }}</td>
                                     <td>{{  App\User::getNameById($unity_data->asistant_id) }}</td>
                                     <td>{{  App\User::getNameById($unity_data->user_id) }}</td>
-                                    <td>Q {{ $unity_data->patient_input }}</td>
+                                    <td>Q {{ $unity_data->patient_input }}/{{ $unity_data->patient_phone }}</td>
+                                    <td>{{ $unity_data->general_case }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -52,7 +55,6 @@
     </div>
 @endsection
 @section('after_scripts')
-    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"/>
     <script>
         $(document).ready(function(){
             $('#unity').DataTable({
@@ -62,4 +64,5 @@
             });
         });
     </script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"/>
 @endsection

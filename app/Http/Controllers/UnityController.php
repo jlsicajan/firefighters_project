@@ -47,14 +47,19 @@ class UnityController extends Controller
         $unity_data->patient_address = Input::get('patient_address');
         $unity_data->patient_address_from = Input::get('patient_address_from');
         $unity_data->patient_destiny = Input::get('patient_destiny');
-        $unity_data->patient_phone = Input::get('patient_phone');
-        $unity_data->patient_input = Input::get('patient_input');
+        if(Input::get('patient_phone') != ''){
+            $unity_data->patient_phone = Input::get('patient_phone');
+        }
+        if(Input::get('patient_input') != ''){
+            $unity_data->patient_input = Input::get('patient_input');
+        }
         if (Input::get('asistant_id') != 'no_one') {
             $unity_data->asistant_id = Input::get('asistant_id');
         }
         $unity_data->pilot_id = Input::get('pilot_id');
         $unity_data->unity_id = $unity['id'];
         $unity_data->user_id = Auth::user()->id;
+        $unity_data->general_case = Input::get('general_case');
         $unity_data->save();
 
         return 'Unidad ' . Input::get('unity_id') . ' ingresado correctamente';

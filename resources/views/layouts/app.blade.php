@@ -122,6 +122,8 @@
 <script>
     $("#name_responsible_div").hide();
     $("#div_phone_patient").hide();
+    $("#name_responsible_div_a").hide();
+    $("#div_phone_patient_a").hide();
     $('#patient_name_check').click(function() {
         if( $(this).is(':checked')) {
             $("#name_patient_div").show();
@@ -143,6 +145,27 @@
         }
     });
 
+    $('#patient_name_check_a').click(function() {
+        if( $(this).is(':checked')) {
+            $("#name_patient_div_a").show();
+
+            $("input#patient_responsible_a").prop('required',false);
+            $("input#patient_name_a").prop('required',true);
+
+            $("#name_responsible_div_a").hide();
+        }
+    });
+    $('#patient_responsible_check_a').click(function() {
+        if( $(this).is(':checked')) {
+            $("#name_responsible_div_a").show();
+
+            $("input#patient_responsible_a").prop('required',true);
+            $("input#patient_name_a").prop('required',false);
+
+            $("#name_patient_div_a").hide();
+        }
+    });
+
     $('#yes_input').click(function() {
         if( $(this).is(':checked')) {
             $("#div_patient_input").show();
@@ -157,8 +180,8 @@
         if( $(this).is(':checked')) {
             $("#div_phone_patient").show();
 
-            $("input#patient_phone").prop('required',false);
-            $("input#patient_input").prop('required',true);
+            $("input#patient_phone").prop('required',true);
+            $("input#patient_input").prop('required',false);
 
             $("#div_patient_input").hide();
         }

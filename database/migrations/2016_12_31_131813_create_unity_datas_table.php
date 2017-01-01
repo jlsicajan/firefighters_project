@@ -33,6 +33,7 @@ class CreateUnityDatasTable extends Migration
             $table->integer('pilot_id')->unsigned();
             $table->integer('unity_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->string('general_case');
 
             $table->foreign('asistant_id')->references('id')->on('users');
             $table->foreign('pilot_id')->references('id')->on('users');
