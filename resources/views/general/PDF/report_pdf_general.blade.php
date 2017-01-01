@@ -1,4 +1,10 @@
-<table id="unity" class="display" cellspacing="0" width="100%"  border="1">
+<div id="details" class="clearfix">
+    <div id="invoice">
+        <h1></h1>
+        <div class="date">:</div>
+    </div>
+</div>
+<table border="1">
     <thead>
     <tr>
         <th>Fecha</th>
