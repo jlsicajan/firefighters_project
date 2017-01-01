@@ -52,6 +52,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="row text-center">
+                            <a type="button" class="btn btn-danger" href="{{ url('pdf/general') }}">Generar PDF</a>
+                        </div>
                     </div>
                 </div>
             </div>

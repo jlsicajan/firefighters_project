@@ -37,3 +37,7 @@ Route::get('/unidades/{unidad}', ['as'   => 'unidad',
                                   'uses' => 'UnityController@index']);
 Route::post('/saveunidades/', ['as'   => 'unidad.save',
                                   'uses' => 'UnityController@save']);
+
+
+//PDF ROUTES
+Route::get('/pdf/general', 'GeneralController@pdf');
