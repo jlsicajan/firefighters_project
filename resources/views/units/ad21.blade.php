@@ -72,6 +72,8 @@
                     pilot_id: $('select#pilot').val(),
                     unity_id: $('input#unity_id').val(),
                     general_case: $('input#general_case').val(),
+                    asistant_id_two: $('select#asistant_id_two').val(),
+                    observations: $('textarea#observations').val(),
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
@@ -105,6 +107,8 @@
                     pilot_id: $('select#pilot_a').val(),
                     unity_id: $('input#unity_id_a').val(),
                     general_case: $('input#general_case_a').val(),
+                    asistant_id_two: $('select#asistant_id_two_a').val(),
+                    observations: $('textarea#observations_a').val(),
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {

@@ -100,7 +100,15 @@
             @endforeach
         </select>
     </div>
-
+    <div class="form-group">
+        <label for="asistant_id_two_a">Segundo asistente</label>
+        <select class="form-control" id="asistant_id_two_a" name="asistant_id_two_a">
+            <option value="no_one" selected>SIN SEGUNDO ASISTENTE</option>
+            @foreach($officials as $official)
+                <option value="{{ $official->id }}">{{ $official->name }}</option>
+            @endforeach
+        </select>
+    </div>
     <div class="form-group">
         <label for="pilot_a">Piloto</label>
         <select class="form-control" id="pilot_a" name="pilot_a">
@@ -109,6 +117,11 @@
                 <option value="{{ $pilot->id }}">{{ $pilot->name }}</option>
             @endforeach
         </select>
+    </div>
+
+    <div class="form-group">
+        <label for="observations_a">Observaciones</label>
+        <textarea class="form-control" id="observations_a" name="observations_a" rows="2"></textarea>
     </div>
 
     <button type="submit" class="btn btn-primary">Guardar</button>

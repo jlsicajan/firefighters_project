@@ -59,10 +59,14 @@ class UnityController extends Controller
         if (Input::get('asistant_id') != 'no_one') {
             $unity_data->asistant_id = Input::get('asistant_id');
         }
+        if (Input::get('asistant_id_two') != 'no_one') {
+            $unity_data->asistant_id_two = Input::get('asistant_id_two');
+        }
         $unity_data->pilot_id = Input::get('pilot_id');
         $unity_data->unity_id = $unity['id'];
         $unity_data->user_id = Auth::user()->id;
         $unity_data->general_case = Input::get('general_case');
+        $unity_data->observations = Input::get('observations');
         $unity_data->save();
 
         return 'Unidad ' . Input::get('unity_id') . ' ingresado correctamente';

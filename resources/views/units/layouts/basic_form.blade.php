@@ -115,6 +115,16 @@
     </div>
 
     <div class="form-group">
+        <label for="asistant_id_two">Segundo asistente</label>
+        <select class="form-control" id="asistant_id_two" name="asistant_id_two">
+            <option value="no_one" selected>SIN SEGUNDO ASISTENTE</option>
+            @foreach($officials as $official)
+                <option value="{{ $official->id }}">{{ $official->name }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="form-group">
         <label for="unity">Piloto</label>
         <select class="form-control" id="pilot" name="pilot">
             <option value="null" selected disabled>-- Seleccion piloto --</option>
@@ -122,6 +132,11 @@
                 <option value="{{ $pilot->id }}">{{ $pilot->name }}</option>
             @endforeach
         </select>
+    </div>
+
+    <div class="form-group">
+        <label for="observations">Observaciones</label>
+        <textarea class="form-control" id="observations" name="observations" rows="2"></textarea>
     </div>
 
     <button type="submit" class="btn btn-primary">Guardar</button>
