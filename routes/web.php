@@ -22,7 +22,12 @@ Route::get('/combustible', 'ExpensesController@gas');
 Route::get('/estacion', 'ExpensesController@station');
 Route::get('/libro_novedades', 'NewsController@index');
 Route::get('/inventario_recaudaciones', 'CollectionController@index');
+// GENERAL CONTROL ROUTES
 Route::get('/general', 'GeneralController@index');
+Route::get('/gastos/combustible', 'GeneralSpendGasController@index');
+Route::get('/gastos/estacion', 'GeneralSpendStationController@index');
+Route::get('/control/recaudaciones', 'GeneralCollectionController@index');
+Route::get('/control/novedades', 'GeneralNewsController@index');
 
 //      SAVE DATA
 Route::post('/combustible/gas', ['as'   => 'save.gas',

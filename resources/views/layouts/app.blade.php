@@ -47,7 +47,22 @@
                 <ul class="nav navbar-nav">
                     &nbsp;@if (Auth::check())
                         @if (Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian'| Auth::user()->name == 'Administrador')
-                        <li><a href="{{ url('general') }}">Control general</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="true">Control general<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ url('general') }}">Control de unidades</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ url('gastos/combustible') }}">Control de gastos de combustible</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ url('gastos/estacion') }}">Control de gastos de la estacion</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ url('control/recaudaciones') }}">Control de recaudaciones</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ url('control/novedades') }}">Control de novedades</a></li>
+                                    <li role="separator" class="divider"></li>
+                                </ul>
+                            </li>
                         @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -64,7 +79,7 @@
                                 <li><a href="{{ route('unidad', ['unidad' => 'ee22']) }}">UNIDAD EE-22</a></li>
                                 <li role="separator" class="divider"></li>
                                 {{--<img src="/images/unitys/MDP-22.jpg" style="margin: 10px; height: 250px; width: 350px"--}}
-                                     {{--class="navimg">--}}
+                                {{--class="navimg">--}}
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -124,64 +139,64 @@
     $("#div_phone_patient").hide();
     $("#name_responsible_div_a").hide();
     $("#div_phone_patient_a").hide();
-    $('#patient_name_check').click(function() {
-        if( $(this).is(':checked')) {
+    $('#patient_name_check').click(function () {
+        if ($(this).is(':checked')) {
             $("#name_patient_div").show();
 
-            $("input#patient_responsible").prop('required',false);
-            $("input#patient_name").prop('required',true);
+            $("input#patient_responsible").prop('required', false);
+            $("input#patient_name").prop('required', true);
 
             $("#name_responsible_div").hide();
         }
     });
-    $('#patient_responsible_check').click(function() {
-        if( $(this).is(':checked')) {
+    $('#patient_responsible_check').click(function () {
+        if ($(this).is(':checked')) {
             $("#name_responsible_div").show();
 
-            $("input#patient_responsible").prop('required',true);
-            $("input#patient_name").prop('required',false);
+            $("input#patient_responsible").prop('required', true);
+            $("input#patient_name").prop('required', false);
 
             $("#name_patient_div").hide();
         }
     });
 
-    $('#patient_name_check_a').click(function() {
-        if( $(this).is(':checked')) {
+    $('#patient_name_check_a').click(function () {
+        if ($(this).is(':checked')) {
             $("#name_patient_div_a").show();
 
-            $("input#patient_responsible_a").prop('required',false);
-            $("input#patient_name_a").prop('required',true);
+            $("input#patient_responsible_a").prop('required', false);
+            $("input#patient_name_a").prop('required', true);
 
             $("#name_responsible_div_a").hide();
         }
     });
-    $('#patient_responsible_check_a').click(function() {
-        if( $(this).is(':checked')) {
+    $('#patient_responsible_check_a').click(function () {
+        if ($(this).is(':checked')) {
             $("#name_responsible_div_a").show();
 
-            $("input#patient_responsible_a").prop('required',true);
-            $("input#patient_name_a").prop('required',false);
+            $("input#patient_responsible_a").prop('required', true);
+            $("input#patient_name_a").prop('required', false);
 
             $("#name_patient_div_a").hide();
         }
     });
 
-    $('#yes_input').click(function() {
-        if( $(this).is(':checked')) {
+    $('#yes_input').click(function () {
+        if ($(this).is(':checked')) {
             $("#div_patient_input").show();
 
-            $("input#patient_input").prop('required',true);
-            $("input#patient_phone").prop('required',false);
+            $("input#patient_input").prop('required', true);
+            $("input#patient_phone").prop('required', false);
 
             $("#div_phone_patient").hide();
         }
     });
-    $('#no_input').click(function() {
-        if( $(this).is(':checked')) {
+    $('#no_input').click(function () {
+        if ($(this).is(':checked')) {
             $("#div_phone_patient").show();
 
-            $("input#patient_phone").prop('required',true);
-            $("input#patient_input").prop('required',false);
+            $("input#patient_phone").prop('required', true);
+            $("input#patient_input").prop('required', false);
 
             $("#div_patient_input").hide();
         }
