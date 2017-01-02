@@ -8,7 +8,7 @@
                     <div class="panel-heading">UNIDAD AD21</div>
                     <div class="panel-body">
                         <div class="text-center">
-                            <img src="/images/unitys/ad21.jpeg" style="height: 250px; width: 350px">
+                            <img class="img-responsive" src="/images/unitys/ad21.jpeg" style="margin: 0 auto; height: 250px; width: 350px">
                         </div>
                         <hr>
                         <ul class="nav nav-tabs">
