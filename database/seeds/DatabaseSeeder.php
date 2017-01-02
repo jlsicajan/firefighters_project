@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UnityTableSeeder::class);
         $this->call(RoleTableSeeder::class);
         $this->call(UserRoleTableSeeder::class);
+        $this->call(NewUserTableSeeder::class);
         Model::reguard();
     }
 }
