@@ -23,6 +23,9 @@ class UnityController extends Controller
             ->orWhere('username', '=', 'juan')
             ->orWhere('username', '=', 'byron')
             ->orWhere('username', '=', 'isabel')
+            ->orWhere('username', '=', 'david')
+            ->orWhere('username', '=', 'narciso')
+            ->orWhere('username', '=', 'edson')
             ->get();
         $data = ['officials' => $official, 'pilots' => $pilots];
 
