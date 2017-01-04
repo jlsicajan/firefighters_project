@@ -34,7 +34,7 @@
                             <tbody>
                             @foreach(json_decode($gas_datas) as $gas_data)
                                 <tr>
-                                    <td>{{ $gas_data->created_at }}</td>
+                                    <td>{{ $gas_data->date }}</td>
                                     <td>{{  App\Unity::getNameById($gas_data->unity_id) }}</td>
                                     <td>{{  App\User::getNameById($gas_data->user_id) }}</td>
                                     <td>{{ $gas_data->bill_number }}</td>

@@ -8,8 +8,12 @@
                     <div class="panel-heading">Gastos de combustible</div>
 
                     <div class="panel-body">
-                        <meta name="csrf-token" content="{{ csrf_token() }}" />
+                        <meta name="csrf-token" content="{{ csrf_token() }}"/>
                         <form action="#" autocomplete="off" method="POST" id="form_gas">
+                            <div class="form-group">
+                                <label for="date">Fecha</label>
+                                <input type="date" class="form-control" name="date" id="date" required/>
+                            </div>
                             <div class="form-group">
                                 <label for="unity">Unidad</label>
                                 <select class="form-control" id="unity" name="unity">
@@ -47,12 +51,23 @@
 @endsection
 @section('after_scripts')
     <script>
+        var now = new Date();
+
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+        var today = now.getFullYear() + "-" + month + "-" + day;
+        if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+            today = day + "/" + month + "/" + now.getFullYear();
+        }
+        $('#date').val(today);
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $('#form_gas').on('submit', function (e) {
             $.ajax({
                 type: "POST",
                 url: '{{ URL::route('save.gas') }}',
                 data: {
+                    date: $('input#date').val(),
                     unity: $('select#unity').val(),
                     bill_number: $('input#bill_number').val(),
                     gas_name: $('input#gas_name').val(),
@@ -63,6 +78,7 @@
                 success: function (data) {
                     alert(data);
                     $('#form_gas').trigger("reset");
+                    $('#date').val(today);
                 }
             });
             return false;

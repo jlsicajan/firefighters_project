@@ -30,7 +30,7 @@
                             <tbody>
                             @foreach(json_decode($station_datas) as $station_data)
                                 <tr>
-                                    <td>{{ $station_data->created_at }}</td>
+                                    <td>{{ $station_data->date }}</td>
                                     <td>{{  App\User::getNameById($station_data->user_id) }}</td>
                                     <td>{{ $station_data->bill_number }}</td>
                                     <td>{{ $station_data->station_spend }}</td>
