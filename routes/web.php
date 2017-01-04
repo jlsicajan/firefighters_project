@@ -46,3 +46,4 @@ Route::post('/saveunidades/', ['as'   => 'unidad.save',
 
 //PDF ROUTES
 Route::get('/pdf/general', 'GeneralController@pdf');
+Route::get('/pdf/general/spend/gas', 'GeneralSpendGasController@pdf');

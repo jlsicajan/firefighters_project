@@ -1,10 +1,19 @@
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    table, td, th {
+        border: 1px solid black;
+    }
+</style>
 <div id="details" class="clearfix">
     <div id="invoice">
         <h1></h1>
         <div class="date">:</div>
     </div>
 </div>
-<table border="1">
+<table>
     <thead>
     <tr>
         <th>Fecha</th>
