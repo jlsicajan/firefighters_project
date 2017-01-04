@@ -32,10 +32,15 @@
             <td>{{  App\Unity::getNameById($gas_spend->unity_id) }}</td>
             <td>{{ $gas_spend->bill_number }}</td>
             <td>{{ $gas_spend->gas_name }}</td>
-            <td>{{ $gas_spend->gas_spend }}</td>
+            <td>Q. {{ number_format($gas_spend->gas_spend, 2) }}</td>
             <td>{{  App\User::getNameById($gas_spend->user_id) }}</td>
             <td>{{ $gas_spend->note_gas }}</td>
         </tr>
     @endforeach
     </tbody>
 </table>
+<div id="details" class="clearfix">
+    <div id="invoice">
+        <h2>TOTAL GASTADO EN COMBUSTIBLE: Q. {{ number_format($total_gas_general, 2) }}</h2>
+    </div>
+</div>

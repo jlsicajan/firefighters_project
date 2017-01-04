@@ -32,8 +32,8 @@ class GeneralSpendGasController extends Controller
 
   public function pdf(Request $request)
   {
-
-    $data = ['gas_spends' => GasSpend::all()];
+    $total_gas_general = GasSpend::all()->sum('gas_spend');
+    $data = ['gas_spends' => GasSpend::all(), 'total_gas_general' => $total_gas_general];
     $pdf = App::make('dompdf.wrapper');
     $view = \View::make('general.PDF.report_pdf_spend_gas')->with($data)->render();
     $date = date('Y-m-d');

@@ -39,7 +39,7 @@
                                     <td>{{  App\User::getNameById($gas_data->user_id) }}</td>
                                     <td>{{ $gas_data->bill_number }}</td>
                                     <td>{{ $gas_data->gas_name }}</td>
-                                    <td>{{ $gas_data->gas_spend }}</td>
+                                    <td>Q. {{ number_format($gas_data->gas_spend, 2) }}</td>
                                     <td>{{ $gas_data->note_gas }}</td>
                                 </tr>
                             @endforeach
