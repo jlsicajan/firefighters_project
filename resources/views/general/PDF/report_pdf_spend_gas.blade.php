@@ -10,7 +10,7 @@
 <div id="details" class="clearfix">
     <div id="invoice">
         <h1></h1>
-        <div class="date">:</div>
+        <div class="date"></div>
     </div>
 </div>
 <table>

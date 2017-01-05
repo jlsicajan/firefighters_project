@@ -33,7 +33,7 @@
                                     <td>{{ $station_data->date }}</td>
                                     <td>{{  App\User::getNameById($station_data->user_id) }}</td>
                                     <td>{{ $station_data->bill_number }}</td>
-                                    <td>{{ $station_data->station_spend }}</td>
+                                    <td>Q. {{ number_format($station_data->station_spend, 2) }}</td>
                                     <td>{{ $station_data->description }}</td>
                                 </tr>
                             @endforeach
@@ -43,13 +43,13 @@
                 </div>
             </div>
         </div>
-        {{--<div class="row text-center">--}}
-            {{--<div class="col-md-12">--}}
-                {{--<div class="panel panel-default">--}}
-                    {{--<div class="panel-heading">Reporte de gastos en combustible</div>--}}
+        <div class="row text-center">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Reporte de gastos de la estacion</div>
 
-                    {{--<div class="panel-body">--}}
-                        {{--<form class="form-inline" method="get" action="{{ action('GeneralController@pdf') }}">--}}
+                    <div class="panel-body">
+                        <form class="form-inline" method="get" action="{{ action('GeneralSpendStationController@pdf') }}">
                             {{--<div class="form-group">--}}
                                 {{--<label for="date_from">DESDE:</label>--}}
                                 {{--<input type="date" class="form-control" name="date_from" id="date_from" placeholder="d/m/Y"/>--}}
@@ -73,12 +73,12 @@
                                     {{--@endforeach--}}
                                 {{--</select>--}}
                             {{--</div>--}}
-                            {{--<button type="submit" class="btn btn-danger">Generar PDF</button>--}}
-                        {{--</form>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
+                            <button type="submit" class="btn btn-danger">Generar PDF</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @section('after_scripts')
