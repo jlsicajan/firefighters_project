@@ -137,8 +137,13 @@
 <script>
     $("#name_responsible_div").hide();
     $("#div_phone_patient").hide();
+
     $("#name_responsible_div_a").hide();
     $("#div_phone_patient_a").hide();
+
+    $("#name_responsible_div_service").hide();
+    $("#div_phone_patient_service").hide();
+
     $('#patient_name_check').click(function () {
         if ($(this).is(':checked')) {
             $("#name_patient_div").show();
@@ -178,6 +183,27 @@
             $("input#patient_name_a").prop('required', false);
 
             $("#name_patient_div_a").hide();
+        }
+    });
+
+    $('#patient_name_check_service').click(function () {
+        if ($(this).is(':checked')) {
+            $("#name_patient_div_service").show();
+
+            $("input#patient_responsible_service").prop('required', false);
+            $("input#patient_name_service").prop('required', true);
+
+            $("#name_responsible_div_service").hide();
+        }
+    });
+    $('#patient_responsible_check_service').click(function () {
+        if ($(this).is(':checked')) {
+            $("#name_responsible_div_service").show();
+
+            $("input#patient_responsible_service").prop('required', true);
+            $("input#patient_name_service").prop('required', false);
+
+            $("#name_patient_div_service").hide();
         }
     });
 

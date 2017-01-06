@@ -15,6 +15,7 @@
                         <ul class="nav nav-tabs">
                             <li><a data-toggle="tab" href="#enfermedadcomun">Enfermedad comun</a></li>
                             <li><a data-toggle="tab" href="#accidente">Accidente</a></li>
+                            <li><a data-toggle="tab" href="#social">Servicio social</a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="enfermedadcomun" class="tab-pane fade in active">
@@ -24,6 +25,10 @@
                             <div id="accidente" class="tab-pane fade">
                                 <h3>Ingrese los datos para accidente</h3>
                                 @include('units.layouts.basic_form_accident', ['unity_set' => 'RD19', 'general_case' => 'Accidente'])
+                            </div>
+                            <div id="social" class="tab-pane fade">
+                                <h3>Ingrese los datos para servicio social</h3>
+                                @include('units.layouts.basic_form_social', ['unity_set' => 'RD19', 'general_case' => 'Servicio social'])
                             </div>
                         </div>
                     </div>
@@ -46,6 +51,8 @@
         $('.date').val(today);
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             $('.form_basic').trigger("reset");
+            $('.form_basic_accident').trigger("reset");
+            $('.form_basic_service').trigger("reset");
             $('.date').val(today);
         });
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
@@ -114,6 +121,42 @@
                 success: function (data) {
                     alert(data);
                     $('.form_basic_accident').trigger("reset");
+                    $('.date').val(today);
+                }
+            });
+            return false;
+        });
+        $('.form_basic_service').on('submit', function (e) {
+            $.ajax({
+                type: "POST",
+                url: '{{ URL::route('unidad.save') }}',
+                data: {
+                    date: $('input#date_service').val(),
+                    timeout: $('input#timeout_service').val(),
+                    timein: $('input#timein_service').val(),
+                    kmout: $('input#kmout_service').val(),
+                    kmin: $('input#kmin_service').val(),
+                    patient_name: $('input#patient_name_service').val(),
+                    patient_responsible: $('input#patient_responsible_service').val(),
+                    patient_age: $('input#patient_age_service').val(),
+                    patient_case: $('textarea#patient_case_service').val(),
+                    patient_address: $('input#patient_address_service').val(),
+                    patient_address_from: $('input#patient_address_from_service').val(),
+                    patient_destiny: $('input#patient_destiny_service').val(),
+                    patient_phone: $('input#patient_phone_service').val(),
+                    patient_input: $('input#patient_input_service').val(),
+                    asistant_id: $('select#asistant_service').val(),
+                    pilot_id: $('select#pilot_service').val(),
+                    unity_id: $('input#unity_id_service').val(),
+                    general_case: $('input#general_case_service').val(),
+                    asistant_id_two: $('select#asistant_id_two_service').val(),
+                    observations: $('textarea#observations_service').val(),
+                    service_type: $('input#service_type').val(),
+                    _token: CSRF_TOKEN
+                },
+                success: function (data) {
+                    alert(data);
+                    $('.form_basic_service').trigger("reset");
                     $('.date').val(today);
                 }
             });
