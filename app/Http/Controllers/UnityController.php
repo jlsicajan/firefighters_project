@@ -27,7 +27,16 @@ class UnityController extends Controller
             ->orWhere('username', '=', 'narciso')
             ->orWhere('username', '=', 'edson')
             ->get();
-        $data = ['officials' => $official, 'pilots' => $pilots];
+        if($unity == 'rd'){
+            $kmin_all = UnityData::where('unity_id', '=', Unity::findByCode('RD19'))->select('kmin')->orderBy('created_at', 'desc')->first();
+        }else{
+            $kmin_all = UnityData::where('unity_id', '=', Unity::findByCode(strtoupper($unity)))->select('kmin')->orderBy('created_at', 'desc')->first();
+        }
+        $kmin_all = isset($kmin_all)? $kmin_all->kmin : '';
+
+        $data = ['officials' => $official, 'pilots' => $pilots,
+          'kmin_all' => $kmin_all,
+        ];
 
         return view('units.' . $unity)->with($data);
     }
