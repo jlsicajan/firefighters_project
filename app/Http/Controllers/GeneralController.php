@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\App;
+use Faker\Provider\cs_CZ\DateTime;
 
 class GeneralController extends Controller
 {
@@ -34,24 +35,21 @@ class GeneralController extends Controller
 
     public function pdf(Request $request)
     {
-//        $date_from= date("Y/d/m", strtotime($request->get('date_from')));
-//        $date_to = date("Y/d/m", strtotime($request->get('date_to')));
-//        $year = $request->get('year');
-//        $unity_select = $request->get('unity');
-//
-//        if ($unity_select == 'all') {
-//            $unity_datas = UnityData::orderBy('date')
-//                ->where('date', 'LIKE', '%'.[$date_from, $date_to])
-//                ->get();
-//        } else {
-//            $unity = Unity::findByCode($unity_select);
-//
-//            $unity_datas = UnityData::where('unity_id', '=', $unity['id'])
-//                ->where('date', 'LIKE', '%'.[$date_from, $date_to])
-//                ->get();
-//        }
+        $range = $this->convertYmd($request->get('date_from'), $request->get('date_to'));
 
-        $data = ['unity_datas' => UnityData::all()];
+        if ($request->get('unity') == 'all') {
+            $unity_datas = UnityData::orderBy('date')
+                ->whereIn('date', $range)
+                ->get();
+        } else {
+            $unity = Unity::findByCode($request->get('unity'));
+
+            $unity_datas = UnityData::where('unity_id', '=', $unity['id'])
+                ->whereIn('date', $range)
+                ->get();
+        }
+        $data = ['unity_datas' => $unity_datas, 'date_from' => $request->get('date_from'), 'date_to' => $request->get('date_to')];
+
         $pdf = App::make('dompdf.wrapper');
         $view = \View::make('general.PDF.report_pdf_general')->with($data)->render();
         $date = date('Y-m-d');
@@ -60,18 +58,36 @@ class GeneralController extends Controller
         return $pdf->download('general-' . $date . '.pdf');
     }
 
-//    function dateRange( $first, $last, $step, $format ) {
-//
-//        $dates = array();
-//        $current = strtotime( $first );
-//        $last = strtotime( $last );
-//
-//        while( $current <= $last ) {
-//
-//            $dates[] = date( $format, $current );
-//            $current = strtotime( $step, $current );
-//        }
-//
-//        return $dates;
-//    }
+    function createDateRangeArray($strDateFrom,$strDateTo)
+    {
+        $aryRange=array();
+
+        $iDateFrom=mktime(1,0,0,substr($strDateFrom,5,2),     substr($strDateFrom,8,2),substr($strDateFrom,0,4));
+        $iDateTo=mktime(1,0,0,substr($strDateTo,5,2),     substr($strDateTo,8,2),substr($strDateTo,0,4));
+
+        if ($iDateTo>=$iDateFrom)
+        {
+            array_push($aryRange,date('d/m/Y',$iDateFrom)); // first entry
+            while ($iDateFrom<$iDateTo)
+            {
+                $iDateFrom+=86400; // add 24 hours
+                array_push($aryRange,date('d/m/Y',$iDateFrom));
+            }
+        }
+        return $aryRange;
+    }
+
+    function convertYmd($date_from, $date_to){
+        $day_to = substr($date_to, 0, -8);
+        $month_to = substr($date_to, 3, -5);
+        $year_to = substr($date_to, -4);
+        $ymd_to = $year_to . '-' . $month_to . '-' . $day_to;
+
+        $day_from = substr($date_from, 0, -8);
+        $month_from = substr($date_from, 3, -5);
+        $year_from = substr($date_from, -4);
+        $ymd_from = $year_from . '-' . $month_from . '-' . $day_from;
+
+        return $this->createDateRangeArray($ymd_from, $ymd_to);
+    }
 }

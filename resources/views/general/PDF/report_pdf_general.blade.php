@@ -6,11 +6,14 @@
     table, td, th {
         border: 1px solid black;
     }
+
+    h2{
+        color: #293D3B;
+    }
 </style>
 <div id="details" class="clearfix">
     <div id="invoice">
-        <h1></h1>
-        <div class="date">:</div>
+        <h2>REPORTE DESDE EL {{ $date_from }} HASTA EL {{ $date_to }}</h2>
     </div>
 </div>
 <table>
@@ -45,3 +48,14 @@
     @endforeach
     </tbody>
 </table>
+<div id="details" class="clearfix">
+    {{--<div id="invoice">--}}
+        {{--<h2>TOTAL APORTES: Q. {{ number_format($total_gas_general, 2) }}</h2>--}}
+        {{--<hr>--}}
+        {{--<h2>TOTAL SALIDAS AD21: {{ $total_out_ad21 }} </h2>--}}
+        {{--<h2>TOTAL SALIDAS RD19: {{ $total_out_rd19 }}</h2>--}}
+        {{--<h2>TOTAL SALIDAS MDP-22: {{ $total_out_mdp22 }}</h2>--}}
+        {{--<h2>TOTAL SALIDAS TDP-22: {{ $total_out_tdp22 }}</h2>--}}
+        {{--<h2>TOTAL SALIDAS EE-22: {{ $total_out_ee22 }}</h2>--}}
+    {{--</div>--}}
+</div>

@@ -72,12 +72,6 @@
                                 <input type="date" class="form-control" name="date_to" id="date_to" placeholder="d/m/Y"/>
                             </div>
                             <div class="form-group">
-                                <label for="year">AÑO:</label>
-                                <select class="form-control" id="year" name="year">
-                                    <option value="2017">2017</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
                                 <label for="unity">UNIDAD:</label>
                                 <select class="form-control" id="unity" name="unity">
                                     <option value="all" selected>-- TODAS LAS UNIDADES --</option>
