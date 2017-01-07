@@ -56,29 +56,23 @@
 
                     <div class="panel-body">
                         <form class="form-inline" method="get" action="{{ action('GeneralSpendGasController@pdf') }}">
-                            {{--<div class="form-group">--}}
-                                {{--<label for="date_from">DESDE:</label>--}}
-                                {{--<input type="date" class="form-control" name="date_from" id="date_from" placeholder="d/m/Y"/>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label for="date_to">HASTA:</label>--}}
-                                {{--<input type="date" class="form-control" name="date_to" id="date_to" placeholder="d/m/Y"/>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label for="year">AÑO:</label>--}}
-                                {{--<select class="form-control" id="year" name="year">--}}
-                                    {{--<option value="2017">2017</option>--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label for="unity">UNIDAD:</label>--}}
-                                {{--<select class="form-control" id="unity" name="unity">--}}
-                                    {{--<option value="all" selected>-- TODAS LAS UNIDADES --</option>--}}
-                                    {{--@foreach($unities as $unity)--}}
-                                        {{--<option value="{{ $unity->code }}">{{ $unity->name }}</option>--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
+                            <div class="form-group">
+                                <label for="date_from">DESDE:</label>
+                                <input type="date" class="form-control" name="date_from" id="date_from" placeholder="d/m/Y"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="date_to">HASTA:</label>
+                                <input type="date" class="form-control" name="date_to" id="date_to" placeholder="d/m/Y"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="unity">UNIDAD:</label>
+                                <select class="form-control" id="unity" name="unity">
+                                    <option value="all" selected>-- TODAS LAS UNIDADES --</option>
+                                    @foreach($unities as $unity)
+                                        <option value="{{ $unity->code }}">{{ $unity->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <button type="submit" class="btn btn-danger">Generar PDF</button>
                         </form>
                     </div>

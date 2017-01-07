@@ -30,6 +30,7 @@ class GeneralController extends Controller
     public function index()
     {
         $data = ['unity_datas' => UnityData::all(), 'unities' => Unity::all()];
+
         return view('general.index')->with($data);
     }
 
@@ -41,14 +42,29 @@ class GeneralController extends Controller
             $unity_datas = UnityData::orderBy('date')
                 ->whereIn('date', $range)
                 ->get();
+
+            $total_in = UnityData::orderBy('date')
+                ->whereIn('date', $range)
+                ->sum('patient_input');
         } else {
             $unity = Unity::findByCode($request->get('unity'));
 
-            $unity_datas = UnityData::where('unity_id', '=', $unity['id'])
+            $unity_datas = UnityData::orderBy('date')
+                ->where('unity_id', '=', $unity['id'])
                 ->whereIn('date', $range)
                 ->get();
+
+            $total_in = UnityData::orderBy('date')
+                ->where('unity_id', '=', $unity['id'])
+                ->whereIn('date', $range)
+                ->sum('patient_input');
         }
-        $data = ['unity_datas' => $unity_datas, 'date_from' => $request->get('date_from'), 'date_to' => $request->get('date_to')];
+
+        $data = ['unity_datas' => $unity_datas,
+                 'date_from'   => $request->get('date_from'),
+                 'date_to'     => $request->get('date_to'),
+                 'unity'       => $request->get('unity'),
+                 'total_in'    => $total_in];
 
         $pdf = App::make('dompdf.wrapper');
         $view = \View::make('general.PDF.report_pdf_general')->with($data)->render();
@@ -58,26 +74,26 @@ class GeneralController extends Controller
         return $pdf->download('general-' . $date . '.pdf');
     }
 
-    function createDateRangeArray($strDateFrom,$strDateTo)
+    function createDateRangeArray($strDateFrom, $strDateTo)
     {
-        $aryRange=array();
+        $aryRange = [];
 
-        $iDateFrom=mktime(1,0,0,substr($strDateFrom,5,2),     substr($strDateFrom,8,2),substr($strDateFrom,0,4));
-        $iDateTo=mktime(1,0,0,substr($strDateTo,5,2),     substr($strDateTo,8,2),substr($strDateTo,0,4));
+        $iDateFrom = mktime(1, 0, 0, substr($strDateFrom, 5, 2), substr($strDateFrom, 8, 2), substr($strDateFrom, 0, 4));
+        $iDateTo = mktime(1, 0, 0, substr($strDateTo, 5, 2), substr($strDateTo, 8, 2), substr($strDateTo, 0, 4));
 
-        if ($iDateTo>=$iDateFrom)
-        {
-            array_push($aryRange,date('d/m/Y',$iDateFrom)); // first entry
-            while ($iDateFrom<$iDateTo)
-            {
-                $iDateFrom+=86400; // add 24 hours
-                array_push($aryRange,date('d/m/Y',$iDateFrom));
+        if ($iDateTo >= $iDateFrom) {
+            array_push($aryRange, date('d/m/Y', $iDateFrom)); // first entry
+            while ($iDateFrom < $iDateTo) {
+                $iDateFrom += 86400; // add 24 hours
+                array_push($aryRange, date('d/m/Y', $iDateFrom));
             }
         }
+
         return $aryRange;
     }
 
-    function convertYmd($date_from, $date_to){
+    function convertYmd($date_from, $date_to)
+    {
         $day_to = substr($date_to, 0, -8);
         $month_to = substr($date_to, 3, -5);
         $year_to = substr($date_to, -4);

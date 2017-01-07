@@ -29,7 +29,7 @@
                                 <th>Piloto</th>
                                 <th>Asistente</th>
                                 <th>Oficial que reporta</th>
-                                <th>Paciente aporte / telefono</th>
+                                <th>Paciente aporte  /  telefono</th>
                                 <th>Caso</th>
                             </tr>
                             </tfoot>
@@ -46,7 +46,7 @@
                                         <td>NINGUN ASISTENTE</td>
                                     @endif
                                     <td>{{  App\User::getNameById($unity_data->user_id) }}</td>
-                                    <td>Q {{ $unity_data->patient_input }}/{{ $unity_data->patient_phone }}</td>
+                                    <td>Q. {{ number_format($unity_data->patient_input , 2) }}  /  {{ $unity_data->patient_phone }}</td>
                                     <td>{{ $unity_data->patient_case }}</td>
                                 </tr>
                             @endforeach
@@ -105,7 +105,8 @@
             $('#unity').DataTable({
                 "language": {
                     "url": "/datatable/language/spanish.json"
-                }
+                },
+                "scrollY": "500px",
             });
         });
     </script>

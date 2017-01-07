@@ -8,7 +8,7 @@
     }
 
     h2{
-        color: #293D3B;
+        color: green;
     }
 </style>
 <div id="details" class="clearfix">
@@ -25,7 +25,7 @@
         <th>Piloto</th>
         <th>Asistente</th>
         <th>Oficial que reporta</th>
-        <th>Paciente aporte / telefono</th>
+        <th>Paciente aporte  /  telefono</th>
         <th>Caso</th>
     </tr>
     </thead>
@@ -42,13 +42,16 @@
                 <td>NINGUN ASISTENTE</td>
             @endif
             <td>{{  App\User::getNameById($unity_data->user_id) }}</td>
-            <td>Q {{ $unity_data->patient_input }}/{{ $unity_data->patient_phone }}</td>
+            <td>Q. {{ number_format($unity_data->patient_input , 2) }}  /  {{ $unity_data->patient_phone }}</td>
             <td>{{ $unity_data->patient_case }}</td>
         </tr>
     @endforeach
     </tbody>
 </table>
 <div id="details" class="clearfix">
+    <div id="invoice">
+        <h2>TOTAL INGRESO POR APORTES: {{ $total_in }}</h2>
+    </div>
     {{--<div id="invoice">--}}
         {{--<h2>TOTAL APORTES: Q. {{ number_format($total_gas_general, 2) }}</h2>--}}
         {{--<hr>--}}

@@ -20,6 +20,6 @@ class Unity extends Model
     }
     public static function getNameById($id){
         $unity = Unity::where('id', '=', $id)->select('name')->first();
-        return $unity['name'];
+        return ltrim($unity['name'], 'UNIDAD');
     }
 }

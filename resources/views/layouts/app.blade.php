@@ -51,6 +51,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="true">Control general<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
+                                    <li role="separator" class="divider"></li>
                                     <li><a href="{{ url('general') }}">Control de unidades</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{{ url('gastos/combustible') }}">Control de gastos de combustible</a></li>
@@ -68,6 +69,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="true">Unidades<span class="caret"></span></a>
                             <ul class="dropdown-menu">
+                                <li role="separator" class="divider"></li>
                                 <li><a href="{{ route('unidad', ['unidad' => 'ad21']) }}">UNIDAD A21</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ route('unidad', ['unidad' => 'rd']) }}">UNIDAD RD 19</a></li>
@@ -86,8 +88,11 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="true">Gastos<span class="caret"></span></a>
                             <ul class="dropdown-menu">
+                                <li role="separator" class="divider"></li>
                                 <li><a href="{{ url('combustible') }}">Gastos de combustible</a></li>
+                                <li role="separator" class="divider"></li>
                                 <li><a href="{{ url('estacion') }}">Gastos de la estacion</a></li>
+                                <li role="separator" class="divider"></li>
                             </ul>
                         </li>
                         <li><a href="{{ url('libro_novedades') }}">Libro de novedades</a></li>
