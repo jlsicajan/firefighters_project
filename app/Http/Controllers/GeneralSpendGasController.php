@@ -33,7 +33,7 @@ class GeneralSpendGasController extends Controller
 
     public function pdf(Request $request)
     {
-        $range = $this->convertYmd($request->get('date_from'), $request->get('date_to'));
+        $range = $this->createDateRangeArray($request->get('date_from'), $request->get('date_to'));
 
         if ($request->get('unity') == 'all') {
             $gas_spends = GasSpend::orderBy('date')
