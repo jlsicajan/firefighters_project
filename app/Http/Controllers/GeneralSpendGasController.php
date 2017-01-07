@@ -33,7 +33,7 @@ class GeneralSpendGasController extends Controller
 
     public function pdf(Request $request)
     {
-        $range = $this->createDateRangeArray($request->get('date_from'), $request->get('date_to'));
+        $range = $this->convertYmd($request->get('date_from'), $request->get('date_to'));
 
         if ($request->get('unity') == 'all') {
             $gas_spends = GasSpend::orderBy('date')
@@ -75,10 +75,10 @@ class GeneralSpendGasController extends Controller
         $iDateTo = mktime(1, 0, 0, substr($strDateTo, 5, 2), substr($strDateTo, 8, 2), substr($strDateTo, 0, 4));
 
         if ($iDateTo >= $iDateFrom) {
-            array_push($aryRange, date('d/m/Y', $iDateFrom)); // first entry
+            array_push($aryRange, date('Y-m-d', $iDateFrom)); // first entry
             while ($iDateFrom < $iDateTo) {
                 $iDateFrom += 86400; // add 24 hours
-                array_push($aryRange, date('d/m/Y', $iDateFrom));
+                array_push($aryRange, date('Y-m-d', $iDateFrom));
             }
         }
 
