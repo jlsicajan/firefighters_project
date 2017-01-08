@@ -24,15 +24,15 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        return view('news.index');
+    public function index(Request $request){
+        $data = array('date_today' => date('d/m/Y'));
+        return view('news.index')->with($data);
     }
 
     public function saveNew(Request $request){
         $new = new NewDay();
         $new->user_id = Auth::user()->id;
-        $new->date = Input::get('date');
+        $new->date = date('d/m/Y');
         $new->news_day = Input::get('news_day');
         $new->save();
         return 'Novedad ingresado correctamente con fecha ' . $new->date;

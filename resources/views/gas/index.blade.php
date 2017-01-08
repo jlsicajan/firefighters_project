@@ -12,7 +12,7 @@
                         <form action="#" autocomplete="off" method="POST" id="form_gas">
                             <div class="form-group">
                                 <label for="date">Fecha</label>
-                                <input type="date" class="form-control" name="date" id="date" required/>
+                                <input type="text" class="form-control" name="date" id="date" required value="{{ $date_today }}" disabled/>
                             </div>
                             <div class="form-group">
                                 <label for="unity">Unidad</label>
@@ -51,16 +51,6 @@
 @endsection
 @section('after_scripts')
     <script>
-        var now = new Date();
-
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-        var today = now.getFullYear() + "-" + month + "-" + day;
-        if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-            today = day + "/" + month + "/" + now.getFullYear();
-        }
-        $('#date').val(today);
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $('#form_gas').on('submit', function (e) {
             $.ajax({

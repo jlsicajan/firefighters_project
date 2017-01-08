@@ -65,11 +65,11 @@
                         <form class="form-inline" method="get" action="{{ action('GeneralController@pdf') }}">
                             <div class="form-group">
                                 <label for="date_from">DESDE:</label>
-                                <input type="date" class="form-control" name="date_from" id="date_from" placeholder="d/m/Y"/>
+                                <input type="text" class="form-control" name="date_from" id="date_from" placeholder="d/m/Y"/>
                             </div>
                             <div class="form-group">
                                 <label for="date_to">HASTA:</label>
-                                <input type="date" class="form-control" name="date_to" id="date_to" placeholder="d/m/Y"/>
+                                <input type="text" class="form-control" name="date_to" id="date_to" placeholder="d/m/Y"/>
                             </div>
                             <div class="form-group">
                                 <label for="unity">UNIDAD:</label>
@@ -90,17 +90,9 @@
 @endsection
 @section('after_scripts')
     <script>
-        var now = new Date();
+        $("#date_from").datepicker({ dateFormat: 'dd-mm-yy' });
+        $("#date_to").datepicker({ dateFormat: 'dd-mm-yy' });
 
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-        var today = now.getFullYear() + "-" + month + "-" + day;
-        if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-            today = day + "/" + month + "/" + now.getFullYear();
-        }
-        $('#date_from').val(today);
-        $('#date_to').val(today);
         $(document).ready(function () {
             $('#unity').DataTable({
                 "language": {

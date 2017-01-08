@@ -26,13 +26,14 @@ class CollectionController extends Controller
      */
     public function index(Request $request)
     {
-        return view('collections.index');
+        $data = array('date_today' => date('d/m/Y'));
+        return view('collections.index')->with($data);
     }
 
     public function saveCollection(Request $request){
         $collection = new Collection();
         $collection->user_id = Auth::user()->id;
-        $collection->date = Input::get('date');
+        $collection->date = date('d/m/Y');
         $collection->quantity = Input::get('quantity');
         $collection->description = Input::get('description');
         $collection->save();

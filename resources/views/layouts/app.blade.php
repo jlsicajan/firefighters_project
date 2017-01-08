@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/jquery-ui.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet">
 
     <!-- Scripts -->
@@ -138,6 +139,8 @@
 
 <!-- Scripts -->
 <script src="/js/app.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script src="/js/language/es.js"></script>
 @yield('after_scripts')
 <script>
     $("#name_responsible_div").hide();

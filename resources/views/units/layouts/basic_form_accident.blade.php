@@ -4,7 +4,7 @@
     <input type="hidden" name="general_case_a" id="general_case_a" value="{{ $general_case }}"/>
     <div class="form-group">
         <label for="date_a">Fecha</label>
-        <input type="date" class="form-control date" name="date_a" id="date_a" required/>
+        <input type="text" class="form-control" name="date" id="date" required value="{{ $date_today }}" disabled/>
     </div>
 
     <div class="form-group">

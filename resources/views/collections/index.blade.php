@@ -12,7 +12,7 @@
                         <form action="#" autocomplete="off" method="POST" id="form_collections">
                             <div class="form-group">
                                 <label for="date">Fecha</label>
-                                <input type="date" class="form-control" name="date" id="date" required/>
+                                <input type="text" class="form-control" name="date" id="date" required value="{{ $date_today }}" disabled/>
                             </div>
                             <div class="form-group">
                                 <label for="quantity">Cuanto se recaudo (Q)</label>

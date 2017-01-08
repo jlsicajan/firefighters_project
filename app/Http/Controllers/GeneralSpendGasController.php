@@ -34,7 +34,6 @@ class GeneralSpendGasController extends Controller
     public function pdf(Request $request)
     {
         $range = $this->convertYmd($request->get('date_from'), $request->get('date_to'));
-
         if ($request->get('unity') == 'all') {
             $gas_spends = GasSpend::orderBy('date')
                 ->whereIn('date', $range)
@@ -58,7 +57,12 @@ class GeneralSpendGasController extends Controller
         }
 
 
-        $data = ['gas_spends' => $gas_spends, 'total_gas_general' => $total_gas_general];
+        $data = ['gas_spends' => $gas_spends,
+                 'date_from'   => $request->get('date_from'),
+                 'date_to'     => $request->get('date_to'),
+                 'unity'       => $request->get('unity'),
+                 'total_gas_general' => $total_gas_general];
+
         $pdf = App::make('dompdf.wrapper');
         $view = \View::make('general.PDF.report_pdf_spend_gas')->with($data)->render();
         $date = date('Y-m-d');
@@ -75,10 +79,10 @@ class GeneralSpendGasController extends Controller
         $iDateTo = mktime(1, 0, 0, substr($strDateTo, 5, 2), substr($strDateTo, 8, 2), substr($strDateTo, 0, 4));
 
         if ($iDateTo >= $iDateFrom) {
-            array_push($aryRange, date('Y-m-d', $iDateFrom)); // first entry
+            array_push($aryRange, date('d/m/Y', $iDateFrom)); // first entry
             while ($iDateFrom < $iDateTo) {
                 $iDateFrom += 86400; // add 24 hours
-                array_push($aryRange, date('Y-m-d', $iDateFrom));
+                array_push($aryRange, date('d/m/Y', $iDateFrom));
             }
         }
 

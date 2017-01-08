@@ -35,7 +35,7 @@ class UnityController extends Controller
         $kmin_all = isset($kmin_all)? $kmin_all->kmin : '';
 
         $data = ['officials' => $official, 'pilots' => $pilots,
-          'kmin_all' => $kmin_all,
+          'kmin_all' => $kmin_all, 'date_today' => date('d/m/Y')
         ];
 
         return view('units.' . $unity)->with($data);
@@ -48,7 +48,7 @@ class UnityController extends Controller
         $unity_data = new UnityData();
 
         if(Input::get('is_water') == true){
-            $unity_data->date = Input::get('date');
+            $unity_data->date = date('d/m/Y');
             $unity_data->timeout = Input::get('timeout');
             $unity_data->timein = Input::get('timein');
             $unity_data->kmout = Input::get('kmout');
@@ -90,7 +90,7 @@ class UnityController extends Controller
             return 'Unidad ' . Input::get('unity_id') . ' ingresado correctamente';
         }
 
-        $unity_data->date = Input::get('date');
+        $unity_data->date = date('d/m/Y');
         $unity_data->timeout = Input::get('timeout');
         $unity_data->timein = Input::get('timein');
         $unity_data->kmout = Input::get('kmout');

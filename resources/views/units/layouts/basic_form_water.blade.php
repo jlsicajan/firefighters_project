@@ -4,7 +4,7 @@
     <input type="hidden" name="general_case_water" id="general_case_water" value="{{ $general_case }}"/>
     <div class="form-group">
         <label for="date_water">Fecha</label>
-        <input type="date" class="form-control date" name="date_water" id="date_water" required/>
+        <input type="text" class="form-control" name="date" id="date" required value="{{ $date_today }}" disabled/>
     </div>
 
     <div class="form-group">

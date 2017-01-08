@@ -38,21 +38,10 @@
 @endsection
 @section('after_scripts')
     <script>
-        var now = new Date();
-
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-        var today = now.getFullYear() + "-" + month + "-" + day;
-        if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-            today = day + "/" + month + "/" + now.getFullYear();
-        }
-        $('.date').val(today);
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             $('.form_basic').trigger("reset");
             $('.form_basic_accident').trigger("reset");
             $('.form_basic_service').trigger("reset");
-            $('.date').val(today);
         });
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $('.form_basic').on('submit', function (e) {
@@ -85,7 +74,6 @@
                 success: function (data) {
                     alert(data);
                     $('.form_basic').trigger("reset");
-                    $('.date').val(today);
                 }
             });
             return false;
@@ -120,7 +108,6 @@
                 success: function (data) {
                     alert(data);
                     $('.form_basic_accident').trigger("reset");
-                    $('.date').val(today);
                 }
             });
             return false;
@@ -156,7 +143,6 @@
                 success: function (data) {
                     alert(data);
                     $('.form_basic_service').trigger("reset");
-                    $('.date').val(today);
                 }
             });
             return false;
