@@ -44,6 +44,6 @@
 </table>
 <div id="details" class="clearfix">
     <div id="invoice">
-        <h2>TOTAL GASTADO EN COMBUSTIBLE: Q. {{ number_format($total_gas_general, 2) }}</h2>
+        <h2>TOTAL EGRESOS EN COMBUSTIBLE: Q. {{ number_format($total_gas_general, 2) }}</h2>
     </div>
 </div>

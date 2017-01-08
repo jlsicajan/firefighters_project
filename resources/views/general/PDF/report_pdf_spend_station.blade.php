@@ -40,6 +40,6 @@
 </table>
 <div id="details" class="clearfix">
     <div id="invoice">
-        <h2>TOTAL GASTADO EN LA ESTACION: Q. {{ number_format($total_station_general, 2) }}</h2>
+        <h2>TOTAL EGRESOS EN LA ESTACION: Q. {{ number_format($total_station_general, 2) }}</h2>
     </div>
 </div>
