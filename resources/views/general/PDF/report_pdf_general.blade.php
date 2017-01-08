@@ -26,7 +26,7 @@
         <th>Asistente</th>
         <th>Oficial que reporta</th>
         <th>Paciente aporte  /  telefono</th>
-        <th>Caso</th>
+        <th>Caso /  <p style="color: green">Observaciones</p></th>
     </tr>
     </thead>
     <tbody>
@@ -43,7 +43,7 @@
             @endif
             <td>{{  App\User::getNameById($unity_data->user_id) }}</td>
             <td>Q. {{ number_format($unity_data->patient_input , 2) }}  /  {{ $unity_data->patient_phone }}</td>
-            <td>{{ $unity_data->patient_case }}</td>
+            <td>{{ $unity_data->patient_case }} / <p style="color: green">{{ $unity_data->observations }}</p></td>
         </tr>
     @endforeach
     </tbody>

@@ -58,11 +58,11 @@
                         <form class="form-inline" method="get" action="{{ action('GeneralSpendGasController@pdf') }}">
                             <div class="form-group">
                                 <label for="date_from">DESDE:</label>
-                                <input type="text" class="form-control" name="date_from" id="date_from" placeholder="d-m-Y"/>
+                                <input type="text" class="form-control" name="date_from" id="date_from" placeholder="d-m-Y" required/>
                             </div>
                             <div class="form-group">
                                 <label for="date_to">HASTA:</label>
-                                <input type="text" class="form-control" name="date_to" id="date_to" placeholder="d-m-Y"/>
+                                <input type="text" class="form-control" name="date_to" id="date_to" placeholder="d-m-Y" required/>
                             </div>
                             <div class="form-group">
                                 <label for="unity">UNIDAD:</label>

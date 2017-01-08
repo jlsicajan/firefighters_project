@@ -17,9 +17,8 @@
                                 <th>Piloto</th>
                                 <th>Asistente</th>
                                 <th>Oficial que reporta</th>
-                                <th>Paciente aporte / telefono</th>
-                                <th>Caso</th>
-                                <th>Observaciones</th>
+                                <th>Paciente aporte  /  telefono</th>
+                                <th>Caso / Observaciones</th>
                             </tr>
                             </thead>
                             <tfoot>
@@ -31,8 +30,7 @@
                                 <th>Asistente</th>
                                 <th>Oficial que reporta</th>
                                 <th>Paciente aporte  /  telefono</th>
-                                <th>Caso</th>
-                                <th>Observaciones</th>
+                                <th>Caso / Observaciones</th>
                             </tr>
                             </tfoot>
                             <tbody>
@@ -49,8 +47,7 @@
                                     @endif
                                     <td>{{  App\User::getNameById($unity_data->user_id) }}</td>
                                     <td>Q. {{ number_format($unity_data->patient_input , 2) }}  /  {{ $unity_data->patient_phone }}</td>
-                                    <td>{{ $unity_data->patient_case }}</td>
-                                    <td>{{ $unity_data->observations }}</td>
+                                    <td>{{ $unity_data->patient_case }} / <p style="color: green">{{ $unity_data->observations }}</p></td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -68,11 +65,11 @@
                         <form class="form-inline" method="get" action="{{ action('GeneralController@pdf') }}">
                             <div class="form-group">
                                 <label for="date_from">DESDE:</label>
-                                <input type="text" class="form-control" name="date_from" id="date_from" placeholder="d-m-Y"/>
+                                <input type="text" class="form-control" name="date_from" id="date_from" placeholder="d-m-Y" required/>
                             </div>
                             <div class="form-group">
                                 <label for="date_to">HASTA:</label>
-                                <input type="text" class="form-control" name="date_to" id="date_to" placeholder="d-m-Y"/>
+                                <input type="text" class="form-control" name="date_to" id="date_to" placeholder="d-m-Y" required/>
                             </div>
                             <div class="form-group">
                                 <label for="unity">UNIDAD:</label>
