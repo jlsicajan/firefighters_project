@@ -50,7 +50,7 @@
 </table>
 <div id="details" class="clearfix">
     <div id="invoice">
-        <h2>TOTAL INGRESO POR APORTES: {{ $total_in }}</h2>
+        <h2>TOTAL INGRESO POR APORTES: Q. {{ number_format($total_in, 2) }}</h2>
     </div>
     {{--<div id="invoice">--}}
         {{--<h2>TOTAL APORTES: Q. {{ number_format($total_gas_general, 2) }}</h2>--}}

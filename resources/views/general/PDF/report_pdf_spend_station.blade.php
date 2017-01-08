@@ -6,11 +6,14 @@
     table, td, th {
         border: 1px solid black;
     }
+
+    h2{
+        color: green;
+    }
 </style>
 <div id="details" class="clearfix">
     <div id="invoice">
-        <h1></h1>
-        <div class="date"></div>
+        <h2>REPORTE DESDE EL {{ $date_from }} HASTA EL {{ $date_to }}</h2>
     </div>
 </div>
 <table>
