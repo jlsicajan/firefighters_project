@@ -69,7 +69,7 @@ class GeneralController extends Controller
         $pdf = App::make('dompdf.wrapper');
         $view = \View::make('general.PDF.report_pdf_general')->with($data)->render();
         $date = date('Y-m-d');
-        $pdf->loadHTML($view)->setPaper('a4', 'landscape');
+        $pdf->loadHTML($view)->setPaper('letter', 'landscape');
 
         return $pdf->download('general-' . $date . '.pdf');
     }

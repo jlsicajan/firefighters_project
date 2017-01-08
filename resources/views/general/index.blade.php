@@ -4,33 +4,33 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Control general</div>
+                <div class="panel panel-default panel-transparent">
+                    <div class="panel-heading"><h4>Control general de unidades</h4></div>
 
                     <div class="panel-body">
                         <table id="unity" class="display" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Fecha</th>
-                                <th>Unidad</th>
-                                <th>Nombre paciente</th>
-                                <th>Piloto</th>
-                                <th>Asistente</th>
-                                <th>Oficial que reporta</th>
-                                <th>Paciente aporte  /  telefono</th>
-                                <th>Caso / Observaciones</th>
+                                <th class="white_word">Fecha</th>
+                                <th class="white_word">Unidad</th>
+                                <th class="white_word">Nombre paciente</th>
+                                <th class="white_word">Piloto</th>
+                                <th class="white_word">Asistente</th>
+                                <th class="white_word">Oficial que reporta</th>
+                                <th class="white_word">Paciente aporte  /  telefono</th>
+                                <th class="white_word">Caso / Observaciones</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>Fecha</th>
-                                <th>Unidad</th>
-                                <th>Nombre paciente</th>
-                                <th>Piloto</th>
-                                <th>Asistente</th>
-                                <th>Oficial que reporta</th>
-                                <th>Paciente aporte  /  telefono</th>
-                                <th>Caso / Observaciones</th>
+                                <th class="white_word">Fecha</th>
+                                <th class="white_word">Unidad</th>
+                                <th class="white_word">Nombre paciente</th>
+                                <th class="white_word">Piloto</th>
+                                <th class="white_word">Asistente</th>
+                                <th class="white_word">Oficial que reporta</th>
+                                <th class="white_word">Paciente aporte  /  telefono</th>
+                                <th class="white_word">Caso / Observaciones</th>
                             </tr>
                             </tfoot>
                             <tbody>
@@ -58,21 +58,21 @@
         </div>
         <div class="row text-center">
             <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Reporte de control general</div>
+                <div class="panel panel-default panel-transparent">
+                    <div class="panel-heading"><h4 class="white_word">Reporte de control general</h4></div>
 
                     <div class="panel-body">
                         <form class="form-inline" method="get" action="{{ action('GeneralController@pdf') }}">
                             <div class="form-group">
-                                <label for="date_from">DESDE:</label>
+                                <label for="date_from" class="white_word">DESDE:</label>
                                 <input type="text" class="form-control" name="date_from" id="date_from" placeholder="d-m-Y" required/>
                             </div>
                             <div class="form-group">
-                                <label for="date_to">HASTA:</label>
+                                <label for="date_to"  class="white_word">HASTA:</label>
                                 <input type="text" class="form-control" name="date_to" id="date_to" placeholder="d-m-Y" required/>
                             </div>
                             <div class="form-group">
-                                <label for="unity">UNIDAD:</label>
+                                <label for="unity" class="white_word">UNIDAD:</label>
                                 <select class="form-control" id="unity" name="unity">
                                     <option value="all" selected>-- TODAS LAS UNIDADES --</option>
                                     @foreach($unities as $unity)
