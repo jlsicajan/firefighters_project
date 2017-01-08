@@ -32,16 +32,6 @@
 @endsection
 @section('after_scripts')
     <script>
-        var now = new Date();
-
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-        var today = now.getFullYear() + "-" + month + "-" + day;
-        if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-            today = day + "/" + month + "/" + now.getFullYear();
-        }
-        $('#date').val(today);
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
         $('#form_collections').on('submit', function (e) {
