@@ -22,7 +22,8 @@
         ]); ?>
     </script>
 </head>
-<body background="{{ url('images/body.jpg') }}">
+{{--background="{{ url('images/body.jpg') }}"--}}
+<body>
 <div id="app">
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">

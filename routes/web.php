@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 //      PRINCIPAL PAGES
 Route::get('/home', 'HomeController@index');
+Route::get('/programador', 'DeveloperController@developer');
 Route::get('/combustible', 'ExpensesController@gas');
 Route::get('/estacion', 'ExpensesController@station');
 Route::get('/libro_novedades', 'NewsController@index');
