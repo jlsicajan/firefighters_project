@@ -36,23 +36,35 @@ class GeneralSpendGasController extends Controller
         $range = $this->convertYmd($request->get('date_from'), $request->get('date_to'));
         if ($request->get('unity') == 'all') {
             $gas_spends = GasSpend::orderBy('date')
-                ->whereIn('date', $range)
+                ->where(function ($query) use($range) {
+                    for ($i = 0; $i < count($range); $i++){
+                        $query->orwhere('date', 'like',  $range[$i] .'%');
+                    }})
                 ->get();
 
             $total_gas_general = GasSpend::orderBy('date')
-                ->whereIn('date', $range)
+                ->where(function ($query) use($range) {
+                    for ($i = 0; $i < count($range); $i++){
+                        $query->orwhere('date', 'like',  $range[$i] .'%');
+                    }})
                 ->sum('gas_spend');
         } else {
             $unity = Unity::findByCode($request->get('unity'));
 
             $gas_spends = GasSpend::orderBy('date')
                 ->where('unity_id', '=', $unity['id'])
-                ->whereIn('date', $range)
+                ->where(function ($query) use($range) {
+                    for ($i = 0; $i < count($range); $i++){
+                        $query->orwhere('date', 'like',  $range[$i] .'%');
+                    }})
                 ->get();
 
             $total_gas_general = GasSpend::orderBy('date')
                 ->where('unity_id', '=', $unity['id'])
-                ->whereIn('date', $range)
+                ->where(function ($query) use($range) {
+                    for ($i = 0; $i < count($range); $i++){
+                        $query->orwhere('date', 'like',  $range[$i] .'%');
+                    }})
                 ->sum('gas_spend');
         }
 

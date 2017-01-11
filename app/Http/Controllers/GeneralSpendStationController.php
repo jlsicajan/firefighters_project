@@ -35,11 +35,17 @@ class GeneralSpendStationController extends Controller
         $range = $this->convertYmd($request->get('date_from'), $request->get('date_to'));
 
         $station_spends = StationSpend::orderBy('date')
-            ->whereIn('date', $range)
+            ->where(function ($query) use($range) {
+                for ($i = 0; $i < count($range); $i++){
+                    $query->orwhere('date', 'like',  $range[$i] .'%');
+                }})
             ->get();
 
         $total_station_general = StationSpend::orderBy('date')
-            ->whereIn('date', $range)
+            ->where(function ($query) use($range) {
+                for ($i = 0; $i < count($range); $i++){
+                    $query->orwhere('date', 'like',  $range[$i] .'%');
+                }})
             ->sum('station_spend');
 
         $data = ['station_spends'        => $station_spends,

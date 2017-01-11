@@ -40,23 +40,35 @@ class GeneralController extends Controller
 
         if ($request->get('unity') == 'all') {
             $unity_datas = UnityData::orderBy('date')
-                ->whereIn('date', $range)
+                ->where(function ($query) use($range) {
+                    for ($i = 0; $i < count($range); $i++){
+                        $query->orwhere('date', 'like',  $range[$i] .'%');
+                    }})
                 ->get();
 
             $total_in = UnityData::orderBy('date')
-                ->whereIn('date', $range)
+                ->where(function ($query) use($range) {
+                    for ($i = 0; $i < count($range); $i++){
+                        $query->orwhere('date', 'like',  $range[$i] .'%');
+                    }})
                 ->sum('patient_input');
         } else {
             $unity = Unity::findByCode($request->get('unity'));
 
             $unity_datas = UnityData::orderBy('date')
                 ->where('unity_id', '=', $unity['id'])
-                ->whereIn('date', $range)
+                ->where(function ($query) use($range) {
+                    for ($i = 0; $i < count($range); $i++){
+                        $query->orwhere('date', 'like',  $range[$i] .'%');
+                    }})
                 ->get();
 
             $total_in = UnityData::orderBy('date')
                 ->where('unity_id', '=', $unity['id'])
-                ->whereIn('date', $range)
+                ->where(function ($query) use($range) {
+                    for ($i = 0; $i < count($range); $i++){
+                        $query->orwhere('date', 'like',  $range[$i] .'%');
+                    }})
                 ->sum('patient_input');
         }
 
