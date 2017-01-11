@@ -19,7 +19,7 @@
 
     <div class="form-group">
         <label for="kmout_service">Kilometraje salida</label>
-        <input type="number" class="form-control" name="kmout_service" id="kmout_service" value="{{ $kmin_all }}" required/>
+        <input type="number" class="form-control kmout" name="kmout_service" id="kmout_service" value="{{ $kmin_all }}" required/>
     </div>
 
     <div class="form-group">

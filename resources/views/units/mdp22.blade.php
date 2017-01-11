@@ -39,10 +39,12 @@
 @endsection
 @section('after_scripts')
     <script>
+        var km_out = {{ $kmin_all }}
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             $('.form_basic').trigger("reset");
             $('.form_basic_accident').trigger("reset");
             $('.form_basic_service').trigger("reset");
+            $('.kmout').val(km_out);
         });
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $('.form_basic').on('submit', function (e) {
@@ -73,8 +75,10 @@
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
-                    alert(data);
+                    alert(data['message']);
                     $('.form_basic').trigger("reset");
+                    $('input#kmout').val(data['kmall']);
+                    km_out = data['kmall'];
                 }
             });
             return false;
@@ -107,8 +111,10 @@
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
-                    alert(data);
+                    alert(data['message']);
                     $('.form_basic_accident').trigger("reset");
+                    $('input#kmout_a').val(data['kmall']);
+                    km_out = data['kmall'];
                 }
             });
             return false;
@@ -142,8 +148,10 @@
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
-                    alert(data);
+                    alert(data['message']);
                     $('.form_basic_service').trigger("reset");
+                    $('input#kmout_service').val(data['kmall']);
+                    km_out = data['kmall'];
                 }
             });
             return false;

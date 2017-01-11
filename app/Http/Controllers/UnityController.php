@@ -87,7 +87,8 @@ class UnityController extends Controller
 
             $unity_data->save();
 
-            return 'Unidad ' . Input::get('unity_id') . ' ingresado correctamente';
+            $data = array('message' => 'Unidad ' . Input::get('unity_id') . ' ingresado correctamente', 'kmall' => $unity_data->kmin);
+            return $data;
         }
 
         $unity_data->date = date('d/m/Y H:i:s');
@@ -134,6 +135,7 @@ class UnityController extends Controller
         }
         $unity_data->save();
 
-        return 'Unidad ' . Input::get('unity_id') . ' ingresado correctamente';
+        $data = array('message' => 'Unidad ' . Input::get('unity_id') . ' ingresado correctamente', 'kmall' => $unity_data->kmin);
+        return $data;
     }
 }
