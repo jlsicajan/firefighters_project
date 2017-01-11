@@ -30,13 +30,13 @@ class ExpensesController extends Controller
     public function gas(Request $request)
     {
         $unities = Unity::all();
-        $data = array('unities' => $unities, 'date_today' => date('d/m/Y'));
+        $data = array('unities' => $unities, 'date_today' => date('d/m/Y H:i:s'));
         return view('gas.index')->with($data);
     }
 
     public function station()
     {
-        $data = array('date_today' => date('d/m/Y'));
+        $data = array('date_today' => date('d/m/Y H:i:s'));
         return view('station.index')->with($data);
     }
 
@@ -52,7 +52,7 @@ class ExpensesController extends Controller
         $gas_spend->gas_name = Input::get('gas_name');
         $gas_spend->gas_spend = Input::get('gas_spend');
         $gas_spend->note_gas = Input::get('note_gas');
-        $gas_spend->date = date('d/m/Y');
+        $gas_spend->date = date('d/m/Y H:i:s');
         $gas_spend->save();
 
         return 'Gasto ingresado correctamente Q' . $gas_spend->gas_spend;
@@ -64,7 +64,7 @@ class ExpensesController extends Controller
         $station_spend->bill_number = Input::get('bill_number');
         $station_spend->station_spend = Input::get('station_spend');
         $station_spend->description = Input::get('description');
-        $station_spend->date = date('d/m/Y');
+        $station_spend->date = date('d/m/Y H:i:s');
         $station_spend->save();
         return 'Gasto ingresado correctamente Q' . $station_spend->station_spend;
     }

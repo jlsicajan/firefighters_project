@@ -13,4 +13,5 @@ class StationSpend extends Model
      * @var array
      */
     protected $fillable = ['user_id' ,'bill_number', 'station_spend', 'description'];
+
 }
