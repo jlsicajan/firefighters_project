@@ -21,6 +21,7 @@
                 'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    @yield('after-styles')
 </head>
 {{--background="{{ url('images/body.jpg') }}"--}}
 <body>
