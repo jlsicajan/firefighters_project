@@ -96,3 +96,7 @@ body {
 /*.white_word {*/
     /*color: white;*/
 /*}*/
+
+.black_word {
+    color: black;
+}
