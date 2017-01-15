@@ -7,13 +7,13 @@
                 <form class="form-inline" method="get" action="{{ action('GeneralController@pdf') }}">
                     <div class="form-group input-append date form_datetime">
                         <label for="date_from" class="white_word">CONTROL GENERAL DE UNIDADES DESDE: </label>
-                        <input size="16" type="text" class="form-control" name="date_from" id="date_from"
+                        <input size="20" type="text" class="form-control" name="date_from" id="date_from"
                                placeholder="d/m/Y h"
                                required readonly/>
                     </div>
                     <div class="form-group input-append date form_datetime">
                         <label for="date_to" class="white_word">HASTA:</label>
-                        <input size="16" type="text" class="form-control" name="date_to" id="date_to"
+                        <input size="20" type="text" class="form-control" name="date_to" id="date_to"
                                placeholder="d/m/Y h"
                                required readonly/>
                         <span class="add-on"><i class="icon-th"></i></span>
@@ -90,17 +90,17 @@
 @endsection
 @section('after_scripts')
     <script>
-                $('#date_from, #date_to').datetimepicker({
-                    language: 'es',
-                    format: 'dd/mm/yyyy HH:ii p',
-                    weekStart: 1,
-                    todayBtn: 1,
-                    autoclose: 1,
-                    todayHighlight: 1,
-                    startView: 2,
-                    forceParse: 0,
-                    showMeridian: 1
-                });
+        $('#date_from, #date_to').datetimepicker({
+            language: 'es',
+            format: 'dd/mm/yyyy HH:ii p',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1
+        });
         $(document).ready(function () {
             $('#unity_table').DataTable({
                 "language": {

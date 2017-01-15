@@ -5,8 +5,33 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Control general de los gastos de combustible</div>
-
+                    <div class="panel-heading">
+                        <form class="form-inline" method="get" action="{{ action('GeneralSpendGasController@pdf') }}">
+                            <div class="form-group input-append date form_datetime">
+                                <label for="date_from" class="white_word">CONTROL GENERAL DE COMBUSTIBLE DESDE: </label>
+                                <input size="20" type="text" class="form-control" name="date_from" id="date_from"
+                                       placeholder="d/m/Y h"
+                                       required readonly/>
+                            </div>
+                            <div class="form-group input-append date form_datetime">
+                                <label for="date_to" class="white_word">HASTA:</label>
+                                <input size="20" type="text" class="form-control" name="date_to" id="date_to"
+                                       placeholder="d/m/Y h"
+                                       required readonly/>
+                                <span class="add-on"><i class="icon-th"></i></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="unity">UNIDAD:</label>
+                                <select class="form-control" id="unity" name="unity">
+                                    <option value="all" selected>-- TODAS LAS UNIDADES --</option>
+                                    @foreach($unities as $unity)
+                                        <option value="{{ $unity->code }}">{{ $unity->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-danger">Generar PDF</button>
+                        </form>
+                    </div>
                     <div class="panel-body">
                         <table id="gas_spend" class="display" cellspacing="0" width="100%">
                             <thead>
@@ -49,42 +74,21 @@
                 </div>
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Reporte de gastos en combustible</div>
-
-                    <div class="panel-body">
-                        <form class="form-inline" method="get" action="{{ action('GeneralSpendGasController@pdf') }}">
-                            <div class="form-group">
-                                <label for="date_from">DESDE:</label>
-                                <input type="text" class="form-control" name="date_from" id="date_from" placeholder="d-m-Y" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="date_to">HASTA:</label>
-                                <input type="text" class="form-control" name="date_to" id="date_to" placeholder="d-m-Y" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="unity">UNIDAD:</label>
-                                <select class="form-control" id="unity" name="unity">
-                                    <option value="all" selected>-- TODAS LAS UNIDADES --</option>
-                                    @foreach($unities as $unity)
-                                        <option value="{{ $unity->code }}">{{ $unity->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-danger">Generar PDF</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 @section('after_scripts')
     <script>
-        $("#date_from").datepicker({ dateFormat: 'dd-mm-yy' });
-        $("#date_to").datepicker({ dateFormat: 'dd-mm-yy' });
+        $('#date_from, #date_to').datetimepicker({
+            language: 'es',
+            format: 'dd/mm/yyyy HH:ii p',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1
+        });
         $(document).ready(function () {
             $('#gas_spend').DataTable({
                 "language": {
