@@ -19,31 +19,31 @@
 <table>
     <thead>
     <tr>
-        <th>Fecha</th>
-        <th>Unidad</th>
-        <th>Nombre paciente</th>
-        <th>Piloto</th>
-        <th>Asistente</th>
-        <th>Oficial que reporta</th>
-        <th>Paciente aporte  /  telefono</th>
-        <th>Caso /  <p style="color: green">Observaciones</p></th>
+        <th style="color: blue">Fecha</th>
+        <th style="color: blue">Unidad</th>
+        <th style="color: blue">Nombre paciente</th>
+        <th style="color: blue">Piloto</th>
+        <th style="color: blue">Asistente</th>
+        <th style="color: blue">Oficial que reporta</th>
+        <th style="color: blue">Paciente aporte  /  telefono</th>
+        <th style="color: blue">Caso /  <p style="color: green">Observaciones</p></th>
     </tr>
     </thead>
     <tbody>
     @foreach(json_decode($unity_datas) as $unity_data)
         <tr>
-            <td>{{ $unity_data->date }}</td>
-            <td>{{  App\Unity::getNameById($unity_data->unity_id) }}</td>
-            <td>{{ $unity_data->patient_name }}</td>
-            <td>{{  App\User::getNameById($unity_data->pilot_id) }}</td>
+            <td style="color: blue">{{ $unity_data->date }}</td>
+            <td style="color: blue">{{  App\Unity::getNameById($unity_data->unity_id) }}</td>
+            <td style="color: blue">{{ $unity_data->patient_name }}</td>
+            <td style="color: blue">{{  App\User::getNameById($unity_data->pilot_id) }}</td>
             @if(App\User::getNameById($unity_data->asistant_id) != '')
-                <td>{{  App\User::getNameById($unity_data->asistant_id) }}</td>
+                <td style="color: blue">{{  App\User::getNameById($unity_data->asistant_id) }}</td>
             @else
-                <td>NINGUN ASISTENTE</td>
+                <td style="color: blue">NINGUN ASISTENTE</td>
             @endif
-            <td>{{  App\User::getNameById($unity_data->user_id) }}</td>
-            <td>Q. {{ number_format($unity_data->patient_input , 2) }} /  {{ $unity_data->patient_phone }}</td>
-            <td>{{ $unity_data->patient_case }} / <p style="color: green">{{ $unity_data->observations }}</p></td>
+            <td style="color: blue">{{  App\User::getNameById($unity_data->user_id) }}</td>
+            <td style="color: blue">Q. {{ number_format($unity_data->patient_input , 2) }} /  {{ $unity_data->patient_phone }}</td>
+            <td style="color: blue">{{ $unity_data->patient_case }} / <p style="color: green">{{ $unity_data->observations }}</p></td>
         </tr>
     @endforeach
     </tbody>
