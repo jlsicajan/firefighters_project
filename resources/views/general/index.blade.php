@@ -2,11 +2,12 @@
 
 @section('content')
     <div class="col-md-12">
+        <h5><strong>CONTROL GENERAL DE UNIDADES</strong></h5>
         <div class="panel panel-default panel-transparent">
             <div class="panel-heading">
                 <form class="form-inline" method="get" action="{{ action('GeneralController@pdf') }}">
                     <div class="form-group input-append date form_datetime">
-                        <label for="date_from" class="white_word">CONTROL GENERAL DE UNIDADES DESDE: </label>
+                        <label for="date_from" class="white_word">DESDE: </label>
                         <input size="20" type="text" class="form-control" name="date_from" id="date_from"
                                placeholder="d/m/Y h"
                                required readonly/>
@@ -27,12 +28,12 @@
                             @endforeach
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-danger">Generar PDF</button>
+                        <button type="submit" name="PDF" value="PDF" class="btn btn-danger">Generar PDF</button>
+                        {{--<button type="submit" name="XLSX" value="XLSX" class="btn btn-success">Generar EXCEL</button>--}}
                 </form>
             </div>
 
             <div class="panel-body">
-                <hr>
                 <table id="unity_table" class="display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
@@ -63,6 +64,7 @@
                     </tfoot>
                     <tbody>
                     @foreach(json_decode($unity_datas) as $unity_data)
+{{--                        <tr data-toggle="modal" data-id="{{ $unity_data->id }}" data-target="#unityDetailModal" style="cursor: pointer;">--}}
                         <tr>
                             <td>{{ $unity_data->date }}</td>
                             <td>{{  App\Unity::getNameById($unity_data->unity_id) }}</td>
@@ -88,6 +90,7 @@
         </div>
     </div>
 @endsection
+@include('general.unity_datas.modals.unityDetailModal')
 @section('after_scripts')
     <script>
         $('#date_from, #date_to').datetimepicker({
