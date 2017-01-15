@@ -3,10 +3,37 @@
 @section('content')
     <div class="col-md-12">
         <div class="panel panel-default panel-transparent">
-            <div class="panel-heading"><h4>Control general de unidades</h4></div>
+            <div class="panel-heading">
+                <form class="form-inline" method="get" action="{{ action('GeneralController@pdf') }}">
+                    <div class="form-group input-append date form_datetime">
+                        <label for="date_from" class="white_word">CONTROL GENERAL DE UNIDADES DESDE: </label>
+                        <input size="16" type="text" class="form-control" name="date_from" id="date_from"
+                               placeholder="d/m/Y h"
+                               required readonly/>
+                    </div>
+                    <div class="form-group input-append date form_datetime">
+                        <label for="date_to" class="white_word">HASTA:</label>
+                        <input size="16" type="text" class="form-control" name="date_to" id="date_to"
+                               placeholder="d/m/Y h"
+                               required readonly/>
+                        <span class="add-on"><i class="icon-th"></i></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="unity" class="white_word">UNIDAD:</label>
+                        <select class="form-control" id="unity" name="unity">
+                            <option value="all" selected>-- TODAS LAS UNIDADES --</option>
+                            @foreach($unities as $unity)
+                                <option value="{{ $unity->code }}">{{ $unity->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Generar PDF</button>
+                </form>
+            </div>
 
             <div class="panel-body">
-                <table id="unity" class="display" cellspacing="0" width="100%">
+                <hr>
+                <table id="unity_table" class="display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
                         <th class="white_word">Fecha</th>
@@ -49,7 +76,8 @@
                             <td>{{  App\User::getNameById($unity_data->user_id) }}</td>
                             <td>Q. {{ number_format($unity_data->patient_input , 2) }}
                                 / {{ $unity_data->patient_phone }}</td>
-                            <td>{{ $unity_data->patient_case }} / <p style="color: green">{{ $unity_data->observations }}</p></td>
+                            <td>{{ $unity_data->patient_case }} / <p
+                                        style="color: green">{{ $unity_data->observations }}</p></td>
                             <td><strong>{{ $unity_data->kmout }}</strong></td>
                             <td><strong>{{ $unity_data->kmin }}</strong></td>
                         </tr>
@@ -59,52 +87,28 @@
             </div>
         </div>
     </div>
-    </div>
-    <div class="row text-center">
-        <div class="col-md-12">
-            <div class="panel panel-default panel-transparent">
-                <div class="panel-heading"><h4 class="white_word">Reporte de control general</h4></div>
-
-                <div class="panel-body">
-                    <form class="form-inline" method="get" action="{{ action('GeneralController@pdf') }}">
-                        <div class="form-group">
-                            <label for="date_from" class="white_word">DESDE:</label>
-                            <input type="text" class="form-control" name="date_from" id="date_from" placeholder="d-m-Y"
-                                   required/>
-                        </div>
-                        <div class="form-group">
-                            <label for="date_to" class="white_word">HASTA:</label>
-                            <input type="text" class="form-control" name="date_to" id="date_to" placeholder="d-m-Y"
-                                   required/>
-                        </div>
-                        <div class="form-group">
-                            <label for="unity" class="white_word">UNIDAD:</label>
-                            <select class="form-control" id="unity" name="unity">
-                                <option value="all" selected>-- TODAS LAS UNIDADES --</option>
-                                @foreach($unities as $unity)
-                                    <option value="{{ $unity->code }}">{{ $unity->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-danger">Generar PDF</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        @endsection
-        @section('after_scripts')
-            <script>
-                $("#date_from").datepicker({dateFormat: 'dd-mm-yy'});
-                $("#date_to").datepicker({dateFormat: 'dd-mm-yy'});
-
-                $(document).ready(function () {
-                    $('#unity').DataTable({
-                        "language": {
-                            "url": "/datatable/language/spanish.json"
-                        },
-                        "scrollY": "500px",
-                    });
+@endsection
+@section('after_scripts')
+    <script>
+                $('#date_from, #date_to').datetimepicker({
+                    language: 'es',
+                    format: 'dd/mm/yyyy HH:ii p',
+                    weekStart: 1,
+                    todayBtn: 1,
+                    autoclose: 1,
+                    todayHighlight: 1,
+                    startView: 2,
+                    forceParse: 0,
+                    showMeridian: 1
                 });
-            </script>
-            <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"/>
+        $(document).ready(function () {
+            $('#unity_table').DataTable({
+                "language": {
+                    "url": "/datatable/language/spanish.json"
+                },
+                "scrollY": "500px",
+            });
+        });
+    </script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"/>
 @endsection

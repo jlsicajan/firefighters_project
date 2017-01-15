@@ -14,7 +14,7 @@
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/jquery-ui.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet">
-
+    <link href="/css/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -141,8 +141,8 @@
 
 <!-- Scripts -->
 <script src="/js/app.js"></script>
-<script src="/js/jquery-ui.js"></script>
-<script src="/js/language/es.js"></script>
+<script type="text/javascript" src="/js/bootstrap-datetimepicker/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/bootstrap-datetimepicker/bootstrap-datetimepicker.es.js" charset="UTF-8"></script>
 @yield('after_scripts')
 <script>
     $("#name_responsible_div").hide();

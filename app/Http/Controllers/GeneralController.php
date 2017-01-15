@@ -38,19 +38,15 @@ class GeneralController extends Controller
     {
         $range = $this->convertYmd($request->get('date_from'), $request->get('date_to'));
 
+        $date_from = strtotime($range['ymd_from']);
+        $date_to = strtotime($range['ymd_to']);
         if ($request->get('unity') == 'all') {
             $unity_datas = UnityData::orderBy('date')
-                ->where(function ($query) use($range) {
-                    for ($i = 0; $i < count($range); $i++){
-                        $query->orwhere('date', 'like',  $range[$i] .'%');
-                    }})
+                ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
                 ->get();
 
             $total_in = UnityData::orderBy('date')
-                ->where(function ($query) use($range) {
-                    for ($i = 0; $i < count($range); $i++){
-                        $query->orwhere('date', 'like',  $range[$i] .'%');
-                    }})
+                ->whereBetween('created_at', [$date_from, $date_to])
                 ->sum('patient_input');
         } else {
             $unity = Unity::findByCode($request->get('unity'));
@@ -86,36 +82,26 @@ class GeneralController extends Controller
         return $pdf->download('general-' . $date . '.pdf');
     }
 
-    function createDateRangeArray($strDateFrom, $strDateTo)
-    {
-        $aryRange = [];
-
-        $iDateFrom = mktime(1, 0, 0, substr($strDateFrom, 5, 2), substr($strDateFrom, 8, 2), substr($strDateFrom, 0, 4));
-        $iDateTo = mktime(1, 0, 0, substr($strDateTo, 5, 2), substr($strDateTo, 8, 2), substr($strDateTo, 0, 4));
-
-        if ($iDateTo >= $iDateFrom) {
-            array_push($aryRange, date('d/m/Y', $iDateFrom)); // first entry
-            while ($iDateFrom < $iDateTo) {
-                $iDateFrom += 86400; // add 24 hours
-                array_push($aryRange, date('d/m/Y', $iDateFrom));
-            }
-        }
-
-        return $aryRange;
-    }
 
     function convertYmd($date_from, $date_to)
     {
+
+        $time_from = substr($date_from, -6);
+        $time_to = substr($date_to, -6);
+
+        $date_from = substr($date_from, 0, -7);
+        $date_to = substr($date_to, 0, -7);
+
         $day_to = substr($date_to, 0, -8);
         $month_to = substr($date_to, 3, -5);
         $year_to = substr($date_to, -4);
-        $ymd_to = $year_to . '-' . $month_to . '-' . $day_to;
+        $ymd_to = $year_to . '-' . $month_to . '-' . $day_to . ' ' . $time_to;
 
         $day_from = substr($date_from, 0, -8);
         $month_from = substr($date_from, 3, -5);
         $year_from = substr($date_from, -4);
-        $ymd_from = $year_from . '-' . $month_from . '-' . $day_from;
+        $ymd_from = $year_from . '-' . $month_from . '-' . $day_from . ' ' . $time_from;
 
-        return $this->createDateRangeArray($ymd_from, $ymd_to);
+        return array('ymd_from' => $ymd_from, 'ymd_to' => $ymd_to);
     }
 }
