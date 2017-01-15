@@ -41,6 +41,13 @@ class UnityController extends Controller
         return view('units.' . $unity)->with($data);
     }
 
+    public function find($id)
+    {
+        $unity_data = UnityData::find($id);
+
+        return view('general.unity_datas.modals.unityDetailModal', ['unity_data' => $unity_data])->render();
+    }
+
     public function save(Request $request)
     {
         $unity = Unity::findByCode(Input::get('unity_id'));

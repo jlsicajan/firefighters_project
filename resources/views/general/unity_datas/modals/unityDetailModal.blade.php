@@ -1,40 +1,33 @@
-<div class="modal fade" id="unityDetailModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Channel</h4>
-            </div>
-            <div class="modal-body">
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
+<form class="form-inline">
+    <div class="form-group">
+        <label for="date">Fecha</label>
+        <input size="20" class="form-control" id="date" type="text" value="{{ $unity_data->date }}" disabled>
     </div>
-</div>
-<script>
-    $("#unityDetailModal").on("show.bs.modal", function (e) {
-//        var link = $(e.relatedTarget);
-//        var modal_function = link.data("func");
-//        var channel_id = link.data("inf");
-//        $('#name, #description').val("");
-//        $("#thumbnail").attr("src", "");
-//        if (modal_function == 'edit') {
-//            $.ajax({
-//                type: "GET",
-//                url: "/channel/find",
-//                data: {id: channel_id},
-//                success: function (data) {
-//                    obj = JSON.parse(data);
-//                    $("#channel_id").val(data.id);
-//                    $('#name').val(obj.name);
-//                    $('#description').val(obj.description);
-//                    $('#thumbnail').attr("src", obj.thumbnail_url);
-//                }
-//            });
-//        }
-    });
-</script>
+    <div class="form-group">
+        <label for="unity">Unidad</label>
+        <input size="10" class="form-control" id="unity" type="text" value="{{  App\Unity::getNameById($unity_data->unity_id) }}" disabled>
+    </div>
+    <div class="form-group">
+        <label for="user_id">Oficial que reporta</label>
+        <input size="30" class="form-control" id="user_id" type="text" value="{{  App\User::getNameById($unity_data->user_id) }}" disabled>
+    </div>
+</form>
+<form action="#" autocomplete="off" method="POST" id="form_collections">
+    <div class="col-xs-4">
+
+    </div>
+    <div class="col-xs-2">
+
+    </div>
+    <div class="col-xs-3">
+
+    </div>
+    <div class="form-group">
+        <label for="quantity">Cuanto se recaudo (Q)</label>
+        <input type="number" class="form-control" name="quantity" id="quantity" required/>
+    </div>
+    <div class="form-group">Breve desripcion</label>
+        <textarea class="form-control" id="station_description" name="station_description"
+                  required rows="8"></textarea>
+    </div>
+</form>

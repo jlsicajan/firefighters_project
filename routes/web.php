@@ -49,3 +49,6 @@ Route::post('/saveunidades/', ['as'   => 'unidad.save',
 Route::get('/pdf/general', 'GeneralController@pdf');
 Route::get('/pdf/general/spend/gas', 'GeneralSpendGasController@pdf');
 Route::get('/pdf/general/spend/station', 'GeneralSpendStationController@pdf');
+
+//ROUTES FOR FIND DATA
+Route::get('/unity/data/find/{id}', 'UnityController@find');
