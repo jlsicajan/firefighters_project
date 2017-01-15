@@ -53,18 +53,12 @@ class GeneralController extends Controller
 
             $unity_datas = UnityData::orderBy('date')
                 ->where('unity_id', '=', $unity['id'])
-                ->where(function ($query) use($range) {
-                    for ($i = 0; $i < count($range); $i++){
-                        $query->orwhere('date', 'like',  $range[$i] .'%');
-                    }})
+                ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
                 ->get();
 
             $total_in = UnityData::orderBy('date')
                 ->where('unity_id', '=', $unity['id'])
-                ->where(function ($query) use($range) {
-                    for ($i = 0; $i < count($range); $i++){
-                        $query->orwhere('date', 'like',  $range[$i] .'%');
-                    }})
+                ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
                 ->sum('patient_input');
         }
 
