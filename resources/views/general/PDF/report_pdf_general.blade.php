@@ -27,6 +27,8 @@
         <th>Oficial que reporta</th>
         <th>Paciente aporte  /  telefono</th>
         <th>Caso /  <p style="color: green">Observaciones</p></th>
+        <th>Km salida</th>
+        <th>Km entrada</th>
     </tr>
     </thead>
     <tbody>
@@ -44,6 +46,8 @@
             <td>{{  App\User::getNameById($unity_data->user_id) }}</td>
             <td>Q. {{ number_format($unity_data->patient_input , 2) }} /  {{ $unity_data->patient_phone }}</td>
             <td>{{ $unity_data->patient_case }} / <p style="color: green">{{ $unity_data->observations }}</p></td>
+            <td><strong>{{ $unity_data->kmout }}</strong></td>
+            <td><strong>{{ $unity_data->kmin }}</strong></td>
         </tr>
     @endforeach
     </tbody>
