@@ -4,7 +4,7 @@
     }
 
     table, td, th {
-        border: 1px solid black;
+        border: 1px solid blue;
     }
 
     h2{
@@ -19,25 +19,25 @@
 <table>
     <thead>
     <tr>
-        <th>Fecha</th>
-        <th>Unidad</th>
-        <th>No. factura</th>
-        <th>Gasolinera</th>
-        <th>Gastado</th>
-        <th>Oficial que reporta</th>
-        <th>Nota</th>
+        <th style="color: blue">Fecha</th>
+        <th style="color: blue">Unidad</th>
+        <th style="color: blue">No. factura</th>
+        <th style="color: blue">Gasolinera</th>
+        <th style="color: blue">Gastado</th>
+        <th style="color: blue">Oficial que reporta</th>
+        <th style="color: blue">Nota</th>
     </tr>
     </thead>
     <tbody>
     @foreach(json_decode($gas_spends) as $gas_spend)
         <tr>
-            <td>{{ $gas_spend->date }}</td>
-            <td>{{  App\Unity::getNameById($gas_spend->unity_id) }}</td>
-            <td>{{ $gas_spend->bill_number }}</td>
-            <td>{{ $gas_spend->gas_name }}</td>
-            <td>Q. {{ number_format($gas_spend->gas_spend, 2) }}</td>
-            <td>{{  App\User::getNameById($gas_spend->user_id) }}</td>
-            <td>{{ $gas_spend->note_gas }}</td>
+            <td style="color: blue">{{ $gas_spend->date }}</td>
+            <td style="color: blue">{{  App\Unity::getNameById($gas_spend->unity_id) }}</td>
+            <td style="color: blue">{{ $gas_spend->bill_number }}</td>
+            <td style="color: blue">{{ $gas_spend->gas_name }}</td>
+            <td style="color: blue">Q. {{ number_format($gas_spend->gas_spend, 2) }}</td>
+            <td style="color: blue">{{  App\User::getNameById($gas_spend->user_id) }}</td>
+            <td style="color: blue">{{ $gas_spend->note_gas }}</td>
         </tr>
     @endforeach
     </tbody>
