@@ -42,39 +42,19 @@ class GeneralController extends Controller
 
         $date_from = strtotime($range['ymd_from']);
         $date_to = strtotime($range['ymd_to']);
+
+        $pdf = App::make('dompdf.wrapper');
         if ($request->get('unity') == 'all') {
-            $unity_datas = UnityData::orderBy('date')
-                ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
-                ->get();
-
-            $total_in = UnityData::orderBy('date')
-                ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
-                ->sum('patient_input');
+            $view = $this->pdfAllUnities($date_from, $date_to, $request->get('date_from'), $request->get('date_to'));
         } else {
-            $unity = Unity::findByCode($request->get('unity'));
-
-            $unity_datas = UnityData::orderBy('date')
-                ->where('unity_id', '=', $unity['id'])
-                ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
-                ->get();
-
-            $total_in = UnityData::orderBy('date')
-                ->where('unity_id', '=', $unity['id'])
-                ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
-                ->sum('patient_input');
+            $view = $this->pdfOneUnity($date_from, $date_to, $request->get('date_from'), $request->get('date_to'), $request->get('unity'));
         }
 
-        $data = ['unity_datas' => $unity_datas,
-                 'date_from'   => $request->get('date_from'),
-                 'date_to'     => $request->get('date_to'),
-                 'unity'       => $request->get('unity'),
-                 'total_in'    => $total_in];
         if ($request->get('XLSX')) {
             $this->xlsx($request);
         }
-        $pdf = App::make('dompdf.wrapper');
-        $view = \View::make('general.PDF.report_pdf_general')->with($data)->render();
-        $date = date('Y-m-d');
+
+        $date = date('d/m/Y H:i');
         $pdf->loadHTML($view)->setPaper('legal', 'landscape');
 
         return $pdf->download('general-' . $date . '.pdf');
@@ -131,5 +111,43 @@ class GeneralController extends Controller
         $ymd_from = $year_from . '-' . $month_from . '-' . $day_from . ' ' . $time_from;
 
         return ['ymd_from' => $ymd_from, 'ymd_to' => $ymd_to];
+    }
+
+    public function pdfAllUnities($date_from, $date_to, $request_date_from, $request_date_to){
+        $unity_datas = UnityData::orderBy('date')
+            ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
+            ->get();
+
+        $total_in = UnityData::orderBy('date')
+            ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
+            ->sum('patient_input');
+
+        $data = ['unity_datas' => $unity_datas,
+                 'date_from'   => $request_date_from,
+                 'date_to'     => $request_date_to,
+                 'total_in'    => $total_in];
+
+        return \View::make('general.PDF.report_pdf_general')->with($data)->render();
+    }
+
+    public function pdfOneUnity($date_from, $date_to, $request_date_from, $request_date_to, $unity_selected){
+        $unity = Unity::findByCode($unity_selected);
+
+        $unity_datas = UnityData::orderBy('date')
+            ->where('unity_id', '=', $unity['id'])
+            ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
+            ->get();
+
+        $total_in = UnityData::orderBy('date')
+            ->where('unity_id', '=', $unity['id'])
+            ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
+            ->sum('patient_input');
+
+        $data = ['unity_datas' => $unity_datas,
+                 'date_from'   => $request_date_from,
+                 'date_to'     => $request_date_to,
+                 'unity'       => $unity_selected,
+                 'total_in'    => $total_in];
+        return \View::make('general.PDF.report_pdf_general')->with($data)->render();
     }
 }
