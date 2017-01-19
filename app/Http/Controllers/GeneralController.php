@@ -145,12 +145,17 @@ class GeneralController extends Controller
             ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
             ->sum('patient_input');
 
+        if(isset($unity_datas[0]->kmout)){
+            $km_first = $unity_datas[0]->kmout;
+        }else{
+            $km_first = 0;
+        }
         $data = ['unity_datas' => $unity_datas,
                  'date_from'   => $request_date_from,
                  'date_to'     => $request_date_to,
                  'unity'       => $unity_selected,
                  'total_in'    => $total_in,
-                 'km_first' => $unity_datas[0]->kmout];
+                 'km_first' => $km_first];
 
         switch ($unity_selected){
             case "TDP22":
