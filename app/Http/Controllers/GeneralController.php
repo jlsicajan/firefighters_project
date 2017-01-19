@@ -57,7 +57,8 @@ class GeneralController extends Controller
         $date = date('d/m/Y H:i');
         $pdf->loadHTML($view)->setPaper('legal', 'landscape');
 
-        return $pdf->download('general-' . $date . '.pdf');
+        $name_file = $request->get('unity');
+        return $pdf->download($name_file . '-' . $date . '.pdf');
     }
 
     public function xlsx($request)
@@ -131,6 +132,7 @@ class GeneralController extends Controller
     }
 
     public function pdfOneUnity($date_from, $date_to, $request_date_from, $request_date_to, $unity_selected){
+
         $unity = Unity::findByCode($unity_selected);
 
         $unity_datas = UnityData::orderBy('date')
@@ -147,7 +149,20 @@ class GeneralController extends Controller
                  'date_from'   => $request_date_from,
                  'date_to'     => $request_date_to,
                  'unity'       => $unity_selected,
-                 'total_in'    => $total_in];
-        return \View::make('general.PDF.report_pdf_general')->with($data)->render();
+                 'total_in'    => $total_in,
+                 'km_first' => $unity_datas[0]->kmout];
+
+        switch ($unity_selected){
+            case "TDP22":
+                return \View::make('general.PDF.report_foreach_unity.report_pdf_tdp22')->with($data)->render();
+            case "AD21":
+                return \View::make('general.PDF.report_foreach_unity.report_pdf_ad21')->with($data)->render();
+            case "RD19":
+                return \View::make('general.PDF.report_foreach_unity.report_pdf_rd19')->with($data)->render();
+            case "MDP22":
+                return \View::make('general.PDF.report_foreach_unity.report_pdf_mdp22')->with($data)->render();
+            case "EE22":
+                return \View::make('general.PDF.report_foreach_unity.report_pdf_ee22')->with($data)->render();
+        }
     }
 }
