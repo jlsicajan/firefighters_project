@@ -137,7 +137,7 @@ class GeneralController extends Controller
                 ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
                 ->where('unity_id', '=', $unity->id)
                 ->sum('patient_input');
-            if (isset($unity_datas[0]->kmout)) {
+            if (isset($unity_datas[$unity->code][0]->kmout)) {
                 $km_first[$unity->code] = $unity_datas[$unity->code][0]->kmout;
             } else {
                 $km_first[$unity->code] = 0;
