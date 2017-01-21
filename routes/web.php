@@ -24,11 +24,11 @@ Route::get('/estacion', 'ExpensesController@station');
 Route::get('/libro_novedades', 'NewsController@index');
 Route::get('/inventario_recaudaciones', 'CollectionController@index');
 // GENERAL CONTROL ROUTES
-Route::get('/general', 'GeneralController@index');
-Route::get('/gastos/combustible', 'GeneralSpendGasController@index');
-Route::get('/gastos/estacion', 'GeneralSpendStationController@index');
-Route::get('/control/recaudaciones', 'GeneralCollectionController@index');
-Route::get('/control/novedades', 'GeneralNewsController@index');
+Route::get('/general', 'Reports\GeneralController@index');
+Route::get('/gastos/combustible', 'Reports\GeneralSpendGasController@index');
+Route::get('/gastos/estacion', 'Reports\GeneralSpendStationController@index');
+Route::get('/control/recaudaciones', 'Reports\GeneralCollectionController@index');
+Route::get('/control/novedades', 'Reports\GeneralNewsController@index');
 
 //      SAVE DATA
 Route::post('/combustible/gas', ['as'   => 'save.gas',
@@ -46,6 +46,6 @@ Route::post('/saveunidades/', ['as'   => 'unidad.save',
 
 
 //PDF ROUTES
-Route::get('/pdf/general', 'GeneralController@pdf');
-Route::get('/pdf/general/spend/gas', 'GeneralSpendGasController@pdf');
-Route::get('/pdf/general/spend/station', 'GeneralSpendStationController@pdf');
+Route::get('/pdf/general', 'Reports\GeneralController@pdf');
+Route::get('/pdf/general/spend/gas', 'Reports\GeneralSpendGasController@pdf');
+Route::get('/pdf/general/spend/station', 'Reports\GeneralSpendStationController@pdf');

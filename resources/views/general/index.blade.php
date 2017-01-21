@@ -5,7 +5,7 @@
         <h5><strong>CONTROL GENERAL DE UNIDADES</strong></h5>
         <div class="panel panel-default panel-transparent">
             <div class="panel-heading">
-                <form class="form-inline" method="get" action="{{ action('GeneralController@pdf') }}">
+                <form class="form-inline" method="get" action="{{ action('Reports\GeneralController@pdf') }}">
                     <div class="form-group input-append date form_datetime">
                         <label for="date_from" class="white_word">DESDE: </label>
                         <input size="20" type="text" class="form-control" name="date_from" id="date_from"

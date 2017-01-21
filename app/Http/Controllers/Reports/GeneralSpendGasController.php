@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Reports;
 
 use App\GasSpend;
 use App\Unity;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class GeneralSpendGasController extends Controller
 {
@@ -27,8 +29,11 @@ class GeneralSpendGasController extends Controller
     public function index()
     {
         $data = ['gas_datas' => GasSpend::all(), 'unities' => Unity::all()];
-
-        return view('general.spend_gas.index')->with($data);
+        if(Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian'| Auth::user()->name == 'Administrador'){
+            return view('general.spend_gas.index')->with($data);
+        }else{
+            return 'Error de permiso';
+        }
     }
 
     public function pdf(Request $request)

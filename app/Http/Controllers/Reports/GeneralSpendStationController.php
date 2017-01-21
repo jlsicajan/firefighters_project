@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Reports;
 
 use App\StationSpend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class GeneralSpendStationController extends Controller
 {
@@ -26,8 +28,12 @@ class GeneralSpendStationController extends Controller
     public function index()
     {
         $data = ['station_datas' => StationSpend::all()];
+        if(Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian'| Auth::user()->name == 'Administrador'){
+            return view('general.spend_station.index')->with($data);
+        }else{
+            return 'Error de permiso';
+        }
 
-        return view('general.spend_station.index')->with($data);
     }
 
     public function pdf(Request $request)

@@ -16,4 +16,25 @@ class UnityData extends Model
                             'patient_age', 'patient_case', 'patient_address', 'patient_address_from',
                             'patient_destiny', 'patient_phone', 'patient_input', 'asistant_id', 'pilot_id', 'unity_id', 'user_id', 'general_case',
                             'observations', 'asistant_id_two', 'asistant_id_three'];
+
+    public function asistant()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function pilot()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function unity()
+    {
+        return $this->belongsTo(Unity::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function asistant_two()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

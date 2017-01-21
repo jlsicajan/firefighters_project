@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <form class="form-inline" method="get" action="{{ action('GeneralSpendGasController@pdf') }}">
+                        <form class="form-inline" method="get" action="{{ action('Reports\GeneralSpendGasController@pdf') }}">
                             <div class="form-group input-append date form_datetime">
                                 <label for="date_from" class="white_word">CONTROL GENERAL DE COMBUSTIBLE DESDE: </label>
                                 <input size="20" type="text" class="form-control" name="date_from" id="date_from"

@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Reports;
 
 use App\Collection;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class GeneralCollectionController extends Controller
 {
@@ -25,6 +27,11 @@ class GeneralCollectionController extends Controller
     public function index()
     {
         $data = ['collection_datas' => Collection::all()];
-        return view('general.collections.index')->with($data);
+        if(Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian'| Auth::user()->name == 'Administrador'){
+            return view('general.collections.index')->with($data);
+        }else{
+            return 'Error de permiso';
+        }
+
     }
 }

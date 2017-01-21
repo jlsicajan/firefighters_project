@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Reports;
 
 use App\Unity;
 use App\UnityData;
@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\App;
 use Faker\Provider\cs_CZ\DateTime;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class GeneralController extends Controller
 {
@@ -32,8 +34,11 @@ class GeneralController extends Controller
     public function index()
     {
         $data = ['unity_datas' => UnityData::all(), 'unities' => Unity::all()];
-
-        return view('general.index')->with($data);
+        if (Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian' | Auth::user()->name == 'Administrador') {
+            return view('general.index')->with($data);
+        } else {
+            return 'Error de permiso';
+        }
     }
 
     public function pdf(Request $request)
@@ -58,14 +63,15 @@ class GeneralController extends Controller
         $pdf->loadHTML($view)->setPaper('legal', 'landscape');
 
         $name_file = $request->get('unity');
+
         return $pdf->download($name_file . '-' . $date . '.pdf');
     }
 
     public function xlsx($request)
     {
-        Excel::create('General unidades', function ($excel) use($request) {
+        Excel::create('General unidades', function ($excel) use ($request) {
 
-            $excel->sheet('Unidades', function ($sheet) use($request){
+            $excel->sheet('Unidades', function ($sheet) use ($request) {
 
                 $range = $this->convertYmd($request->get('date_from'), $request->get('date_to'));
 
@@ -114,24 +120,46 @@ class GeneralController extends Controller
         return ['ymd_from' => $ymd_from, 'ymd_to' => $ymd_to];
     }
 
-    public function pdfAllUnities($date_from, $date_to, $request_date_from, $request_date_to){
-        $unity_datas = UnityData::orderBy('date')
-            ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
-            ->get();
+    public function pdfAllUnities($date_from, $date_to, $request_date_from, $request_date_to)
+    {
+        $unities = Unity::all();
 
-        $total_in = UnityData::orderBy('date')
+        $unity_datas = [];
+        $total_in = [];
+        $km_first = [];
+
+        foreach ($unities as $unity) {
+            $unity_datas[$unity->code] = UnityData::orderBy('date')
+                ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
+                ->where('unity_id', '=', $unity->id)
+                ->get();
+            $total_in[$unity->code] = UnityData::orderBy('date')
+                ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
+                ->where('unity_id', '=', $unity->id)
+                ->sum('patient_input');
+            if (isset($unity_datas[0]->kmout)) {
+                $km_first[$unity->code] = $unity_datas[$unity->code][0]->kmout;
+            } else {
+                $km_first[$unity->code] = 0;
+            }
+        }
+        $total_in_all = UnityData::orderBy('date')
             ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
             ->sum('patient_input');
 
         $data = ['unity_datas' => $unity_datas,
                  'date_from'   => $request_date_from,
                  'date_to'     => $request_date_to,
-                 'total_in'    => $total_in];
+                 'total_in'    => $total_in,
+                 'total_in_all'    => $total_in_all,
+                 'unities'     => $unities,
+                 'km_first'    => $km_first];
 
         return \View::make('general.PDF.report_pdf_general')->with($data)->render();
     }
 
-    public function pdfOneUnity($date_from, $date_to, $request_date_from, $request_date_to, $unity_selected){
+    public function pdfOneUnity($date_from, $date_to, $request_date_from, $request_date_to, $unity_selected)
+    {
 
         $unity = Unity::findByCode($unity_selected);
 
@@ -145,9 +173,9 @@ class GeneralController extends Controller
             ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
             ->sum('patient_input');
 
-        if(isset($unity_datas[0]->kmout)){
+        if (isset($unity_datas[0]->kmout)) {
             $km_first = $unity_datas[0]->kmout;
-        }else{
+        } else {
             $km_first = 0;
         }
         $data = ['unity_datas' => $unity_datas,
@@ -155,9 +183,9 @@ class GeneralController extends Controller
                  'date_to'     => $request_date_to,
                  'unity'       => $unity_selected,
                  'total_in'    => $total_in,
-                 'km_first' => $km_first];
+                 'km_first'    => $km_first];
 
-        switch ($unity_selected){
+        switch ($unity_selected) {
             case "TDP22":
                 return \View::make('general.PDF.report_foreach_unity.report_pdf_tdp22')->with($data)->render();
             case "AD21":
