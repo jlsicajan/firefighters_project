@@ -39,28 +39,52 @@
             <th style="color: blue">Caso / <p style="color: green">Observaciones</p></th>
             <th style="color: blue">Km salida</th>
             <th style="color: blue">Km entrada</th>
+            <th style="color: blue"> @if($unity_one->code == "TDP22") Cantidad de agua @else CASO @endif</th>
         </tr>
         </thead>
         <tbody>
         @foreach($unity_datas[$unity_one->code] as $unity_data)
-            <tr>
-                <td style="color: blue">{{ $unity_data->date }}</td>
-                <td style="color: blue">{{ $unity_data->unity->code }}</td>
-                <td style="color: blue">{{ $unity_data->patient_name }}</td>
-                <td style="color: blue">{{ $unity_data->pilot->name }}</td>
-                @if(App\User::getNameById($unity_data->asistant_id) != '')
-                    <td style="color: blue">{{  $unity_data->asistant->name }}</td>
-                @else
-                    <td style="color: blue">NINGUN ASISTENTE</td>
-                @endif
-                <td style="color: blue">{{ $unity_data->user->name }}</td>
-                <td style="color: blue">Q. {{ number_format($unity_data->patient_input , 2) }}
-                    / {{ $unity_data->patient_phone }}</td>
-                <td style="color: blue">{{ $unity_data->patient_case }} / <p
-                            style="color: green">{{ $unity_data->observations }}</p></td>
-                <td><strong style="color: blue">{{ $unity_data->kmout }}</strong></td>
-                <td><strong style="color: blue">{{ $unity_data->kmin }}</strong></td>
-            </tr>
+            @if($unity_one->code == "TDP22")
+                <tr>
+                    <td style="color: blue">{{ $unity_data->date }}</td>
+                    <td style="color: blue">{{  $unity_data->unity->code  }}</td>
+                    <td style="color: blue">@if($unity_data->patient_name == " ") {{ $unity_data->general_case }} @else {{ $unity_data->patient_name }} @endif</td>
+                    <td style="color: blue">{{  $unity_data->pilot->name }}</td>
+                    @if(App\User::getNameById($unity_data->asistant_id) != '')
+                        <td style="color: blue">{{  $unity_data->asistant->name }}</td>
+                    @else
+                        <td style="color: blue">NINGUN ASISTENTE</td>
+                    @endif
+                    <td style="color: blue">{{  $unity_data->user->name }}</td>
+                    <td style="color: blue">Q. {{ number_format($unity_data->patient_input , 2) }}
+                        / {{ $unity_data->patient_phone }}</td>
+                    <td style="color: blue">{{ $unity_data->patient_case }} / <p
+                                style="color: green">{{ $unity_data->observations }}</p></td>
+                    <td><strong style="color: blue">{{ $unity_data->kmout }}</strong></td>
+                    <td><strong style="color: blue">{{ $unity_data->kmin }}</strong></td>
+                    <td><strong style="color: blue">{{ $unity_data->water_spend }}</strong></td>
+                </tr>
+            @else
+                <tr>
+                    <td style="color: blue">{{ $unity_data->date }}</td>
+                    <td style="color: blue">{{ $unity_data->unity->code }}</td>
+                    <td style="color: blue">{{ $unity_data->patient_name }}</td>
+                    <td style="color: blue">{{ $unity_data->pilot->name }}</td>
+                    @if(App\User::getNameById($unity_data->asistant_id) != '')
+                        <td style="color: blue">{{  $unity_data->asistant->name }}</td>
+                    @else
+                        <td style="color: blue">NINGUN ASISTENTE</td>
+                    @endif
+                    <td style="color: blue">{{ $unity_data->user->name }}</td>
+                    <td style="color: blue">Q. {{ number_format($unity_data->patient_input , 2) }}
+                        / {{ $unity_data->patient_phone }}</td>
+                    <td style="color: blue">{{ $unity_data->patient_case }} / <p
+                                style="color: green">{{ $unity_data->observations }}</p></td>
+                    <td><strong style="color: blue">{{ $unity_data->kmout }}</strong></td>
+                    <td><strong style="color: blue">{{ $unity_data->kmin }}</strong></td>
+                    <td><strong style="color: blue">{{ $unity_data->general_case }}</strong></td>
+                </tr>
+            @endif
             <?php $kmtour = $unity_data->kmin - $km_first[$unity_one->code] ?>
         @endforeach
         </tbody>
@@ -92,7 +116,7 @@
                 </tr>
             @endforeach
             <tr>
-                <td><strong style="color: red">TOTAL:  </strong></td>
+                <td><strong style="color: red">TOTAL: </strong></td>
                 <td><strong style="color: red">Q. {{ number_format($total_in_all, 2) }}</strong></td>
             </tr>
         </table>
