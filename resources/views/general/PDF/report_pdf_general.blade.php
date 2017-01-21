@@ -85,7 +85,7 @@
                     <td><strong style="color: blue">{{ $unity_data->general_case }}</strong></td>
                 </tr>
             @endif
-            <?php $kmtour = $unity_data->kmin - $km_first[$unity_one->code] ?>
+            <?php $kmtour[$unity_one->code] = $unity_data->kmin - $km_first[$unity_one->code] ?>
         @endforeach
         </tbody>
     </table><br>
@@ -99,7 +99,7 @@
         <tr>
             <td align="left" style="color: blue"><strong>KILOMETROS
                     RECORRIDOS {{ App\Unity::findNameByCode($unity_one->code) }}: </strong></td>
-            <td align="right" style="color: red"><strong> @if(isset($kmtour)) {{ number_format($kmtour) }} @else
+            <td align="right" style="color: red"><strong> @if(isset($kmtour[$unity_one->code])) {{ number_format($kmtour[$unity_one->code]) }} @else
                         0 @endif KM</strong></td>
         </tr>
     </table>

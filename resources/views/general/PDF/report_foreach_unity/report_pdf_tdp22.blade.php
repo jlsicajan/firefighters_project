@@ -54,7 +54,7 @@
             <td><strong style="color: blue">{{ $unity_data->kmin }}</strong></td>
             <td><strong style="color: blue">{{ $unity_data->water_spend }}</strong></td>
         </tr>
-        <?php $kmtour = $unity_data->kmin - $km_first?>
+        <?php $kmtour = $unity_data->kmin - $km_first ?>
     @endforeach
     </tbody>
 </table>
