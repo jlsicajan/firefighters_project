@@ -33,8 +33,4 @@ class UnityData extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function asistant_two()
-    {
-        return $this->belongsTo(User::class);
-    }
 }
