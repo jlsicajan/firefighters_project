@@ -51,7 +51,7 @@
                     <td style="color: blue">@if($unity_data->patient_name == " ") {{ $unity_data->general_case }} @else {{ $unity_data->patient_name }} @endif</td>
                     <td style="color: blue">{{  $unity_data->pilot->name }}</td>
                     @if(App\User::getNameById($unity_data->asistant_id) != '')
-                        <td style="color: blue">{{  $unity_data->asistant->name }}</td>
+                        <td style="color: blue">{{  $unity_data->asistant->name or 'Sin asistente'}}</td>
                     @else
                         <td style="color: blue">NINGUN ASISTENTE</td>
                     @endif
@@ -71,7 +71,7 @@
                     <td style="color: blue">{{ $unity_data->patient_name }}</td>
                     <td style="color: blue">{{ $unity_data->pilot->name }}</td>
                     @if(App\User::getNameById($unity_data->asistant_id) != '')
-                        <td style="color: blue">{{  $unity_data->asistant->name }}</td>
+                        <td style="color: blue">{{  $unity_data->asistant->name or 'Sin asistente' }}</td>
                     @else
                         <td style="color: blue">NINGUN ASISTENTE</td>
                     @endif

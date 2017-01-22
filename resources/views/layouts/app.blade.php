@@ -78,7 +78,9 @@
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ route('unidad', ['unidad' => 'rd']) }}">UNIDAD RD 19</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ route('unidad', ['unidad' => 'mdp22']) }}">UNIDAD MDP-22</a></li>
+                                <li><a href="{{ route('unidad', ['unidad' => 'mdp22']) }}">UNIDAD MDP-22-01</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{{ route('unidad', ['unidad' => 'mdp22-02']) }}">UNIDAD MDP-22-02</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ route('unidad', ['unidad' => 'tdp22']) }}">UNIDAD TDP-22</a></li>
                                 <li role="separator" class="divider"></li>
