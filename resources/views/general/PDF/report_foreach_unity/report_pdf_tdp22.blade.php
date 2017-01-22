@@ -46,7 +46,7 @@
                 <td style="color: blue">NINGUN ASISTENTE</td>
             @endif
             <td style="color: blue">{{  App\User::getNameById($unity_data->user_id) }}</td>
-            <td style="color: blue">Q. {{ number_format($unity_data->patient_input , 2) }}
+            <td style="color: blue">Q. {{ number_formatfill_unity($unity_data->patient_input , 2) }}
                 / {{ $unity_data->patient_phone }}</td>
             <td style="color: blue">{{ $unity_data->patient_case }} / <p
                         style="color: green">{{ $unity_data->observations }}</p></td>

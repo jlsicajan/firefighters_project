@@ -27,7 +27,16 @@
             <h5><strong>Asistente:</strong> {{ $unity_data->asistant->name }}</h5>
             <h5><strong>Segundo asistente:</strong> {{ App\User::getNameById($unity_data->asistant_id_two) }}</h5>
             <h5><strong>Piloto:</strong> {{ $unity_data->pilot->name }}</h5>
-            <h5><strong>Tipo de servicio:</strong> {{ $unity_data->service_type }}</h5>
+            @if($unity_data->service_type != " ")
+                <h5><strong>Tipo de servicio social:</strong> {{ $unity_data->service_type }}</h5>
+            @endif
+            @if($unity_data->unity->code == "TDP22")
+                <h5><strong>Destino servicio de agua:</strong> {{ $unity_data->water_destiny }}</h5>
+                <h5><strong>Cantidad distribuida:</strong> {{ $unity_data->water_spend }}</h5>
+                <h5><strong>Lugar de carga:</strong> {{ $unity_data->fill_unity }}</h5>
+                <h5><strong>Cuanto se gasto en la cargada:</strong> {{ $unity_data->fill_spend }}</h5>
+                <h5><strong>Quien aporta el gasto:</strong> {{ $unity_data->spend_aport }}</h5>
+            @endif
         </div>
     </div>
 </div>
