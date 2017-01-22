@@ -13,16 +13,16 @@
                         </div>
                         <hr>
                         <ul class="nav nav-tabs">
-                            <li><a data-toggle="tab" href="#enfermedadcomun">Enfermedad comun</a></li>
+                            {{--<li><a data-toggle="tab" href="#enfermedadcomun">Enfermedad comun</a></li>--}}
                             <li><a data-toggle="tab" href="#accidente">Accidente</a></li>
                             <li><a data-toggle="tab" href="#social">Servicio social</a></li>
                             <li><a data-toggle="tab" href="#water">Servicio de agua</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div id="enfermedadcomun" class="tab-pane fade in active">
-                                <h3>Ingrese los datos para enfermedad comun</h3>
-                                @include('units.layouts.basic_form', ['unity_set' => 'TDP22', 'general_case' => 'Enfermedad comun'])
-                            </div>
+                            {{--<div id="enfermedadcomun" class="tab-pane fade in active">--}}
+                                {{--<h3>Ingrese los datos para enfermedad comun</h3>--}}
+                                {{--@include('units.layouts.basic_form', ['unity_set' => 'TDP22', 'general_case' => 'Enfermedad comun'])--}}
+                            {{--</div>--}}
                             <div id="accidente" class="tab-pane fade">
                                 <h3>Ingrese los datos para accidente</h3>
                                 @include('units.layouts.basic_form_accident', ['unity_set' => 'TDP22', 'general_case' => 'Accidente'])
@@ -31,7 +31,7 @@
                                 <h3>Ingrese los datos para servicio social</h3>
                                 @include('units.layouts.basic_form_social', ['unity_set' => 'TDP22', 'general_case' => 'Servicio social'])
                             </div>
-                            <div id="water" class="tab-pane fade">
+                            <div id="water" class="tab-pane fade in active">
                                 <h3>Ingrese los datos para servicio de agua</h3>
                                 @include('units.layouts.basic_form_water', ['unity_set' => 'TDP22', 'general_case' => 'Servicio de agua'])
                             </div>
@@ -46,49 +46,12 @@
     <script>
         var km_out = {{ $kmin_all }}
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            $('.form_basic').trigger("reset");
             $('.form_basic_accident').trigger("reset");
             $('.form_basic_service').trigger("reset");
             $('.form_basic_water').trigger("reset");
             $('.kmout').val(km_out);
         });
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-        $('.form_basic').on('submit', function (e) {
-            $.ajax({
-                type: "POST",
-                url: '{{ URL::route('unidad.save') }}',
-                data: {
-                    date: $('input#date').val(),
-                    timeout: $('input#timeout').val(),
-                    timein: $('input#timein').val(),
-                    kmout: $('input#kmout').val(),
-                    kmin: $('input#kmin').val(),
-                    patient_name: $('input#patient_name').val(),
-                    patient_responsible: $('input#patient_responsible').val(),
-                    patient_age: $('input#patient_age').val(),
-                    patient_case: $('textarea#patient_case').val(),
-                    patient_address: $('input#patient_address').val(),
-                    patient_address_from: $('input#patient_address_from').val(),
-                    patient_destiny: $('input#patient_destiny').val(),
-                    patient_phone: $('input#patient_phone').val(),
-                    patient_input: $('input#patient_input').val(),
-                    asistant_id: $('select#asistant').val(),
-                    pilot_id: $('select#pilot').val(),
-                    unity_id: $('input#unity_id').val(),
-                    general_case: $('input#general_case').val(),
-                    asistant_id_two: $('select#asistant_id_two').val(),
-                    observations: $('textarea#observations').val(),
-                    _token: CSRF_TOKEN
-                },
-                success: function (data) {
-                    alert(data['message']);
-                    $('.form_basic').trigger("reset");
-                    $('input#kmout').val(data['kmall']);
-                    km_out = data['kmall'];
-                }
-            });
-            return false;
-        });
         $('.form_basic_accident').on('submit', function (e) {
             $.ajax({
                 type: "POST",
