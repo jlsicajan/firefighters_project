@@ -64,8 +64,8 @@
                     </tfoot>
                     <tbody>
                     @foreach(json_decode($unity_datas) as $unity_data)
-{{--                        <tr data-toggle="modal" data-id="{{ $unity_data->id }}" data-target="#unityDetailModal" style="cursor: pointer;">--}}
-                        <tr>
+                        <tr data-toggle="modal" data-id="{{ $unity_data->id }}" data-target="#unityDetailModal" style="cursor: pointer;">
+                        {{--<tr>--}}
                             <td>{{ $unity_data->date }}</td>
                             <td>{{  App\Unity::getNameById($unity_data->unity_id) }}</td>
                             <td>{{ $unity_data->patient_name }}</td>
@@ -90,7 +90,22 @@
         </div>
     </div>
 @endsection
-@include('general.unity_datas.modals.unityDetailModal')
+<div class="modal fade" id="unityDetailModal" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Detalle</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 @section('after_scripts')
     <script>
         $('#date_from, #date_to').datetimepicker({
@@ -110,6 +125,12 @@
                     "url": "/datatable/language/spanish.json"
                 },
                 "scrollY": "500px",
+            });
+            $("#unityDetailModal").on("show.bs.modal", function (e) {
+                var id = $(e.relatedTarget).data('id');
+                $.get('/unity/data/find/' + id, function (data) {
+                    $(".modal-body").html(data);
+                });
             });
         });
     </script>

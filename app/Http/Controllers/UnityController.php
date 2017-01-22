@@ -27,15 +27,15 @@ class UnityController extends Controller
             ->orWhere('username', '=', 'narciso')
             ->orWhere('username', '=', 'edson')
             ->get();
-        if($unity == 'rd'){
+        if ($unity == 'rd') {
             $kmin_all = UnityData::where('unity_id', '=', Unity::findByCode('RD19'))->select('kmin')->orderBy('created_at', 'desc')->first();
-        }else{
+        } else {
             $kmin_all = UnityData::where('unity_id', '=', Unity::findByCode(strtoupper($unity)))->select('kmin')->orderBy('created_at', 'desc')->first();
         }
-        $kmin_all = isset($kmin_all)? $kmin_all->kmin : '';
+        $kmin_all = isset($kmin_all) ? $kmin_all->kmin : '';
 
         $data = ['officials' => $official, 'pilots' => $pilots,
-          'kmin_all' => $kmin_all, 'date_today' => date('d/m/Y H:i:s')
+                 'kmin_all'  => $kmin_all, 'date_today' => date('d/m/Y H:i:s')
         ];
 
         return view('units.' . $unity)->with($data);
@@ -47,7 +47,7 @@ class UnityController extends Controller
 
         $unity_data = new UnityData();
 
-        if(Input::get('is_water') == true){
+        if (Input::get('is_water') == true) {
             $unity_data->date = date('d/m/Y H:i:s');
             $unity_data->timeout = Input::get('timeout');
             $unity_data->timein = Input::get('timein');
@@ -87,7 +87,8 @@ class UnityController extends Controller
 
             $unity_data->save();
 
-            $data = array('message' => 'Unidad ' . Input::get('unity_id') . ' ingresado correctamente', 'kmall' => $unity_data->kmin);
+            $data = ['message' => 'Unidad ' . Input::get('unity_id') . ' ingresado correctamente', 'kmall' => $unity_data->kmin];
+
             return $data;
         }
 
@@ -130,12 +131,20 @@ class UnityController extends Controller
         // FOR SERVICE SOCIAL ADD SERVICE TYPE
         if (Input::get('service_type') != '') {
             $unity_data->service_type = Input::get('service_type');
-        }else{
+        } else {
             $unity_data->service_type = ' ';
         }
         $unity_data->save();
 
-        $data = array('message' => 'Unidad ' . Input::get('unity_id') . ' ingresado correctamente', 'kmall' => $unity_data->kmin);
+        $data = ['message' => 'Unidad ' . Input::get('unity_id') . ' ingresado correctamente', 'kmall' => $unity_data->kmin];
+
         return $data;
+    }
+
+    public function find($id)
+    {
+        $unity_data = UnityData::find($id);
+
+        return view('general.unity_datas.modals.unityDetailModal', ['unity_data' => $unity_data])->render();
     }
 }
