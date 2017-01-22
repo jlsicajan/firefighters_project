@@ -155,7 +155,7 @@ class GeneralController extends Controller
                  'total_in_all'    => $total_in_all,
                  'unities'     => $unities,
                  'km_first'    => $km_first];
-//        print_r($unity_datas['EE22'][0]->kmout);die();
+
         return \View::make('general.PDF.report_pdf_general')->with($data)->render();
     }
 

@@ -20,7 +20,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="station_spend">Ingrese la cantidad que gasto</label>
-                                <input type="number" class="form-control" name="station_spend" id="station_spend"
+                                <input type="number" step="any"  class="form-control" name="station_spend" id="station_spend"
                                        required/>
                             </div>
                             <div class="form-group">

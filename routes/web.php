@@ -29,6 +29,7 @@ Route::get('/gastos/combustible', 'Reports\GeneralSpendGasController@index');
 Route::get('/gastos/estacion', 'Reports\GeneralSpendStationController@index');
 Route::get('/control/recaudaciones', 'Reports\GeneralCollectionController@index');
 Route::get('/control/novedades', 'Reports\GeneralNewsController@index');
+Route::get('/reporte/semanal', 'Reports\WeeklyController@index');
 
 //      SAVE DATA
 Route::post('/combustible/gas', ['as'   => 'save.gas',
@@ -43,9 +44,13 @@ Route::get('/unidades/{unidad}', ['as'   => 'unidad',
                                   'uses' => 'UnityController@index']);
 Route::post('/saveunidades/', ['as'   => 'unidad.save',
                                   'uses' => 'UnityController@save']);
+Route::post('/save/weekly', ['as'   => 'save.weekly.data',
+                                  'uses' => 'Reports\WeeklyController@save']);
 
 
 //PDF ROUTES
 Route::get('/pdf/general', 'Reports\GeneralController@pdf');
 Route::get('/pdf/general/spend/gas', 'Reports\GeneralSpendGasController@pdf');
 Route::get('/pdf/general/spend/station', 'Reports\GeneralSpendStationController@pdf');
+//AJAX FOR DATATABLES
+Route::get('weekly/ajax', ['uses' => 'Reports\WeeklyController@ajax', 'as' => 'weekly.data.ajax']);

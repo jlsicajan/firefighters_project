@@ -12,7 +12,6 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-    <link href="/css/jquery-ui.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="/css/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
     <!-- Scripts -->
@@ -64,6 +63,8 @@
                                     <li><a href="{{ url('control/recaudaciones') }}">Control de recaudaciones</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{{ url('control/novedades') }}">Control de novedades</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ url('reporte/semanal') }}">Reporte semanal</a></li>
                                     <li role="separator" class="divider"></li>
                                 </ul>
                             </li>
