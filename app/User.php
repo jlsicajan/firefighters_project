@@ -29,6 +29,9 @@ class User extends Authenticatable
 
     public static function getNameById($id){
         $user = User::where('id', '=', $id)->select('name')->first();
+        if(!isset($user['name'])){
+            $user['name'] = 'No ingresado';
+        }
         return $user['name'];
     }
 }

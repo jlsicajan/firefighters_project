@@ -24,7 +24,7 @@
         <div class="col-xs-4">
             <h4><strong>{{ $unity_data->date }}</strong></h4>
             <hr>
-            <h5><strong>Asistente:</strong> {{ $unity_data->asistant->name }}</h5>
+            <h5><strong>Asistente:</strong> {{ $unity_data->asistant->name or 'Sin asistente'}}</h5>
             <h5><strong>Segundo asistente:</strong> {{ App\User::getNameById($unity_data->asistant_id_two) }}</h5>
             <h5><strong>Piloto:</strong> {{ $unity_data->pilot->name }}</h5>
             <h5><strong>Tipo de servicio social:</strong> {{ $unity_data->service_type }}</h5>
