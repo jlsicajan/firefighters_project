@@ -12,7 +12,7 @@
             <br>
             <h4><strong>Detalles del paciente</strong></h4>
             <hr>
-            <h5><strong>Nombre:</strong> {{  $unity_data->patient_name }} - {{ $unity_data->patient_responsible  }}</h5>
+            <h5><strong>Nombre:</strong> {{  $unity_data->patient_name or 'Nombre no ingresado' }} - {{ $unity_data->patient_responsible  }}</h5>
             <h5><strong>Edad:</strong> {{  $unity_data->patient_age }}</h5>
             <h5><strong>Direccion:</strong> {{  $unity_data->patient_address }}</h5>
             <h5><strong>Direccion de donde salio:</strong> {{  $unity_data->patient_address_from }}</h5>
