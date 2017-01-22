@@ -28,6 +28,7 @@
             <h5><strong>Segundo asistente:</strong> {{ App\User::getNameById($unity_data->asistant_id_two) }}</h5>
             <h5><strong>Piloto:</strong> {{ $unity_data->pilot->name }}</h5>
             <h5><strong>Tipo de servicio social:</strong> {{ $unity_data->service_type }}</h5>
+            <h5><strong>Observaciones:</strong> {{ $unity_data->observations }}</h5>
             @if($unity_data->unity->code == "TDP22")
                 <h5><strong>Destino servicio de agua:</strong> {{ $unity_data->water_destiny or ' ' }}</h5>
                 <h5><strong>Cantidad distribuida:</strong> {{ $unity_data->water_spend or ' ' }}</h5>
