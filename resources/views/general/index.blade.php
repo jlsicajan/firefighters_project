@@ -121,6 +121,7 @@
         });
         $(document).ready(function () {
             $('#unity_table').DataTable({
+                "bSort" : false,
                 "language": {
                     "url": "/datatable/language/spanish.json"
                 },
