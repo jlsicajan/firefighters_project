@@ -66,7 +66,7 @@
                     @foreach(json_decode($unity_datas) as $unity_data)
                         <tr data-toggle="modal" data-id="{{ $unity_data->id }}" data-target="#unityDetailModal" style="cursor: pointer;">
                         {{--<tr>--}}
-                            <td>{{ $unity_data->created_at }}</td>
+                            <td>{{ $unity_data->date }}</td>
                             <td>{{  App\Unity::getNameById($unity_data->unity_id) }}</td>
                             <td>{{ $unity_data->patient_name }}</td>
                             <td>{{  App\User::getNameById($unity_data->pilot_id) }}</td>
