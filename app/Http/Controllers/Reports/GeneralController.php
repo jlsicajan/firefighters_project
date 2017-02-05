@@ -34,7 +34,7 @@ class GeneralController extends Controller
      */
     public function index()
     {
-        $order_datas = UnityData::orderBy('created_at', 'asc')->get();
+        $order_datas = UnityData::orderBy('created_at', 'DESC')->get();
 
         $data = ['unity_datas' => $order_datas, 'unities' => Unity::all()];
         if (Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian' | Auth::user()->name == 'Administrador') {
@@ -82,13 +82,13 @@ class GeneralController extends Controller
                 $date_to = strtotime($range['ymd_to']);
 
                 if ($request->get('unity') == 'all') {
-                    $unity_datas = UnityData::orderBy('date')
+                    $unity_datas = UnityData::orderBy('created_at', 'ASC')
                         ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
                         ->get();
                 } else {
                     $unity = Unity::findByCode($request->get('unity'));
 
-                    $unity_datas = UnityData::orderBy('date')
+                    $unity_datas = UnityData::orderBy('created_at', 'ASC')
                         ->where('unity_id', '=', $unity['id'])
                         ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
                         ->get();
@@ -132,11 +132,11 @@ class GeneralController extends Controller
         $km_first = [];
 
         foreach ($unities as $unity) {
-            $unity_datas[$unity->code] = UnityData::orderBy('date')
+            $unity_datas[$unity->code] = UnityData::orderBy('created_at', 'ASC')
                 ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
                 ->where('unity_id', '=', $unity->id)
                 ->get();
-            $total_in[$unity->code] = UnityData::orderBy('date')
+            $total_in[$unity->code] = UnityData::orderBy('created_at', 'ASC')
                 ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
                 ->where('unity_id', '=', $unity->id)
                 ->sum('patient_input');
@@ -147,7 +147,7 @@ class GeneralController extends Controller
                 $km_first[$unity->code] = 0;
             }
         }
-        $total_in_all = UnityData::orderBy('date')
+        $total_in_all = UnityData::orderBy('created_at', 'ASC')
             ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
             ->sum('patient_input');
 
@@ -167,12 +167,12 @@ class GeneralController extends Controller
 
         $unity = Unity::findByCode($unity_selected);
 
-        $unity_datas = UnityData::orderBy('date')
+        $unity_datas = UnityData::orderBy('created_at', 'ASC')
             ->where('unity_id', '=', $unity['id'])
             ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
             ->get();
 
-        $total_in = UnityData::orderBy('date')
+        $total_in = UnityData::orderBy('created_at', 'ASC')
             ->where('unity_id', '=', $unity['id'])
             ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
             ->sum('patient_input');

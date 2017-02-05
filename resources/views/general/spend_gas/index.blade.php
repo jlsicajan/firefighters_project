@@ -93,7 +93,16 @@
             $('#gas_spend').DataTable({
                 "language": {
                     "url": "/datatable/language/spanish.json"
-                }
+                },
+                "scrollY": "400px",
+                "bSort" : false,
+                //fnDrawCallback for autoscroll to top after change pagination datatable xD
+                "fnDrawCallback": function (o) {
+                    if ( o._iDisplayStart != oldStart ) {
+                        var targetOffset = $('#example').offset().top;
+                        $('html,body').animate({scrollTop: targetOffset}, 500);
+                    }
+                },
             });
         });
     </script>

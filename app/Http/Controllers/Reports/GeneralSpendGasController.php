@@ -28,7 +28,7 @@ class GeneralSpendGasController extends Controller
      */
     public function index()
     {
-        $data = ['gas_datas' => GasSpend::all(), 'unities' => Unity::all()];
+        $data = ['gas_datas' => GasSpend::orderBy('created_at', 'DESC')->get(), 'unities' => Unity::all()];
         if(Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian'| Auth::user()->name == 'Administrador'){
             return view('general.spend_gas.index')->with($data);
         }else{
@@ -43,22 +43,22 @@ class GeneralSpendGasController extends Controller
         $date_to = strtotime($range['ymd_to']);
 
         if ($request->get('unity') == 'all') {
-            $gas_spends = GasSpend::orderBy('date')
+            $gas_spends = GasSpend::orderBy('created_at', 'ASC')
                 ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
                 ->get();
 
-            $total_gas_general = GasSpend::orderBy('date')
+            $total_gas_general = GasSpend::orderBy('created_at', 'ASC')
                 ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
                 ->sum('gas_spend');
         } else {
             $unity = Unity::findByCode($request->get('unity'));
 
-            $gas_spends = GasSpend::orderBy('date')
+            $gas_spends = GasSpend::orderBy('created_at', 'ASC')
                 ->where('unity_id', '=', $unity['id'])
                 ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
                 ->get();
 
-            $total_gas_general = GasSpend::orderBy('date')
+            $total_gas_general = GasSpend::orderBy('created_at', 'ASC')
                 ->where('unity_id', '=', $unity['id'])
                 ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
                 ->sum('gas_spend');

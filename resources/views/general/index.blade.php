@@ -121,11 +121,18 @@
         });
         $(document).ready(function () {
             $('#unity_table').DataTable({
-                "bSort" : false,
                 "language": {
                     "url": "/datatable/language/spanish.json"
                 },
                 "scrollY": "500px",
+                "bSort" : false,
+                //fnDrawCallback for autoscroll to top after change pagination datatable xD
+                "fnDrawCallback": function (o) {
+                    if ( o._iDisplayStart != oldStart ) {
+                        var targetOffset = $('#example').offset().top;
+                        $('html,body').animate({scrollTop: targetOffset}, 500);
+                    }
+                },
             });
             $("#unityDetailModal").on("show.bs.modal", function (e) {
                 var id = $(e.relatedTarget).data('id');

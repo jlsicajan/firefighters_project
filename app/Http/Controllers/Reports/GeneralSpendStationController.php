@@ -27,7 +27,7 @@ class GeneralSpendStationController extends Controller
      */
     public function index()
     {
-        $data = ['station_datas' => StationSpend::all()];
+        $data = ['station_datas' => StationSpend::orderBy('created_at', 'DESC')->get()];
         if(Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian'| Auth::user()->name == 'Administrador'){
             return view('general.spend_station.index')->with($data);
         }else{
@@ -42,11 +42,11 @@ class GeneralSpendStationController extends Controller
         $date_from = strtotime($range['ymd_from']);
         $date_to = strtotime($range['ymd_to']);
 
-        $station_spends = StationSpend::orderBy('date')
+        $station_spends = StationSpend::orderBy('created_at', 'ASC')
             ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
             ->get();
 
-        $total_station_general = StationSpend::orderBy('date')
+        $total_station_general = StationSpend::orderBy('created_at', 'ASC')
             ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
             ->sum('station_spend');
 
