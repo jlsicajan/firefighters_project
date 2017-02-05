@@ -34,7 +34,7 @@ class GeneralController extends Controller
      */
     public function index()
     {
-        $order_datas = UnityData::orderBy('created_at', 'desc')->get();
+        $order_datas = UnityData::orderBy('created_at', 'asc')->get();
 
         $data = ['unity_datas' => $order_datas, 'unities' => Unity::all()];
         if (Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian' | Auth::user()->name == 'Administrador') {
