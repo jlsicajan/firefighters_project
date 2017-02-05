@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports;
 use App\Unity;
 use App\UnityData;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\App;
@@ -33,7 +34,9 @@ class GeneralController extends Controller
      */
     public function index()
     {
-        $data = ['unity_datas' => UnityData::all(), 'unities' => Unity::all()];
+        $order_datas = UnityData::orderBy('created_at', 'desc')->get();
+
+        $data = ['unity_datas' => $order_datas, 'unities' => Unity::all()];
         if (Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian' | Auth::user()->name == 'Administrador') {
             return view('general.index')->with($data);
         } else {
