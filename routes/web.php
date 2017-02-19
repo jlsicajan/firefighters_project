@@ -23,6 +23,11 @@ Route::get('/combustible', 'ExpensesController@gas');
 Route::get('/estacion', 'ExpensesController@station');
 Route::get('/libro_novedades', 'NewsController@index');
 Route::get('/inventario_recaudaciones', 'CollectionController@index');
+//  CHANGE PASSWORD
+Route::get('/cambio/contrasena', ['as'   => 'save.password.view',
+                                  'uses' => 'HomeController@changePassword']);
+Route::post('/nueva/contrasena', ['as'   => 'save.password',
+                                 'uses' => 'HomeController@newPassword']);
 // GENERAL CONTROL ROUTES
 Route::get('/general', 'Reports\GeneralController@index');
 Route::get('/gastos/combustible', 'Reports\GeneralSpendGasController@index');

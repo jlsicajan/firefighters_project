@@ -119,6 +119,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                <li role="separator" class="divider"></li>
                                 <li>
                                     <a href="{{ url('/logout') }}"
                                        onclick="event.preventDefault();
@@ -131,6 +132,9 @@
                                         {{ csrf_field() }}
                                     </form>
                                 </li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{{ url('/cambio/contrasena') }}">Cambiar mi contraseña</a></li>
+                                <li role="separator" class="divider"></li>
                             </ul>
                         </li>
                     @endif
