@@ -23,11 +23,10 @@ Route::get('/combustible', 'ExpensesController@gas');
 Route::get('/estacion', 'ExpensesController@station');
 Route::get('/libro_novedades', 'NewsController@index');
 Route::get('/inventario_recaudaciones', 'CollectionController@index');
+
 //  CHANGE PASSWORD
-Route::get('/cambio/contrasena', ['as'   => 'save.password.view',
-                                  'uses' => 'HomeController@changePassword']);
-Route::post('/nueva/contrasena', ['as'   => 'save.password',
-                                 'uses' => 'HomeController@newPassword']);
+Route::get('/cambio/contrasena', ['as'   => 'save.password.view', 'uses' => 'HomeController@changePassword']);
+Route::post('/nueva/contrasena', ['as'   => 'save.password', 'uses' => 'HomeController@newPassword']);
 // GENERAL CONTROL ROUTES
 Route::get('/general', 'Reports\GeneralController@index');
 Route::get('/gastos/combustible', 'Reports\GeneralSpendGasController@index');
@@ -37,20 +36,13 @@ Route::get('/control/novedades', 'Reports\GeneralNewsController@index');
 Route::get('/reporte/semanal', 'Reports\WeeklyController@index');
 
 //      SAVE DATA
-Route::post('/combustible/gas', ['as'   => 'save.gas',
-                                 'uses' => 'ExpensesController@saveGas']);
-Route::post('/combustible/station', ['as'   => 'save.station',
-                                     'uses' => 'ExpensesController@saveStation']);
-Route::post('/novedades/save', ['as'   => 'save.news',
-                                'uses' => 'NewsController@saveNew']);
-Route::post('/recaudaciones/save', ['as'   => 'save.collections',
-                                'uses' => 'CollectionController@saveCollection']);
-Route::get('/unidades/{unidad}', ['as'   => 'unidad',
-                                  'uses' => 'UnityController@index']);
-Route::post('/saveunidades/', ['as'   => 'unidad.save',
-                                  'uses' => 'UnityController@save']);
-Route::post('/save/weekly', ['as'   => 'save.weekly.data',
-                                  'uses' => 'Reports\WeeklyController@save']);
+Route::post('/combustible/gas', ['as'   => 'save.gas', 'uses' => 'ExpensesController@saveGas']);
+Route::post('/combustible/station', ['as'   => 'save.station', 'uses' => 'ExpensesController@saveStation']);
+Route::post('/novedades/save', ['as'   => 'save.news', 'uses' => 'NewsController@saveNew']);
+Route::post('/recaudaciones/save', ['as'   => 'save.collections', 'uses' => 'CollectionController@saveCollection']);
+Route::get('/unidades/{unidad}', ['as'   => 'unidad', 'uses' => 'UnityController@index']);
+Route::post('/saveunidades/', ['as'   => 'unidad.save', 'uses' => 'UnityController@save']);
+Route::post('/save/weekly', ['as'   => 'save.weekly.data', 'uses' => 'Reports\WeeklyController@save']);
 
 
 //PDF ROUTES
@@ -61,3 +53,5 @@ Route::get('/pdf/general/spend/station', 'Reports\GeneralSpendStationController@
 Route::get('weekly/ajax', ['uses' => 'Reports\WeeklyController@ajax', 'as' => 'weekly.data.ajax']);
 //ROUTES FOR FIND DATA
 Route::get('/unity/data/find/{id}', 'UnityController@find');
+//ROUTES FOR TEST
+Route::get('/testing', 'DeveloperController@testing');

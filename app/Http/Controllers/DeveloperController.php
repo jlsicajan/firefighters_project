@@ -9,4 +9,8 @@ class DeveloperController extends Controller
   public function developer(){
     return view('developer.index');
   }
+
+  public function testing(){
+      return view('developer.test');
+  }
 }
