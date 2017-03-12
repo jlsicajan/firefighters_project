@@ -27,7 +27,7 @@ class GeneralNewsController extends Controller
     public function index()
     {
         $data = ['new_datas' => NewDay::all()];
-        if(Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian' | Auth::user()->name == 'Administrador' | Auth::user()->name == 'reina'){
+        if(Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian' | Auth::user()->name == 'Administrador' | Auth::user()->username == 'reina'){
             return view('general.news.index')->with($data);
         }else{
             return 'Error de permiso';

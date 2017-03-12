@@ -15,7 +15,7 @@ class WeeklyController extends Controller
     {
         $data = ['reintegrate_sum' => WeeklyControl::all()->sum('reintegrate'),
                  'gain_sum' => WeeklyControl::all()->sum('gain')];
-        if (Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian' | Auth::user()->name == 'Administrador' | Auth::user()->name == 'reina') {
+        if (Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian' | Auth::user()->name == 'Administrador' | Auth::user()->username == 'reina') {
             return view('general.weekly.index')->with($data);
         } else {
             return 'Error de permiso';

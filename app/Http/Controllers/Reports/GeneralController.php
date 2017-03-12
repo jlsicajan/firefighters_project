@@ -37,7 +37,7 @@ class GeneralController extends Controller
         $order_datas = UnityData::orderBy('created_at', 'DESC')->get();
 
         $data = ['unity_datas' => $order_datas, 'unities' => Unity::all()];
-        if (Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian' | Auth::user()->name == 'Administrador' | Auth::user()->name == 'reina') {
+        if (Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian' | Auth::user()->name == 'Administrador' | Auth::user()->username == 'reina') {
             return view('general.index')->with($data);
         } else {
             return 'Error de permiso';

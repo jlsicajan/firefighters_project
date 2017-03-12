@@ -29,7 +29,7 @@ class GeneralSpendGasController extends Controller
     public function index()
     {
         $data = ['gas_datas' => GasSpend::orderBy('created_at', 'DESC')->get(), 'unities' => Unity::all()];
-        if(Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian'| Auth::user()->name == 'Administrador' | Auth::user()->name == 'reina'){
+        if(Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian'| Auth::user()->name == 'Administrador' | Auth::user()->username == 'reina'){
             return view('general.spend_gas.index')->with($data);
         }else{
             return 'Error de permiso';

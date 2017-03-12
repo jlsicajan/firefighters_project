@@ -27,7 +27,7 @@ class GeneralCollectionController extends Controller
     public function index()
     {
         $data = ['collection_datas' => Collection::all()];
-        if(Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian'| Auth::user()->name == 'Administrador'){
+        if(Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian' | Auth::user()->name == 'Administrador' | Auth::user()->username == 'reina'){
             return view('general.collections.index')->with($data);
         }else{
             return 'Error de permiso';

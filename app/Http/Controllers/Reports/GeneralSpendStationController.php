@@ -28,7 +28,7 @@ class GeneralSpendStationController extends Controller
     public function index()
     {
         $data = ['station_datas' => StationSpend::orderBy('created_at', 'DESC')->get()];
-        if(Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian'| Auth::user()->name == 'Administrador' | Auth::user()->name == 'reina'){
+        if(Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian'| Auth::user()->name == 'Administrador' | Auth::user()->username == 'reina'){
             return view('general.spend_station.index')->with($data);
         }else{
             return 'Error de permiso';
