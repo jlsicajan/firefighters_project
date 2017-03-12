@@ -1,4 +1,19 @@
 @extends('layouts.app')
+@section('after-styles')
+    <style>
+        .btn-bs-file{
+            position:relative;
+        }
+        .btn-bs-file input[type="file"]{
+            position: absolute;
+            top: -9999999;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            cursor: inherit;
+        }
+    </style>
+@endsection
 @section('content')
     <div class="container">
         <div class="row">
@@ -75,6 +90,10 @@
                                         <input type="radio" class="form-check-input" name="optionsRadios"
                                                id="optionsRadios3" value="option3" disabled>
                                         Option three is disabled
+                                    </label>
+                                </div>
+                                <div class="form-group text-center">
+                                    <label class="btn-bs-file btn btn-lg btn-success">SUBIR <input type="file" name="file_gas_spend" id="file_gas_spend"/>
                                     </label>
                                 </div>
                             </fieldset>
