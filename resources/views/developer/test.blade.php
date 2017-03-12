@@ -13,6 +13,7 @@
             cursor: inherit;
         }
     </style>
+    <link href="/fileinput/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
 @endsection
 @section('content')
     <div class="container">
@@ -96,6 +97,9 @@
                                     <label class="btn-bs-file btn btn-lg btn-success">SUBIR <input type="file" name="file_gas_spend" id="file_gas_spend"/>
                                     </label>
                                 </div>
+                                <div class="form-group">
+                                    <input id="img_gas_spend" name="img_gas_spend" class="file" type="file">
+                                </div>
                             </fieldset>
                             <div class="form-check">
                                 <label class="form-check-label">
@@ -110,4 +114,24 @@
             </div>
         </div>
     </div>
+@endsection
+@section('after_scripts')
+    <script src="/fileinput/fileinput.js" type="text/javascript"></script>
+    <script src="/fileinput/locales/es.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $("#img_gas_spend").fileinput({
+            dropZoneEnabled: false,
+            overwriteInitial: false,
+            maxFileSize: 20000,
+            maxFilesNum: 1,
+            showUpload: false,
+            showCaption: false,
+            fileType: "any",
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            initialPreviewAsData: true,
+            slugCallback: function (filename) {
+                return filename.replace('(', '_').replace(']', '_');
+            }
+        });
+    </script>
 @endsection
