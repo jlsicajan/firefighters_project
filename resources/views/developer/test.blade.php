@@ -1,18 +1,5 @@
 @extends('layouts.app')
 @section('after-styles')
-    <style>
-        .btn-bs-file{
-            position:relative;
-        }
-        .btn-bs-file input[type="file"]{
-            position: absolute;
-            top: -9999999;
-            filter: alpha(opacity=0);
-            opacity: 0;
-            outline: none;
-            cursor: inherit;
-        }
-    </style>
     <link href="/fileinput/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
 @endsection
 @section('content')
@@ -118,20 +105,4 @@
 @section('after_scripts')
     <script src="/fileinput/fileinput.js" type="text/javascript"></script>
     <script src="/fileinput/locales/es.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $("#img_gas_spend").fileinput({
-            dropZoneEnabled: false,
-            overwriteInitial: false,
-            maxFileSize: 20000,
-            maxFilesNum: 1,
-            showUpload: false,
-            showCaption: false,
-            fileType: "any",
-            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-            initialPreviewAsData: true,
-            slugCallback: function (filename) {
-                return filename.replace('(', '_').replace(']', '_');
-            }
-        });
-    </script>
 @endsection
