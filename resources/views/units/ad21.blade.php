@@ -77,7 +77,7 @@
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
-                    $("#modal_loading").modal({show: false});
+                    $("#modal_loading").modal("hide");
                     alert(data['message']);
                     $('.form_basic').trigger("reset");
                     $('.kmout').val(data['kmall']);
@@ -115,7 +115,7 @@
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
-                    $("#modal_loading").modal({show: false});
+                    $("#modal_loading").modal("hide");
                     alert(data['message']);
                     $('.form_basic_accident').trigger("reset");
                     $('.kmout').val(data['kmall']);
@@ -154,7 +154,7 @@
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
-                    $("#modal_loading").modal({show: false});
+                    $("#modal_loading").modal("hide");
                     alert(data['message']);
                     $('.form_basic_service').trigger("reset");
                     $('.kmout').val(data['kmall']);

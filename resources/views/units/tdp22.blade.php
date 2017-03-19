@@ -82,7 +82,7 @@
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
-                    $("#modal_loading").modal({show: false});
+                    $("#modal_loading").modal("hide");
                     alert(data['message']);
                     $('.form_basic').trigger("reset");
                     $('input#kmout').val(data['kmall']);
@@ -121,7 +121,7 @@
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
-                    $("#modal_loading").modal({show: false});
+                    $("#modal_loading").modal("hide");
                     alert(data['message']);
                     $('.form_basic_service').trigger("reset");
                     $('input#kmout_service').val(data['kmall']);
@@ -161,7 +161,7 @@
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
-                    $("#modal_loading").modal({show: false});
+                    $("#modal_loading").modal("hide");
                     alert(data['message']);
                     $('.form_basic_water').trigger("reset");
                     $('input#kmout_water').val(data['kmall']);
