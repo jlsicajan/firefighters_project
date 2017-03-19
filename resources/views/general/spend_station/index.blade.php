@@ -59,17 +59,6 @@
                 </div>
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Reporte de gastos de la estacion</div>
-
-                    <div class="panel-body">
-
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 @section('after_scripts')
