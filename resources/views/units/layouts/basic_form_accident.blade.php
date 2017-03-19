@@ -93,7 +93,7 @@
     <div class="form-group">
         <label for="asistant_a">Asistente</label>
         <select class="form-control" id="asistant_a" name="asistant_a">
-            <option value="null" selected disabled>-- Seleccion el asistente --</option>
+            <option value="null" selected disabled>-- Seleccione al asistente --</option>
             <option value="no_one">NINGUN ASISTENTE</option>
             @foreach($officials as $official)
                 <option value="{{ $official->id }}">{{ $official->name }}</option>
@@ -112,7 +112,7 @@
     <div class="form-group">
         <label for="pilot_a">Piloto</label>
         <select class="form-control" id="pilot_a" name="pilot_a">
-            <option value="null" selected disabled>-- Seleccion piloto --</option>
+            <option value="null" selected disabled>-- Seleccione al piloto --</option>
             @foreach($pilots as $pilot)
                 <option value="{{ $pilot->id }}">{{ $pilot->name }}</option>
             @endforeach

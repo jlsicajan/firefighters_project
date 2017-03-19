@@ -67,7 +67,7 @@
     <div class="form-group">
         <label for="asistant_water">Asistente</label>
         <select class="form-control" id="asistant_water" name="asistant_water">
-            <option value="null" selected disabled>-- Seleccion el asistente --</option>
+            <option value="null" selected disabled>-- Seleccione al asistente --</option>
             <option value="no_one">NINGUN ASISTENTE</option>
             @foreach($officials as $official)
                 <option value="{{ $official->id }}">{{ $official->name }}</option>
@@ -86,7 +86,7 @@
     <div class="form-group">
         <label for="pilot_water">Piloto</label>
         <select class="form-control" id="pilot_water" name="pilot_water">
-            <option value="null" selected disabled>-- Seleccion piloto --</option>
+            <option value="null" selected disabled>-- Seleccione al piloto --</option>
             @foreach($pilots as $pilot)
                 <option value="{{ $pilot->id }}">{{ $pilot->name }}</option>
             @endforeach

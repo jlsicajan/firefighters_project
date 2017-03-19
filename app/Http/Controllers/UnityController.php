@@ -18,7 +18,7 @@ class UnityController extends Controller
 
     public function index($unity)
     {
-        $official = User::all();
+        $official = User::whereNotIn('username', ['admin', 'admin@sicajan.com'])->orderBy('name', 'ASC')->get();
         $pilots = User::where('username', '=', 'fabian')
             ->orWhere('username', '=', 'juan')
             ->orWhere('username', '=', 'byron')
