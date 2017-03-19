@@ -36,6 +36,7 @@
             </div>
         </div>
     </div>
+    @include('units.modal_loading.loading')
 @endsection
 @section('after_scripts')
     <script>
@@ -48,6 +49,7 @@
         });
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $('.form_basic').on('submit', function (e) {
+            $("#modal_loading").modal({show: true});
             $.ajax({
                 type: "POST",
                 url: '{{ URL::route('unidad.save') }}',
@@ -75,6 +77,7 @@
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
+                    $("#modal_loading").modal({show: false});
                     alert(data['message']);
                     $('.form_basic').trigger("reset");
                     $('input#kmout').val(data['kmall']);
@@ -84,6 +87,7 @@
             return false;
         });
         $('.form_basic_accident').on('submit', function (e) {
+            $("#modal_loading").modal({show: true});
             $.ajax({
                 type: "POST",
                 url: '{{ URL::route('unidad.save') }}',
@@ -111,6 +115,7 @@
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
+                    $("#modal_loading").modal({show: false});
                     alert(data['message']);
                     $('.form_basic_accident').trigger("reset");
                     $('input#kmout_a').val(data['kmall']);
@@ -120,6 +125,7 @@
             return false;
         });
         $('.form_basic_service').on('submit', function (e) {
+            $("#modal_loading").modal({show: true});
             $.ajax({
                 type: "POST",
                 url: '{{ URL::route('unidad.save') }}',
@@ -148,6 +154,7 @@
                     _token: CSRF_TOKEN
                 },
                 success: function (data) {
+                    $("#modal_loading").modal({show: false});
                     alert(data['message']);
                     $('.form_basic_service').trigger("reset");
                     $('input#kmout_service').val(data['kmall']);
