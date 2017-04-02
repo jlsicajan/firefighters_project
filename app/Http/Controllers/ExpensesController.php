@@ -43,8 +43,7 @@ class ExpensesController extends Controller
     public function saveGas(Request $request){
         $path_file = $this->upload_any_pdf($request->allFiles());
         date_default_timezone_set('America/Guatemala');
-        $date = date('d/m/Y h:i:s a', time());
-        dd($path_file);
+
         $unity = Unity::findByCode(Input::get('unity'));
         $gas_spend = new GasSpend();
         $gas_spend->unity_id = $unity['id'];
@@ -54,6 +53,7 @@ class ExpensesController extends Controller
         $gas_spend->gas_spend = Input::get('gas_spend');
         $gas_spend->note_gas = Input::get('note_gas');
         $gas_spend->date = date('d/m/Y H:i:s');
+        $gas_spend->path_photo = $path_file;
         $gas_spend->save();
         return 'Gasto ingresado correctamente Q' . $gas_spend->gas_spend;
     }
@@ -78,7 +78,7 @@ class ExpensesController extends Controller
           // Copy the file in our upload folder
           $file->move($destinationPath, $filename);
           // Return uploaded file path
-          return 'gas/photo/' . Auth::user()->id . '/' . $filename;
+          return '/gas/photo/' . Auth::user()->id . '/' . $filename;
         }
     }
 }
