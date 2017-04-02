@@ -13,6 +13,7 @@
             cursor: inherit;
         }
     </style>
+    <link href="/fileinput/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
 @endsection
 @section('content')
     <div class="container">
@@ -55,7 +56,9 @@
                                 <label for="note_gas">Nota (no obligatorio)</label>
                                 <textarea class="form-control" name="note_gas" id="note_gas" rows="2"></textarea>
                             </div>
-
+                            <div class="form-group">Tome fotografia
+                                <input id="img_gas_spend" name="img_gas_spend" class="file" type="file">
+                            </div>
                             <input type="submit" class="btn btn-primary" value="Guardar"/>
                         </form>
                     </div>
@@ -65,7 +68,24 @@
     </div>
 @endsection
 @section('after_scripts')
+    <script src="/fileinput/fileinput.js" type="text/javascript"></script>
+    <script src="/fileinput/locales/es.js" type="text/javascript"></script>
     <script>
+        $("#img_gas_spend").fileinput({
+            dropZoneEnabled: false,
+            overwriteInitial: false,
+            maxFileSize: 20000,
+            maxFilesNum: 1,
+            showUpload: false,
+            showCaption: false,
+            fileType: "any",
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            initialPreviewAsData: true,
+            allowedFileExtensions : ['jpg', 'png', 'jpeg'],
+            slugCallback: function (filename) {
+                return filename.replace('(', '_').replace(']', '_');
+            }
+        });
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $('#form_gas').on('submit', function (e) {
             $.ajax({

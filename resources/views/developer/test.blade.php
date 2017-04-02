@@ -87,6 +87,9 @@
                                 <div class="form-group">
                                     <input id="img_gas_spend" name="img_gas_spend" class="file" type="file">
                                 </div>
+                                <div class="form-group">
+                                    <input id="pdf_essentials" name="pdf_essentials" class="file" type="file">
+                                </div>
                             </fieldset>
                             <div class="form-check">
                                 <label class="form-check-label">
