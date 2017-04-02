@@ -108,7 +108,7 @@
                 url: '{{ URL::route('save.gas') }}',
                 data: data_to_send,
                 success: function (data) {
-                    alert(data);
+
                     $('#form_gas').trigger("reset");
                     $('#date').val(today);
                 }
