@@ -101,14 +101,13 @@
             $.ajax({
                 type: "POST",            
                 cache: false,
-                dataType: 'json',
                 processData: false,
                 contentType: false,
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 url: '{{ URL::route('save.gas') }}',
                 data: data_to_send,
                 success: function (data) {
-
+                    alert(data);
                     $('#form_gas').trigger("reset");
                     $('#date').val(today);
                 }
