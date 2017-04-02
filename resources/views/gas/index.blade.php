@@ -88,21 +88,27 @@
         });
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $('#form_gas').on('submit', function (e) {
+            var data_to_send = new FormData();
+            var files = $('#img_gas_spend').fileinput('getFileStack');
+
+            data_to_send.append('photo', files[0]);
+            data_to_send.append('date', $('input#date').val());
+            data_to_send.append('unity', $('select#unity').val());
+            data_to_send.append('bill_number', $('input#bill_number').val());
+            data_to_send.append('gas_name', $('input#gas_name').val());
+            data_to_send.append('gas_spend', $('input#gas_spend').val());
+            data_to_send.append('note_gas', $('textarea#note_gas').val());
             $.ajax({
-                type: "POST",
+                type: "POST",            
+                cache: false,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 url: '{{ URL::route('save.gas') }}',
-                data: {
-                    date: $('input#date').val(),
-                    unity: $('select#unity').val(),
-                    bill_number: $('input#bill_number').val(),
-                    gas_name: $('input#gas_name').val(),
-                    gas_spend: $('input#gas_spend').val(),
-                    note_gas: $('textarea#note_gas').val(),
-                    _token: CSRF_TOKEN
-                },
+                data: data_to_send,
                 success: function (data) {
                     alert(data);
-                    $('#form_gas').trigger("reset");
                     $('#date').val(today);
                 }
             });
