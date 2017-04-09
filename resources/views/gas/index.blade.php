@@ -66,6 +66,8 @@
             </div>
         </div>
     </div>
+    <!-- Modal loading -->
+    @include('units.modal_loading.loading')
 @endsection
 @section('after_scripts')
     <script src="/fileinput/fileinput.js" type="text/javascript"></script>
@@ -90,6 +92,7 @@
         $('#form_gas').on('submit', function (e) {
             var data_to_send = new FormData();
             var files = $('#img_gas_spend').fileinput('getFileStack');
+            $("#modal_loading").modal({show: true});
 
             data_to_send.append('photo', files[0]);
             data_to_send.append('date', $('input#date').val());
@@ -109,7 +112,7 @@
                 success: function (data) {
                     alert(data);
                     $('#form_gas').trigger("reset");
-                    $('#date').val(today);
+                    $("#modal_loading").modal("hide");
                 }
             });
             return false;

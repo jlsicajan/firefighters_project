@@ -73,14 +73,14 @@ class ExpensesController extends Controller
 
     private function upload_any_file($files, $route){
         foreach ($files as $file){
-          $destinationPath = public_path($route . Auth::user()->id . '/');
+          $destinationPath = public_path($route . '/' . Auth::user()->id . '/');
           // Get the orginal filname or create the filename of your choice
           $filename = rand() . $file->getClientOriginalName();
           // TODO: Criteria with the uploads
           // Copy the file in our upload folder
           $file->move($destinationPath, $filename);
           // Return uploaded file path
-          return '/' . $route . Auth::user()->id . '/' . $filename;
+          return '/' . $route . '/' . Auth::user()->id . '/' . $filename;
         }
     }
 }
