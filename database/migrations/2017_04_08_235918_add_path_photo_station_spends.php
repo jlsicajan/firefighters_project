@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPathPhotoGasSpends extends Migration
+class AddPathPhotoStationSpends extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddPathPhotoGasSpends extends Migration
      */
     public function up()
     {
-        Schema::table('gas_spends', function (Blueprint $table) {
+        Schema::table('station_spends', function (Blueprint $table) {
             $table->string('path_photo')->nullable();
         });
     }

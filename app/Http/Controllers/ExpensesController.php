@@ -41,8 +41,7 @@ class ExpensesController extends Controller
     }
 
     public function saveGas(Request $request){
-        $path_file = $this->upload_any_pdf($request->allFiles());
-        date_default_timezone_set('America/Guatemala');
+        $path_file = $this->upload_any_file($request->allFiles(), 'images/gas/photo');
 
         $unity = Unity::findByCode(Input::get('unity'));
         $gas_spend = new GasSpend();
@@ -59,26 +58,29 @@ class ExpensesController extends Controller
     }
 
     public function saveStation(Request $request){
+        $path_file = $this->upload_any_file($request->allFiles(), 'images/station/photo');
+
         $station_spend = new StationSpend();
         $station_spend->user_id = Auth::user()->id;
         $station_spend->bill_number = Input::get('bill_number');
         $station_spend->station_spend = Input::get('station_spend');
         $station_spend->description = Input::get('description');
         $station_spend->date = date('d/m/Y H:i:s');
+        $station_spend->path_photo = $path_file;
         $station_spend->save();
         return 'Gasto ingresado correctamente Q' . $station_spend->station_spend;
     }
 
-    private function upload_any_pdf($files){
+    private function upload_any_file($files, $route){
         foreach ($files as $file){
-          $destinationPath = public_path('gas/photo/' . Auth::user()->id . '/');
+          $destinationPath = public_path($route . Auth::user()->id . '/');
           // Get the orginal filname or create the filename of your choice
-          $filename = $file->getClientOriginalName();
+          $filename = rand() . $file->getClientOriginalName();
           // TODO: Criteria with the uploads
           // Copy the file in our upload folder
           $file->move($destinationPath, $filename);
           // Return uploaded file path
-          return '/gas/photo/' . Auth::user()->id . '/' . $filename;
+          return '/' . $route . Auth::user()->id . '/' . $filename;
         }
     }
 }

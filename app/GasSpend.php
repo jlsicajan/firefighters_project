@@ -12,5 +12,5 @@ class GasSpend extends Model
      *
      * @var array
      */
-    protected $fillable = ['unity_id', 'user_id' ,'bill_number', 'gas_name', 'gas_spend', 'note_gas'];
+    protected $fillable = ['unity_id', 'user_id' ,'bill_number', 'gas_name', 'gas_spend', 'note_gas', 'path_photo'];
 }
