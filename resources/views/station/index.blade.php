@@ -43,9 +43,9 @@
                                 <textarea class="form-control" id="station_description" name="station_description"
                                           required rows="3"></textarea>
                             </div>
-                            <div class="form-group">Tome una fotografia
-                                <input id="img_station_spend" name="img_station_spend" class="file" type="file">
-                            </div>
+                            {{--<div class="form-group">Tome una fotografia--}}
+                                {{--<input id="img_station_spend" name="img_station_spend" class="file" type="file">--}}
+                            {{--</div>--}}
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </form>
                     </div>

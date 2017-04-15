@@ -56,9 +56,9 @@
                                 <label for="note_gas">Nota (no obligatorio)</label>
                                 <textarea class="form-control" name="note_gas" id="note_gas" rows="2"></textarea>
                             </div>
-                            <div class="form-group">Tome una fotografia
-                                <input id="img_gas_spend" name="img_gas_spend" class="file" type="file">
-                            </div>
+                            {{--<div class="form-group">Tome una fotografia--}}
+                                {{--<input id="img_gas_spend" name="img_gas_spend" class="file" type="file">--}}
+                            {{--</div>--}}
                             <input type="submit" class="btn btn-primary" value="Guardar"/>
                         </form>
                     </div>
