@@ -11,12 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 //      PRINCIPAL PAGES
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::get('/programador', 'DeveloperController@developer');
 Route::get('/combustible', 'ExpensesController@gas');
