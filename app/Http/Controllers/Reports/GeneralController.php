@@ -36,7 +36,9 @@ class GeneralController extends Controller
     {
         $order_datas = UnityData::orderBy('created_at', 'DESC')->get();
 
-        $data = ['unity_datas' => $order_datas, 'unities' => Unity::all()];
+        $char = $this->generate_char_info();
+
+        $data = ['unity_datas' => $order_datas, 'unities' => Unity::all(), 'char_datas' => $char];
         if (Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian' | Auth::user()->name == 'Administrador' | Auth::user()->username == 'reina') {
             return view('general.index')->with($data);
         } else {
@@ -151,13 +153,13 @@ class GeneralController extends Controller
             ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
             ->sum('patient_input');
 
-        $data = ['unity_datas' => $unity_datas,
-                 'date_from'   => $request_date_from,
-                 'date_to'     => $request_date_to,
-                 'total_in'    => $total_in,
-                 'total_in_all'    => $total_in_all,
-                 'unities'     => $unities,
-                 'km_first'    => $km_first];
+        $data = ['unity_datas'  => $unity_datas,
+                 'date_from'    => $request_date_from,
+                 'date_to'      => $request_date_to,
+                 'total_in'     => $total_in,
+                 'total_in_all' => $total_in_all,
+                 'unities'      => $unities,
+                 'km_first'     => $km_first];
 
         return \View::make('general.PDF.report_pdf_general')->with($data)->render();
     }
@@ -201,5 +203,30 @@ class GeneralController extends Controller
             case "EE22":
                 return \View::make('general.PDF.report_foreach_unity.report_pdf_ee22')->with($data)->render();
         }
+    }
+
+    public function generate_char_info()
+    {
+        $sqlQuery = "SELECT SQL_NO_CACHE
+          general_case,
+          MONTH(created_at) AS date,
+          COUNT(*) AS quantity
+          FROM unity_datas
+          GROUP BY MONTH(created_at), general_case;";
+        $results = DB::select(DB::raw($sqlQuery));
+
+        $char = [];
+        foreach($results as $result){
+            $char[$result->general_case][$result->date] = $result->quantity;
+        }
+        foreach($results as $result){
+            for ($y = 1; $y <= ltrim(date('m'), '0'); $y++){
+                if(!isset($char[$result->general_case][$y])){
+                    $char[$result->general_case][$y] = 0;
+                }
+            }
+        }
+
+        return $char;
     }
 }

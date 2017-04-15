@@ -89,6 +89,10 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12">
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    </div>
+    <br>
 @endsection
 <div class="modal fade" id="unityDetailModal" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg">
@@ -107,6 +111,8 @@
     </div>
 </div>
 @section('after_scripts')
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script>
         $('#date_from, #date_to').datetimepicker({
             language: 'es',
@@ -140,6 +146,56 @@
                     $(".modal-body").html(data);
                 });
             });
+        });
+        Highcharts.setOptions({
+            lang: {
+                printChart: "Imprimir",
+                loading: 'Cargando...',
+                exportButtonTitle: "Exportar",
+                printButtonTitle: "Imprimir",
+                downloadPNG: 'Descargar en imagen PNG',
+                downloadJPEG: 'Descargar en imagen JPEG',
+                downloadPDF: 'Descargar en documento PDF',
+                downloadSVG: 'Descargar en SVG'
+            }
+        });
+
+        Highcharts.chart('container', {
+            downloadPDF: "Descargar PDF",
+            downloadPNG: "Descargar imagen",
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Reporte mensual de casos'
+            },
+            subtitle: {
+                text: 'Patzun Chimaltenango 2017'
+            },
+            xAxis: {
+                categories: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+            },
+            yAxis: {
+                title: {
+                    text: 'Casos'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    enableMouseTracking: false
+                }
+            },
+            series: [
+                @foreach($char_datas as $case => $char_data)
+                {
+                    name: '{{ $case }}',
+                    data: {{ json_encode(array_values($char_datas[$case])) }}
+                },
+                @endforeach
+            ]
         });
     </script>
     <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"/>
