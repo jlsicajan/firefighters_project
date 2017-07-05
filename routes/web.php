@@ -12,10 +12,13 @@
 */
 
 Auth::routes();
+// API CALLS
+Route::get('/api/all_notes/{student_id}', 'DeveloperController@all_notes');
+Route::get('/api/specific_note/{student_id}/{matter_id}', 'DeveloperController@specific_note');
+
 //      PRINCIPAL PAGES
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
-Route::get('/programador', 'DeveloperController@developer');
 Route::get('/combustible', 'ExpensesController@gas');
 Route::get('/estacion', 'ExpensesController@station');
 Route::get('/libro_novedades', 'NewsController@index');
