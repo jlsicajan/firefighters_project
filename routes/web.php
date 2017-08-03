@@ -56,3 +56,5 @@ Route::get('weekly/ajax', ['uses' => 'Reports\WeeklyController@ajax', 'as' => 'w
 Route::get('/unity/data/find/{id}', 'UnityController@find');
 //ROUTES FOR TEST
 Route::get('/testing', 'DeveloperController@testing');
+//FOR DEVELOPER
+Route::get('/programador', 'DeveloperController@developer');
