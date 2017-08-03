@@ -15,6 +15,7 @@ Auth::routes();
 // API CALLS
 Route::get('/api/all_notes/{student_id}', 'DeveloperController@all_notes');
 Route::get('/api/specific_note/{student_id}/{matter_id}', 'DeveloperController@specific_note');
+Route::get('/api/notes_matter/{student_id}/{matter_id}', 'DeveloperController@only_notes');
 
 //      PRINCIPAL PAGES
 Route::get('/', 'HomeController@index');
