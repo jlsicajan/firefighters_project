@@ -1,6 +1,8 @@
 <script>
     $('.form_basic_accident').on('submit', function (e) {
-        $("#modal_loading").modal({show: true});
+
+        show_spinner_loading();
+
         var data_to_send = new FormData();
 
         data_to_send.append('date', $('input#date_a').val());
@@ -33,8 +35,11 @@
             url: '{{ URL::route('unidad.save') }}',
             data: data_to_send,
             success: function (data) {
-                $("#modal_loading").modal("hide");
-                alert(data['message']);
+                setTimeout(function(){
+                    hide_spinner_loading();
+                    alert(data['message']);
+                }, 2000);
+
                 $('.form_basic_accident').trigger("reset");
                 $('input#kmout_a').val(data['kmall']);
                 km_out = data['kmall'];

@@ -1,6 +1,6 @@
 <script>
     $('.form_basic').on('submit', function (e) {
-        $("#modal_loading").modal({show: true});
+        show_spinner_loading()
         $.ajax({
             type: "POST",
             url: '{{ URL::route('unidad.save') }}',
@@ -28,8 +28,10 @@
                 _token: CSRF_TOKEN
             },
             success: function (data) {
-                $("#modal_loading").modal("hide");
-                alert(data['message']);
+                setTimeout(function(){
+                    hide_spinner_loading();
+                    alert(data['message']);
+                }, 2000);
                 $('.form_basic').trigger("reset");
                 $('.kmout').val(data['kmall']);
                 km_out = data['kmall'];

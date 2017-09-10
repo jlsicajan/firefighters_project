@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Estacion 22 Patzun Chimaltenango') }}</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -151,8 +151,9 @@
 <script src="/js/app.js"></script>
 <script type="text/javascript" src="/js/bootstrap-datetimepicker/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/bootstrap-datetimepicker/bootstrap-datetimepicker.es.js" charset="UTF-8"></script>
-@yield('after_scripts')
 <script>
+    $(".spinner_container").hide();
+
     $("#name_responsible_div").hide();
     $("#div_phone_patient").hide();
 
@@ -161,6 +162,22 @@
 
     $("#name_responsible_div_service").hide();
     $("#div_phone_patient_service").hide();
+
+    function show_spinner_loading(){
+        // show spinner
+        $(".spinner_container").show();
+        $(".navbar").addClass('blur');
+        $(".container").addClass('blur');
+
+    }
+
+    function hide_spinner_loading(){
+        // hide spinner
+        $(".spinner_container").hide();
+        $(".navbar").removeClass('blur');
+        $(".container").removeClass('blur');
+
+    }
 
     $('#patient_name_check').click(function () {
         if ($(this).is(':checked')) {
@@ -246,5 +263,6 @@
         }
     });
 </script>
+@yield('after_scripts')
 </body>
 </html>

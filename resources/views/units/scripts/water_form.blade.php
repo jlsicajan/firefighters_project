@@ -1,6 +1,6 @@
 <script>
     $('.form_basic_water').on('submit', function (e) {
-        $("#modal_loading").modal({show: true});
+        show_spinner_loading()
         $.ajax({
             type: "POST",
             url: '{{ URL::route('unidad.save') }}',
@@ -30,8 +30,10 @@
                 _token: CSRF_TOKEN
             },
             success: function (data) {
-                $("#modal_loading").modal("hide");
-                alert(data['message']);
+                setTimeout(function(){
+                    hide_spinner_loading();
+                    alert(data['message']);
+                }, 2000);
                 $('.form_basic_water').trigger("reset");
                 $('input#kmout_water').val(data['kmall']);
                 km_out = data['kmall'];
