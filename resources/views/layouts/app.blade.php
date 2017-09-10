@@ -151,6 +151,7 @@
 <script src="/js/app.js"></script>
 <script type="text/javascript" src="/js/bootstrap-datetimepicker/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/bootstrap-datetimepicker/bootstrap-datetimepicker.es.js" charset="UTF-8"></script>
+@yield('after_scripts')
 <script>
     $(".spinner_container").hide();
 
@@ -263,6 +264,5 @@
         }
     });
 </script>
-@yield('after_scripts')
 </body>
 </html>
