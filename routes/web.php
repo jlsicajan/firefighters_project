@@ -52,6 +52,7 @@ Route::get('/pdf/general/spend/gas', 'Reports\GeneralSpendGasController@pdf');
 Route::get('/pdf/general/spend/station', 'Reports\GeneralSpendStationController@pdf');
 //AJAX FOR DATATABLES
 Route::get('weekly/ajax', ['uses' => 'Reports\WeeklyController@ajax', 'as' => 'weekly.data.ajax']);
+Route::get('users/ajax', ['uses' => 'HomeController@users_ajax', 'as' => 'users.data.ajax']);
 //ROUTES FOR FIND DATA
 Route::get('/unity/data/find/{id}', 'UnityController@find');
 //ROUTES FOR TEST

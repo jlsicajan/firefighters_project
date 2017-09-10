@@ -27,27 +27,40 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $users = User::all();
+
+        return view('home')->with(['users' => $users]);
     }
 
-    public function changePassword(){
+    public function changePassword()
+    {
         return view('change_password');
     }
 
-    public function newPassword(Request $request){
-        if(Input::get('new_password') != Input::get('confirm_new_password')){
+    public function newPassword(Request $request)
+    {
+        if (Input::get('new_password') != Input::get('confirm_new_password')) {
             return response()->json(['error' => 'Las contraseñas que ingreso no coinciden'], 404);
         }
 
-        if (Auth::attempt(array('name' => Auth::user()->name, 'password' => Input::get('old_password'))))
-        {
+        if (Auth::attempt(array('name' => Auth::user()->name, 'password' => Input::get('old_password')))) {
             $user = User::find(Auth::user()->id);
             $user->password = bcrypt(Input::get('new_password'));
             $user->save();
             Auth::logout();
             return 'Se cambio su contraseña correctamente';
-        }else{
+        } else {
             return response()->json(['error' => 'La contraseña que ingreso no es la actual'], 404);
         }
+    }
+
+    public function users_ajax()
+    {
+        $users_datas = User::all();
+        $data = [];
+        foreach ($users_datas as $user) {
+            array_push($data, ['DT_RowClass' => 'tr-content', 'DT_RowId' => $user->id, $user->name, $user->username, $user->number, $user->email]);
+        }
+        return ['data' => $data];
     }
 }
