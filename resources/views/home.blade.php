@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-            <div class="panel panel-primary">
+            <div class="panel panel-success">
                 <div class="panel-heading">Bienvenido al sistema {{ Auth::user()->name }}</div>
 
                 <div class="panel-body">
@@ -40,6 +40,8 @@
     $(document).ready(function(){
 
         //en este branch, ahora tenemos que obtener los usuarios para mostrarlos en el home, la idea es trabajar la parte de los usuarios (roles)
+        // y que pueda editar el rol de los usuarios, que no pueda editar su usario, una funcion de activo/inactivo
+        //numero de casco
         //
         var table = $('#users_table').DataTable({
             "ajax": '{{ URL::route('users.data.ajax') }}',

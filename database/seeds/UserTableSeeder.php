@@ -16,7 +16,7 @@ class UserTableSeeder extends Seeder
             'username' => 'admin',
             'number' => '2013124',
             'password' => bcrypt('NeZPJp8Wc'),
-            'email' => 'admin'
+            'email' => 'sicajancoy@gmail.com'
         ]);
         $quantity = 21;
         $name = [
