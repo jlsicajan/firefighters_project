@@ -153,13 +153,13 @@ class GeneralController extends Controller
             ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
             ->sum('patient_input');
 
-        $data = ['unity_datas'  => $unity_datas,
-                 'date_from'    => $request_date_from,
-                 'date_to'      => $request_date_to,
-                 'total_in'     => $total_in,
-                 'total_in_all' => $total_in_all,
-                 'unities'      => $unities,
-                 'km_first'     => $km_first];
+        $data = ['unity_datas' => $unity_datas,
+            'date_from' => $request_date_from,
+            'date_to' => $request_date_to,
+            'total_in' => $total_in,
+            'total_in_all' => $total_in_all,
+            'unities' => $unities,
+            'km_first' => $km_first];
 
         return \View::make('general.PDF.report_pdf_general')->with($data)->render();
     }
@@ -185,23 +185,17 @@ class GeneralController extends Controller
             $km_first = 0;
         }
         $data = ['unity_datas' => $unity_datas,
-                 'date_from'   => $request_date_from,
-                 'date_to'     => $request_date_to,
-                 'unity'       => $unity_selected,
-                 'total_in'    => $total_in,
-                 'km_first'    => $km_first];
+            'date_from' => $request_date_from,
+            'date_to' => $request_date_to,
+            'unity' => $unity_selected,
+            'total_in' => $total_in,
+            'km_first' => $km_first,
+            'unity_selected' => $unity_selected];
 
-        switch ($unity_selected) {
-            case "TDP22":
-                return \View::make('general.PDF.report_foreach_unity.report_pdf_tdp22')->with($data)->render();
-            case "AD21":
-                return \View::make('general.PDF.report_foreach_unity.report_pdf_ad21')->with($data)->render();
-            case "RD19":
-                return \View::make('general.PDF.report_foreach_unity.report_pdf_rd19')->with($data)->render();
-            case "MDP22":
-                return \View::make('general.PDF.report_foreach_unity.report_pdf_mdp22')->with($data)->render();
-            case "EE22":
-                return \View::make('general.PDF.report_foreach_unity.report_pdf_ee22')->with($data)->render();
+        if ($unity_selected == "TDP22") {
+            return \View::make('general.PDF.report_foreach_unity.report_pdf_tdp22')->with($data)->render();
+        } else {
+            return \View::make('general.PDF.report_foreach_unity.report_pdf_generic')->with($data)->render();
         }
     }
 
@@ -216,12 +210,12 @@ class GeneralController extends Controller
         $results = DB::select(DB::raw($sqlQuery));
 
         $char = [];
-        foreach($results as $result){
+        foreach ($results as $result) {
             $char[$result->general_case][$result->date] = $result->quantity;
         }
-        foreach($results as $result){
-            for ($y = 1; $y <= ltrim(date('m'), '0'); $y++){
-                if(!isset($char[$result->general_case][$y])){
+        foreach ($results as $result) {
+            for ($y = 1; $y <= ltrim(date('m'), '0'); $y++) {
+                if (!isset($char[$result->general_case][$y])) {
                     $char[$result->general_case][$y] = 0;
                 }
             }
