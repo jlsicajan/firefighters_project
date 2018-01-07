@@ -1,16 +1,31 @@
 <style>
     table {
         border-collapse: collapse;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .th_list{
+        text-align: unset;
     }
 
     table, td, th {
-        border: 1px solid #0000a1;
-        color: #0000a1;
+        border: 1px solid #2B2B2B;
+        color: #2B2B2B;
     }
 
     h2 {
         color: #006200;
     }
+
+    .address_from{
+        color: #006200;
+    }
+
+    .address_to{
+        color: #930000;
+    }
+
 </style>
 <div id="details" class="clearfix">
     <div id="invoice">
@@ -29,6 +44,12 @@
         <th>Oficial que reporta</th>
         <th>Paciente aporte / telefono</th>
         <th>Caso / <p style="color: green">Observaciones</p></th>
+        <th class="th_list">
+            <ul type="square">
+                <li class="address_from">Desde</li>
+                <li class="address_to">Hasta</li>
+            </ul>
+        </th>
         <th>Km salida</th>
         <th>Km entrada</th>
         <th>CASO</th>
@@ -51,6 +72,12 @@
                 / {{ $unity_data->patient_phone }}</td>
             <td>{{ $unity_data->patient_case }} / <p
                         style="color: green">{{ $unity_data->observations }}</p></td>
+            <td class="th_list">
+                <ul type="square">
+                    <li class="address_from">{{ $unity_data->patient_address_from }}</li>
+                    <li class="address_to">{{ $unity_data->patient_destiny }}</li>
+                </ul>
+            </td>
             <td><strong>{{ $unity_data->kmout }}</strong></td>
             <td><strong>{{ $unity_data->kmin }}</strong></td>
             <td><strong>{{ $unity_data->general_case }}</strong></td>
