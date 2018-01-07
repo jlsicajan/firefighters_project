@@ -1,14 +1,29 @@
 <style>
     table {
         border-collapse: collapse;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .th_list{
+        text-align: unset;
     }
 
     table, td, th {
-        border: 1px solid blue;
+        border: 1px solid #2B2B2B;
+        color: #2B2B2B;
     }
 
     h2 {
-        color: green;
+        color: #006200;
+    }
+
+    .address_from{
+        color: #006200;
+    }
+
+    .address_to{
+        color: #930000;
     }
 </style>
 <div id="details" class="clearfix">
@@ -20,39 +35,50 @@
 <table>
     <thead>
     <tr>
-        <th style="color: blue">Fecha</th>
-        <th style="color: blue">Unidad</th>
-        <th style="color: blue">Nombre paciente</th>
-        <th style="color: blue">Piloto</th>
-        <th style="color: blue">Asistente</th>
-        <th style="color: blue">Oficial que reporta</th>
-        <th style="color: blue">Paciente aporte / telefono</th>
-        <th style="color: blue">Caso / <p style="color: green">Observaciones</p></th>
-        <th style="color: blue">Km salida</th>
-        <th style="color: blue">Km entrada</th>
-        <th style="color: blue">Cantidad de agua</th>
+        <th>Fecha</th>
+        <th>Unidad</th>
+        <th>Nombre paciente</th>
+        <th>Piloto</th>
+        <th>Asistente</th>
+        <th>Oficial que reporta</th>
+        <th>Paciente aporte / telefono</th>
+        <th>Caso / <p style="color: green">Observaciones</p></th>
+        <th class="th_list">
+            <ul type="square">
+                <li class="address_from">Desde</li>
+                <li class="address_to">Hasta</li>
+            </ul>
+        </th>
+        <th>Km salida</th>
+        <th>Km entrada</th>
+        <th>Cantidad de agua</th>
     </tr>
     </thead>
     <tbody>
     @foreach(json_decode($unity_datas) as $unity_data)
         <tr>
-            <td style="color: blue">{{ $unity_data->date }}</td>
-            <td style="color: blue">{{  App\Unity::getNameById($unity_data->unity_id) }}</td>
-            <td style="color: blue">@if($unity_data->patient_name == " ") {{ $unity_data->general_case }} @else {{ $unity_data->patient_name }} @endif</td>
-            <td style="color: blue">{{  App\User::getNameById($unity_data->pilot_id) }}</td>
+            <td>{{ $unity_data->date }}</td>
+            <td>{{  App\Unity::getNameById($unity_data->unity_id) }}</td>
+            <td>@if($unity_data->patient_name == " ") {{ $unity_data->general_case }} @else {{ $unity_data->patient_name }} @endif</td>
+            <td>{{  App\User::getNameById($unity_data->pilot_id) }}</td>
             @if(App\User::getNameById($unity_data->asistant_id) != '')
-                <td style="color: blue">{{  App\User::getNameById($unity_data->asistant_id) }}</td>
+                <td>{{  App\User::getNameById($unity_data->asistant_id) }}</td>
             @else
-                <td style="color: blue">NINGUN ASISTENTE</td>
+                <td>NINGUN ASISTENTE</td>
             @endif
-            <td style="color: blue">{{  App\User::getNameById($unity_data->user_id) }}</td>
-            <td style="color: blue">Q. {{ number_format($unity_data->patient_input , 2) }}
+            <td>{{  App\User::getNameById($unity_data->user_id) }}</td>
+            <td>Q. {{ number_format($unity_data->patient_input , 2) }}
                 / {{ $unity_data->patient_phone }}</td>
-            <td style="color: blue">{{ $unity_data->patient_case }} / <p
-                        style="color: green">{{ $unity_data->observations }}</p></td>
-            <td><strong style="color: blue">{{ $unity_data->kmout }}</strong></td>
-            <td><strong style="color: blue">{{ $unity_data->kmin }}</strong></td>
-            <td><strong style="color: blue">{{ $unity_data->water_spend }}</strong></td>
+            <td>{{ $unity_data->patient_case }} / <p>{{ $unity_data->observations }}</p></td>
+            <td class="th_list">
+                <ul type="square">
+                    <li class="address_from">{{ $unity_data->patient_address_from }}</li>
+                    <li class="address_to">{{ $unity_data->patient_destiny }}</li>
+                </ul>
+            </td>
+            <td><strong>{{ $unity_data->kmout }}</strong></td>
+            <td><strong>{{ $unity_data->kmin }}</strong></td>
+            <td><strong>{{ $unity_data->water_spend }}</strong></td>
         </tr>
         <?php $kmtour = $unity_data->kmin - $km_first ?>
     @endforeach
