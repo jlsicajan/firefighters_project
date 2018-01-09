@@ -1,6 +1,6 @@
 <form action="#" autocomplete="off" method="POST" class="form_basic_accident">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <input type="hidden" name="unity_id_a" id="unity_id_a" value="{{ $unity_set }}"/>
+    <input type="hidden" name="unity_id_a" id="unity_id_a" value="{{ $unity_id }}"/>
     <input type="hidden" name="general_case_a" id="general_case_a" value="{{ $general_case }}"/>
     <div class="form-group">
         <label for="date_a">Fecha</label>
@@ -87,7 +87,7 @@
 
     <div class="form-group">
         <label for="patient_input_a">Cantidad si aporto algo el paciente</label>
-        <input type="number" class="form-control" name="patient_input_a" id="patient_input_a"/>
+        <input max="4" type="number" class="form-control" name="patient_input_a" id="patient_input_a"/>
     </div>
 
     <div class="form-group">

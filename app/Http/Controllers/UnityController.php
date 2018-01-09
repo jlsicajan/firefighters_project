@@ -16,8 +16,14 @@ class UnityController extends Controller
         $this->middleware('auth');
     }
 
-    public function index($unity)
+    public function index($unity_id)
     {
+        $unity = Unity::find($unity_id);
+        if (empty($unity)) {
+            print_r("No se encontro ninguna unidad con este ID");
+            die();
+        }
+
         $official = User::whereNotIn('username', ['admin', 'admin@sicajan.com'])->orderBy('name', 'ASC')->get();
         $pilots = User::where('username', '=', 'fabian')
             ->orWhere('username', '=', 'juan')
@@ -27,23 +33,20 @@ class UnityController extends Controller
             ->orWhere('username', '=', 'narciso')
             ->orWhere('username', '=', 'edson')
             ->get();
-        if ($unity == 'rd') {
-            $kmin_all = UnityData::where('unity_id', '=', Unity::findByCode('RD19'))->select('kmin')->orderBy('created_at', 'desc')->first();
-        } else {
-            $kmin_all = UnityData::where('unity_id', '=', Unity::findByCode(strtoupper($unity)))->select('kmin')->orderBy('created_at', 'desc')->first();
-        }
+
+        $kmin_all = UnityData::where('unity_id', '=', $unity_id)->select('kmin')->orderBy('created_at', 'desc')->first();
         $kmin_all = isset($kmin_all) ? $kmin_all->kmin : '';
 
         $data = ['officials' => $official, 'pilots' => $pilots,
-                 'kmin_all'  => $kmin_all, 'date_today' => date('d/m/Y H:i:s')
+            'kmin_all' => $kmin_all, 'date_today' => date('d/m/Y H:i:s'),
+            'unity' => $unity
         ];
-
-        return view('units.' . $unity)->with($data);
+        return view('units.unity')->with($data);
     }
 
     public function save(Request $request)
     {
-        $unity = Unity::findByCode(Input::get('unity_id'));
+        $unity = Unity::find(Input::get('unity_id'));
 
         $unity_data = new UnityData();
 

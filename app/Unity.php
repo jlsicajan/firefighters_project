@@ -13,7 +13,7 @@ class Unity extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'code'];
+    protected $fillable = ['name', 'code', 'image_url'];
 
     public static function findByCode($code){
         return Unity::where('code', '=', $code)->first()->toArray();

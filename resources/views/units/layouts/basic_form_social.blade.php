@@ -1,6 +1,6 @@
 <form action="#" autocomplete="off" method="POST" class="form_basic_service">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <input type="hidden" name="unity_id_service" id="unity_id_service" value="{{ $unity_set }}"/>
+    <input type="hidden" name="unity_id_service" id="unity_id_service" value="{{ $unity_id }}"/>
     <input type="hidden" name="general_case_service" id="general_case_service" value="{{ $general_case }}"/>
     <div class="form-group">
         <label for="date_service">Fecha</label>
@@ -92,7 +92,7 @@
 
     <div class="form-group">
         <label for="patient_input_service">Cantidad si aporto algo el paciente</label>
-        <input type="number" class="form-control" name="patient_input_service" id="patient_input_service"/>
+        <input max="4" type="number" class="form-control" name="patient_input_service" id="patient_input_service"/>
     </div>
 
     <div class="form-group">

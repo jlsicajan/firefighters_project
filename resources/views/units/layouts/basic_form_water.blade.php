@@ -1,6 +1,6 @@
 <form action="#" autocomplete="off" method="POST" class="form_basic_water">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <input type="hidden" name="unity_id_water" id="unity_id_water" value="{{ $unity_set }}"/>
+    <input type="hidden" name="unity_id_water" id="unity_id_water" value="{{ $unity_id }}"/>
     <input type="hidden" name="general_case_water" id="general_case_water" value="{{ $general_case }}"/>
     <div class="form-group">
         <label for="date_water">Fecha</label>
@@ -61,7 +61,7 @@
 
     <div class="form-group">
         <label for="patient_input_water">Cantidad si aporto algo el usuario</label>
-        <input type="number" class="form-control" name="patient_input_water" id="patient_input_water"/>
+        <input max="4" type="number" class="form-control" name="patient_input_water" id="patient_input_water"/>
     </div>
 
     <div class="form-group">

@@ -1,6 +1,6 @@
 <form action="#" autocomplete="off" method="POST" class="form_basic">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <input type="hidden" name="unity_id" id="unity_id" value="{{ $unity_set }}"/>
+    <input type="hidden" name="unity_id" id="unity_id" value="{{ $unity_id }}"/>
     <input type="hidden" name="general_case" id="general_case" value="{{ $general_case }}"/>
     <div class="form-group">
         <label for="date">Fecha</label>
@@ -80,19 +80,6 @@
                required/>
     </div>
 
-    <div class="form-group">
-        Aporto algo el paciente<label class="checkbox-inline">
-            <input type="radio" class="form-check-input" name="input_patient"
-                   id="yes_input" value="yes" checked>
-            Si
-        </label>
-        <label class="checkbox-inline">
-            <input type="radio" class="form-check-input" name="input_patient"
-                   id="no_input" value="no">
-            No
-        </label>
-    </div>
-
     <div class="form-group" id="div_phone_patient">
         <label for="patient_phone">Ingrese el numero de telefono del paciente</label>
         <input type="number" class="form-control" name="patient_phone" id="patient_phone"/>
@@ -100,7 +87,7 @@
 
     <div class="form-group" id="div_patient_input">
         <label for="patient_input">Ingrese la cantidad que aporto</label>
-        <input type="number" class="form-control" name="patient_input" id="patient_input"/>
+        <input max="4" type="number" class="form-control" name="patient_input" id="patient_input"/>
     </div>
 
     <div class="form-group">
