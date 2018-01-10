@@ -35,14 +35,14 @@
                                 @include('units.layouts.basic_form_social', ['unity_id' => $unity->id, 'general_case' => 'Servicio social'])
                             </div>
                             @if($unity->id == 4)
-                                <div id="water" class="tab-pane fade in active">
+                                <div id="water" class="tab-pane fade">
                                     <h3>Ingrese los datos para servicio de agua</h3>
                                     @include('units.layouts.basic_form_water', ['unity_id' => $unity->id, 'general_case' => 'Servicio de agua'])
                                 </div>
                             @else
                                 <div id="fallecimiento" class="tab-pane fade">
                                     <h3>Ingrese los datos del fallecimiento</h3>
-                                    @include('units.layouts.basic_form_social', ['unity_id' => $unity->id, 'general_case' => 'Fallecimiento'])
+                                    @include('units.layouts.basic_form_decease', ['unity_id' => $unity->id, 'general_case' => 'Fallecimiento'])
                                 </div>
                             @endif
                         </div>
@@ -62,6 +62,7 @@
             $('.form_basic_accident').trigger("reset");
             $('.form_basic_service').trigger("reset");
             $('.form_basic_water').trigger("reset");
+            $('.form_basic_decease').trigger("reset");
             $('.kmout').val(km_out);
         });
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
@@ -70,4 +71,5 @@
     @include('units.scripts.acc_form')
     @include('units.scripts.service_form')
     @include('units.scripts.water_form')
+    @include('units.scripts.decease_form')
 @endsection

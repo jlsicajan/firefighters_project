@@ -1,4 +1,4 @@
-<form action="#" autocomplete="off" method="POST" class="form_basic">
+<form action="#" autocomplete="off" method="POST" class="form_basic_decease">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <input type="hidden" name="unity_id" id="unity_id" value="{{ $unity_id }}"/>
     <input type="hidden" name="general_case" id="general_case" value="{{ $general_case }}"/>
@@ -8,12 +8,12 @@
     </div>
 
     <div class="form-group">
-        <label for="kmout">Hora salida</label>
+        <label for="timeout">Hora salida</label>
         <input type="text" class="form-control" name="timeout" id="timeout" required placeholder="00:00"/>
     </div>
 
     <div class="form-group">
-        <label for="kmout">Hora entrada</label>
+        <label for="timein">Hora entrada</label>
         <input type="text" class="form-control" name="timein" id="timein" required placeholder="00:00"/>
     </div>
 
@@ -57,7 +57,7 @@
     </div>
 
     <div class="form-group">
-        <label for="patient_case">Caso del paciente</label>
+        <label for="patient_case">Motivo de fallecimiento</label>
         <textarea class="form-control" id="patient_case" name="patient_case" rows="2"
                   required placeholder="Descripcion de lo que le sucedio al paciente"></textarea>
     </div>
@@ -92,7 +92,7 @@
 
     <div class="form-group">
         <label for="unity">Asistente</label>
-        <select class="form-control" id="asistant" name="asistant">
+        <select class="form-control" id="asistant" name="asistant_id">
             <option value="null" selected disabled>-- Seleccione al asistente --</option>
             <option value="no_one">NINGUN ASISTENTE</option>
             @foreach($officials as $official)
@@ -113,7 +113,7 @@
 
     <div class="form-group">
         <label for="unity">Piloto</label>
-        <select class="form-control" id="pilot" name="pilot">
+        <select class="form-control" id="pilot" name="pilot_id">
             <option value="null" selected disabled>-- Seleccione al piloto --</option>
             @foreach($pilots as $pilot)
                 <option value="{{ $pilot->id }}">{{ $pilot->name }}</option>

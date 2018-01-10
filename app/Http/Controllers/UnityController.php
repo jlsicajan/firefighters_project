@@ -90,7 +90,7 @@ class UnityController extends Controller
 
             $unity_data->save();
 
-            $data = ['message' => 'Unidad ' . Input::get('unity_id') . ' ingresado correctamente', 'kmall' => $unity_data->kmin];
+            $data = ['message' => 'Dato para  ' . $unity['name'] . ' ingresado correctamente', 'kmall' => $unity_data->kmin];
 
             return $data;
         }
@@ -139,7 +139,7 @@ class UnityController extends Controller
         }
         $unity_data->save();
 
-        $data = ['message' => 'Unidad ' . Input::get('unity_id') . ' ingresado correctamente', 'kmall' => $unity_data->kmin];
+        $data = ['message' => 'Dato para  ' . $unity['name'] . ' ingresado correctamente', 'kmall' => $unity_data->kmin];
 
         return $data;
     }

@@ -61,7 +61,7 @@
 
     <div class="form-group">
         <label for="patient_input_water">Cantidad si aporto algo el usuario</label>
-        <input max="4" type="number" class="form-control" name="patient_input_water" id="patient_input_water"/>
+        <input max="9999" type="number" class="form-control" name="patient_input_water" id="patient_input_water"/>
     </div>
 
     <div class="form-group">

@@ -149,7 +149,6 @@
 @yield('after_scripts')
 <script>
     $(".spinner_container").hide();
-
     $("#name_responsible_div").hide();
 
     $("#name_responsible_div_a").hide();

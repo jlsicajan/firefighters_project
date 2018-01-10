@@ -79,7 +79,7 @@
                     <td>{{  $unity_data->user->name }}</td>
                     <td>Q. {{ number_format($unity_data->patient_input , 2) }}
                         / {{ $unity_data->patient_phone }}</td>
-                    <td>{{ $uity_data->patient_case }} / <p
+                    <td>{{ $unity_data->patient_case }} / <p
                                 style="color: green">{{ $unity_data->observations }}</p></td>
                     <td class="th_list">
                         <ul type="square">

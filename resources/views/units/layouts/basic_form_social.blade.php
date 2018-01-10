@@ -92,7 +92,7 @@
 
     <div class="form-group">
         <label for="patient_input_service">Cantidad si aporto algo el paciente</label>
-        <input max="4" type="number" class="form-control" name="patient_input_service" id="patient_input_service"/>
+        <input max="9999" type="number" class="form-control" name="patient_input_service" id="patient_input_service"/>
     </div>
 
     <div class="form-group">
