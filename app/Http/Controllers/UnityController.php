@@ -30,6 +30,7 @@ class UnityController extends Controller
             ->orWhere('username', '=', 'byron')
             ->orWhere('username', '=', 'isabel')
             ->orWhere('username', '=', 'david')
+            ->orWhere('username', '=', 'edward_mucia')
             ->orWhere('username', '=', 'narciso')
             ->orWhere('username', '=', 'edson')
             ->get();
