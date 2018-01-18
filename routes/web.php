@@ -35,6 +35,7 @@ Route::get('/gastos/estacion', 'Reports\GeneralSpendStationController@index');
 Route::get('/control/recaudaciones', 'Reports\GeneralCollectionController@index');
 Route::get('/control/novedades', 'Reports\GeneralNewsController@index');
 Route::get('/reporte/semanal', 'Reports\WeeklyController@index');
+Route::get('/contabilidad/general', 'Reports\AccountingController@index');
 
 //      SAVE DATA
 Route::post('/combustible/gas', ['as'   => 'save.gas', 'uses' => 'ExpensesController@saveGas']);
