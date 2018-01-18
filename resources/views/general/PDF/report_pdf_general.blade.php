@@ -22,12 +22,16 @@
         color: #006200;
     }
 
-    .address_to{
+    .address_to, .total_km{
         color: #930000;
     }
 
     .page-break {
         page-break-after: always;
+    }
+
+    .nowrap{
+        white-space: nowrap;
     }
 </style>
 @foreach($unities as $unity_one)
@@ -58,8 +62,13 @@
                     <li class="address_to">Hasta</li>
                 </ul>
             </th>
-            <th>Km salida</th>
-            <th>Km entrada</th>
+            <th class="th_list nowrap">
+                <ul type="square">
+                    <li class="km_out">Km salida</li>
+                    <li class="km_in">Km entrada</li>
+                    <li class="total_km">Km recorridos</li>
+                </ul>
+            </th>
             <th> @if($unity_one->code == "TDP22") Cantidad de agua @else CASO @endif</th>
         </tr>
         </thead>
@@ -87,8 +96,13 @@
                             <li class="address_to">{{ $unity_data->patient_destiny }}</li>
                         </ul>
                     </td>
-                    <td><strong >{{ $unity_data->kmout }}</strong></td>
-                    <td><strong >{{ $unity_data->kmin }}</strong></td>
+                    <td class="th_list nowrap">
+                        <ul type="square">
+                            <li class="km_out">{{ $unity_data->kmout }}</li>
+                            <li class="km_in">{{ $unity_data->kmin }}</li>
+                            <li class="total_km">{{ $unity_data->kmin - $unity_data->kmout }} km recorridos</li>
+                        </ul>
+                    </td>
                     <td><strong >{{ $unity_data->water_spend }}</strong></td>
                 </tr>
             @else
@@ -113,8 +127,13 @@
                             <li class="address_to">{{ $unity_data->patient_destiny }}</li>
                         </ul>
                     </td>
-                    <td><strong >{{ $unity_data->kmout }}</strong></td>
-                    <td><strong >{{ $unity_data->kmin }}</strong></td>
+                    <td class="th_list nowrap">
+                        <ul type="square">
+                            <li class="km_out">{{ $unity_data->kmout }}</li>
+                            <li class="km_in">{{ $unity_data->kmin }}</li>
+                            <li class="total_km">{{ $unity_data->kmin - $unity_data->kmout }} km recorridos</li>
+                        </ul>
+                    </td>
                     <td><strong >{{ $unity_data->general_case }}</strong></td>
                 </tr>
             @endif
