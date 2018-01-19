@@ -161,15 +161,22 @@
 <div id="details" class="clearfix">
     <div id="invoice">
         <table>
+            <tr>
+                <td><strong>UNIDAD</strong></td>
+                <td><strong>INGRESOS</strong></td>
+                <td><strong>EGRESOS POR GASOLINA</strong></td>
+            </tr>
             @foreach($unities as $unity_one)
                 <tr>
-                    <td><strong >TOTAL INGRESOS {{ $unity_one->name }}:</strong></td>
+                    <td><strong >{{ $unity_one->code }}:</strong></td>
                     <td><strong >Q. {{ number_format($total_in[$unity_one->code], 2) }}</strong></td>
+                    <td><strong >Q. {{ number_format($total_gas_out[$unity_one->code], 2) }}</strong></td>
                 </tr>
             @endforeach
             <tr>
                 <td><strong>TOTAL: </strong></td>
                 <td><strong>Q. {{ number_format($total_in_all, 2) }}</strong></td>
+                <td><strong>Q. {{ number_format($total_gas_out_all, 2) }}</strong></td>
             </tr>
         </table>
     </div>

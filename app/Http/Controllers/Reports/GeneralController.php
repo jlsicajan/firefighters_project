@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Reports;
 
+use App\GasSpend;
 use App\Unity;
 use App\UnityData;
 use App\User;
@@ -131,6 +132,7 @@ class GeneralController extends Controller
 
         $unity_datas = [];
         $total_in = [];
+        $total_gas_out = [];
         $km_first = [];
 
         foreach ($unities as $unity) {
@@ -143,6 +145,11 @@ class GeneralController extends Controller
                 ->where('unity_id', '=', $unity->id)
                 ->sum('patient_input');
 
+            $total_gas_out[$unity->code] = GasSpend::orderBy('created_at', 'ASC')
+                ->where('unity_id', '=', $unity->id)
+                ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
+                ->sum('gas_spend');
+
             if (isset($unity_datas[$unity->code][0]->kmout)) {
                 $km_first[$unity->code] = $unity_datas[$unity->code][0]->kmout;
             } else {
@@ -152,11 +159,17 @@ class GeneralController extends Controller
         $total_in_all = UnityData::orderBy('created_at', 'ASC')
             ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
             ->sum('patient_input');
+        
+        $total_gas_out_all = GasSpend::orderBy('created_at', 'ASC')
+            ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
+            ->sum('gas_spend');
 
         $data = ['unity_datas' => $unity_datas,
             'date_from' => $request_date_from,
             'date_to' => $request_date_to,
             'total_in' => $total_in,
+            'total_gas_out' => $total_gas_out,
+            'total_gas_out_all' => $total_gas_out_all,
             'total_in_all' => $total_in_all,
             'unities' => $unities,
             'km_first' => $km_first];
