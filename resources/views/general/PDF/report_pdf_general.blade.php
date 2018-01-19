@@ -5,7 +5,7 @@
         text-align: center;
     }
 
-    .th_list{
+    .th_list {
         text-align: unset;
     }
 
@@ -18,11 +18,11 @@
         color: #006200;
     }
 
-    .address_from{
+    .address_from, .gain {
         color: #006200;
     }
 
-    .address_to, .total_km{
+    .address_to, .total_km, .lost {
         color: #930000;
     }
 
@@ -30,9 +30,15 @@
         page-break-after: always;
     }
 
-    .nowrap{
+    .nowrap {
         white-space: nowrap;
     }
+
+    .p-x-15{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
 </style>
 @foreach($unities as $unity_one)
     <table>
@@ -103,7 +109,7 @@
                             <li class="total_km">{{ $unity_data->kmin - $unity_data->kmout }} km recorridos</li>
                         </ul>
                     </td>
-                    <td><strong >{{ $unity_data->water_spend }}</strong></td>
+                    <td><strong>{{ $unity_data->water_spend }}</strong></td>
                 </tr>
             @else
                 <tr>
@@ -134,7 +140,7 @@
                             <li class="total_km">{{ $unity_data->kmin - $unity_data->kmout }} km recorridos</li>
                         </ul>
                     </td>
-                    <td><strong >{{ $unity_data->general_case }}</strong></td>
+                    <td><strong>{{ $unity_data->general_case }}</strong></td>
                 </tr>
             @endif
             <?php $kmtour[$unity_one->code] = $unity_data->kmin - $km_first[$unity_one->code] ?>
@@ -162,21 +168,27 @@
     <div id="invoice">
         <table>
             <tr>
-                <td><strong>UNIDAD</strong></td>
-                <td><strong>INGRESOS</strong></td>
-                <td><strong>EGRESOS POR GASOLINA</strong></td>
+                <td class="p-x-15"><strong>UNIDAD</strong></td>
+                <td class="p-x-15"><strong>INGRESOS</strong></td>
+                <td class="p-x-15"><strong>EGRESOS POR GASOLINA</strong></td>
+                <td class="p-x-15"><strong>GASTOS DE LA ESTACION</strong></td>
+                <td class="p-x-15"><strong>SALDO</strong></td>
             </tr>
             @foreach($unities as $unity_one)
                 <tr>
-                    <td><strong >{{ $unity_one->code }}:</strong></td>
-                    <td><strong >Q. {{ number_format($total_in[$unity_one->code], 2) }}</strong></td>
-                    <td><strong >Q. {{ number_format($total_gas_out[$unity_one->code], 2) }}</strong></td>
+                    <td>{{ $unity_one->code }}:</strong></td>
+                    <td>Q. {{ number_format($total_in[$unity_one->code], 2) }}</td>
+                    <td>Q. {{ number_format($total_gas_out[$unity_one->code], 2) }}</td>
+                    <td></td>
+                    <td></td>
                 </tr>
             @endforeach
             <tr>
                 <td><strong>TOTAL: </strong></td>
-                <td><strong>Q. {{ number_format($total_in_all, 2) }}</strong></td>
-                <td><strong>Q. {{ number_format($total_gas_out_all, 2) }}</strong></td>
+                <td><strong class="gain">Q. {{ number_format($total_in_all, 2) }}</strong></td>
+                <td><strong class="lost">Q. {{ number_format($total_gas_out_all, 2) }}</strong></td>
+                <td><strong class="lost">Q. {{ number_format($total_station_spends, 2) }}</strong></td>
+                <td><strong class="gain">Q. {{ number_format($total_in_all - ($total_gas_out_all + $total_station_spends), 2) }}</strong></td>
             </tr>
         </table>
     </div>

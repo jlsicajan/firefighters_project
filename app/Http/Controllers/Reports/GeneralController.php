@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports;
 
 use App\GasSpend;
+use App\StationSpend;
 use App\Unity;
 use App\UnityData;
 use App\User;
@@ -164,12 +165,17 @@ class GeneralController extends Controller
             ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
             ->sum('gas_spend');
 
+        $total_station_out = StationSpend::orderBy('created_at', 'ASC')
+            ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
+            ->sum('station_spend');
+
         $data = ['unity_datas' => $unity_datas,
             'date_from' => $request_date_from,
             'date_to' => $request_date_to,
             'total_in' => $total_in,
             'total_gas_out' => $total_gas_out,
             'total_gas_out_all' => $total_gas_out_all,
+            'total_station_spends' => $total_station_out,
             'total_in_all' => $total_in_all,
             'unities' => $unities,
             'km_first' => $km_first];
