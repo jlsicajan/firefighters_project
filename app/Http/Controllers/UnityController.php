@@ -33,6 +33,7 @@ class UnityController extends Controller
             ->orWhere('username', '=', 'edward_mucia')
             ->orWhere('username', '=', 'narciso')
             ->orWhere('username', '=', 'edson')
+            ->orWhere('username', '=', 'kenso')
             ->get();
 
         $kmin_all = UnityData::where('unity_id', '=', $unity_id)->select('kmin')->orderBy('created_at', 'desc')->first();
