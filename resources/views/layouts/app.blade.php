@@ -71,6 +71,8 @@
                                         <li role="separator" class="divider"></li>
                                         <li><a href="{{ url('reporte/semanal') }}">Reporte semanal</a></li>
                                         <li role="separator" class="divider"></li>
+                                        <li><a target="_blank" href="https://google.com.gt">Control de Usuarios</a></li>
+                                        <li role="separator" class="divider"></li>
                                     </ul>
                                 </li>
                             @endif
