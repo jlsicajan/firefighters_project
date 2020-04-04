@@ -18,7 +18,8 @@ Route::get('/api/specific_note/{student_id}/{matter_id}', 'DeveloperController@s
 Route::get('/api/notes_matter/{student_id}/{matter_id}', 'DeveloperController@only_notes');
 
 //      PRINCIPAL PAGES
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@new_index');
+Route::get('/reina_pruebas', 'HomeController@reina_index');
 Route::get('/home', 'HomeController@index');
 Route::get('/combustible', 'ExpensesController@gas');
 Route::get('/estacion', 'ExpensesController@station');

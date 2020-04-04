@@ -30,6 +30,22 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function new_index() {
+        //Identificar que usuario esta logeado
+
+        $user_id_logged = Auth::user()->id; //id del usuario
+        $user = User::find($user_id_logged); //SELECT * FROM user WHERE id = 1;
+        $casc_number = $user->number;
+        $email = $user->email;
+
+        return view('new_home', array('casc_number' => $casc_number, 'user_id_logged' => $user_id_logged,
+                                            'email' => $email));
+    }
+
+    public function reina_index(){
+        return view('reina_home');
+    }
+
     public function changePassword(){
         return view('change_password');
     }
