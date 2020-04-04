@@ -64,8 +64,8 @@
                     </tfoot>
                     <tbody>
                     @foreach(json_decode($unity_datas) as $unity_data)
-                        <tr data-toggle="modal" data-id="{{ $unity_data->id }}" data-target="#unityDetailModal" style="cursor: pointer;">
-                        {{--<tr>--}}
+                        <tr data-toggle="modal" data-id="{{ $unity_data->id }}" data-target="#unityDetailModal"
+                            style="cursor: pointer;">
                             <td>{{ $unity_data->date }}</td>
                             <td>{{  App\Unity::getNameById($unity_data->unity_id) }}</td>
                             <td>{{ $unity_data->patient_name }}</td>
