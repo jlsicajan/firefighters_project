@@ -27,7 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $users = User::all();
+
+        return view('home')->with(['users' => $users]);
     }
 
     public function new_index() {
@@ -65,5 +67,22 @@ class HomeController extends Controller
         }else{
             return response()->json(['error' => 'La contraseña que ingreso no es la actual'], 404);
         }
+    }
+
+    public function users_ajax()
+    {
+        $users_datas = $leagues = DB::table('users')
+            ->select('league_name')
+            ->join('countries', 'countries.country_id', '=', 'leagues.country_id')
+            ->where('countries.country_name', $country)
+            ->get();
+
+        $users_datas = User::all();
+
+        $data = [];
+        foreach ($users_datas as $user) {
+            array_push($data, ['DT_RowClass' => 'tr-content', 'DT_RowId' => $user->id, $user->name, $user->username, $user->number, $user->email]);
+        }
+        return ['data' => $data];
     }
 }
