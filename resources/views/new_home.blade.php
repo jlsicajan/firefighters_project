@@ -9,7 +9,7 @@
             </div>
 
             <div class="col-md-6">
-                <table class="table table-bordered bg-primary">
+                <table class="table table-bordered bg-white">
                     <thead>
                         <tr>
                             <th>Datos Usuario</th>
