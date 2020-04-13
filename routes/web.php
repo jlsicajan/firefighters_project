@@ -36,6 +36,8 @@ Route::get('/gastos/estacion', 'Reports\GeneralSpendStationController@index');
 Route::get('/control/recaudaciones', 'Reports\GeneralCollectionController@index');
 Route::get('/control/novedades', 'Reports\GeneralNewsController@index');
 Route::get('/reporte/semanal', 'Reports\WeeklyController@index');
+Route::get('/control/usuarios', 'UsersController@index');
+Route::get('/control/unidades', 'UsersController@index_unities');
 Route::get('/contabilidad/general', 'Reports\AccountingController@index');
 
 //      SAVE DATA
