@@ -86,6 +86,37 @@
                     @endforeach
                     </tbody>
                 </table>
+                <table id="unity_data_table" class="display table table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th class="white_word">Fecha</th>
+                        <th class="white_word">Unidad</th>
+                        <th class="white_word">Nombre paciente</th>
+                        <th class="white_word">Piloto</th>
+                        <th class="white_word">Asistente</th>
+                        <th class="white_word">Oficial que reporta</th>
+                        <th class="white_word">Paciente aporte / telefono</th>
+                        <th class="white_word">Caso / Observaciones</th>
+                        <th class="white_word">Km salida</th>
+                        <th class="white_word">Km entrada</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th class="white_word">Fecha</th>
+                        <th class="white_word">Unidad</th>
+                        <th class="white_word">Nombre paciente</th>
+                        <th class="white_word">Piloto</th>
+                        <th class="white_word">Asistente</th>
+                        <th class="white_word">Oficial que reporta</th>
+                        <th class="white_word">Paciente aporte / telefono</th>
+                        <th class="white_word">Caso / Observaciones</th>
+                        <th class="white_word">Km salida / Km entrada</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -126,6 +157,42 @@
             showMeridian: 1
         });
         $(document).ready(function () {
+            var unity_table = $('#unity_data_table').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "bProcessing": true,
+                "bServerSide": true,
+                "ajax":{
+                    "url": "{{ URL::route('general.unity.data.ajax') }}",
+                    "dataType": "json",
+                    "type": "POST",
+                    "data":{ _token: "{{ csrf_token() }}"}
+                },
+                "columns": [
+                    {"width": "10%"},
+                    {"width": "10%"},
+                    {"width": "10%"},
+                    {"width": "10%"},
+                    {"width": "10%"},
+                    {"width": "10%"},
+                    {"width": "10%"},
+                    {"width": "10%"},
+                    {"width": "10%"},
+                    {"width": "10%"},
+                ],
+                "language": {
+                    "url": "/datatable/language/spanish.json"
+                },
+                "scrollY": "500px",
+                "scrollCollapse": true,
+                "paging": true,
+                "info": true,
+                "bSort" : false,
+                //fnDrawCallback for autoscroll to top after change pagination datatable xD
+                "fnDrawCallback": function (o) {
+                    $('html,body').animate({scrollTop: 0}, 500);
+                },
+            });
             $('#unity_table').DataTable({
                 "language": {
                     "url": "/datatable/language/spanish.json"
@@ -134,10 +201,7 @@
                 "bSort" : false,
                 //fnDrawCallback for autoscroll to top after change pagination datatable xD
                 "fnDrawCallback": function (o) {
-                    if ( o._iDisplayStart != oldStart ) {
-                        var targetOffset = $('#example').offset().top;
-                        $('html,body').animate({scrollTop: targetOffset}, 500);
-                    }
+                    $('html,body').animate({scrollTop: 0}, 500);
                 },
             });
             $("#unityDetailModal").on("show.bs.modal", function (e) {

@@ -74,6 +74,104 @@ class GeneralController extends Controller
         return $pdf->download($name_file . '-' . $date . '.pdf');
     }
 
+    public function load_unity_data_ajax(Request $request)
+    {
+        $data = [];
+
+        $columns = array(
+            0 => 'date',
+            1 => 'unity_id',
+            2 => 'patient_name',
+            3 => 'pilot_id',
+            4 => 'asistant_id',
+            5 => 'user_id',
+            6 => 'patient_input',
+            7 => 'patient_case',
+            8 => 'kmout',
+            9 => 'kmin',
+        );
+
+        $total_data = UnityData::count();
+
+        $total_filtered = $total_data;
+
+        $limit = $request->input('length') > 0 ? $request->input('length') : 10;
+        $limit = $request->input('length');
+        $start = $request->input('start');
+//        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+
+        if(empty($request->input('search.value')))
+        {
+            $unity_datas = UnityData::take($limit)
+                ->skip($start)
+                ->orderBy('created_at', 'DESC')
+                ->get();
+        }
+        else {
+            $search = $request->input('search.value');
+
+            $unity_datas =  UnityData::where('date','LIKE',"%{$search}%")
+                ->orWhere('unity_id', 'LIKE',"%{$search}%")
+                ->orWhere('patient_name', 'LIKE',"%{$search}%")
+                ->orWhere('pilot_id', 'LIKE',"%{$search}%")
+                ->orWhere('asistant_id', 'LIKE',"%{$search}%")
+                ->orWhere('user_id', 'LIKE',"%{$search}%")
+                ->orWhere('patient_input', 'LIKE',"%{$search}%")
+                ->orWhere('patient_case', 'LIKE',"%{$search}%")
+                ->orWhere('kmout', 'LIKE',"%{$search}%")
+                ->orWhere('kmin', 'LIKE',"%{$search}%")
+                ->limit($limit)
+                ->offset($start)
+                ->orderBy('created_at', 'DESC')
+                ->get();
+
+            $total_filtered = UnityData::where('date','LIKE',"%{$search}%")
+                ->orWhere('unity_id', 'LIKE',"%{$search}%")
+                ->orWhere('patient_name', 'LIKE',"%{$search}%")
+                ->orWhere('pilot_id', 'LIKE',"%{$search}%")
+                ->orWhere('asistant_id', 'LIKE',"%{$search}%")
+                ->orWhere('user_id', 'LIKE',"%{$search}%")
+                ->orWhere('patient_input', 'LIKE',"%{$search}%")
+                ->orWhere('patient_case', 'LIKE',"%{$search}%")
+                ->orWhere('kmout', 'LIKE',"%{$search}%")
+                ->orWhere('kmin', 'LIKE',"%{$search}%")
+                ->count();
+        }
+
+        if (Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian' | Auth::user()->name == 'Administrador' | Auth::user()->username == 'reina') {
+//            $unity_datas = UnityData::orderBy('created_at', 'DESC')->get();
+            $data['unity_data'] = [];
+            foreach ($unity_datas as $unity_data) {
+                // TODO should be changed, this is not a proper way, we need to improve performance, make right relations between models
+                $assistant_information = $unity_data->asistant_id != '' ? User::getNameById($unity_data->asistant_id) : 'NINGUN ASISTENTE';//custom messange NINGUN ASISTENTE
+                $pilot_information = User::getNameById($unity_data->pilot_id);
+                $who_reports = User::getNameById($unity_data->user_id);
+
+                array_push($data['unity_data'], [
+                    'DT_RowClass' => 'tr-content',
+                    'DT_RowId' => $unity_data->id,
+                    $unity_data->date,
+                    Unity::getNameById($unity_data->unity_id),
+                    $unity_data->patient_name,
+                    $pilot_information,
+                    $assistant_information,
+                    $who_reports,
+                    'Q. ' . number_format($unity_data->patient_input, 2) . ' / ' . $unity_data->patient_phone,
+                    $unity_data->patient_case . ' / <p style="color: green">' . $unity_data->observations . '</p>',
+                    $unity_data->kmout,
+                    $unity_data->kmin]);
+            }
+            
+            return ["draw" => intval($request->input('draw')),
+                "recordsTotal" => intval($total_data),
+                "recordsFiltered" => intval($total_filtered),
+                'data' => $data['unity_data'], 'unities' => Unity::all()];
+        } else {
+            return 'Acceso denegado';
+        }
+    }
+
     public function xlsx($request)
     {
         Excel::create('General unidades', function ($excel) use ($request) {
@@ -160,7 +258,7 @@ class GeneralController extends Controller
         $total_in_all = UnityData::orderBy('created_at', 'ASC')
             ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
             ->sum('patient_input');
-        
+
         $total_gas_out_all = GasSpend::orderBy('created_at', 'ASC')
             ->whereBetween('created_at', [date('Y-m-d H:i:s', $date_from), date('Y-m-d H:i:s', $date_to)])
             ->sum('gas_spend');
