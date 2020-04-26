@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
@@ -71,12 +72,6 @@ class HomeController extends Controller
 
     public function users_ajax()
     {
-        $users_datas = $leagues = DB::table('users')
-            ->select('league_name')
-            ->join('countries', 'countries.country_id', '=', 'leagues.country_id')
-            ->where('countries.country_name', $country)
-            ->get();
-
         $users_datas = User::all();
 
         $data = [];

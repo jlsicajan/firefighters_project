@@ -316,27 +316,47 @@ class GeneralController extends Controller
         }
     }
 
-    public function generate_char_info()
+    private function make_char_by_year($year)
     {
         $sqlQuery = "SELECT SQL_NO_CACHE
           general_case,
           MONTH(created_at) AS date,
-          COUNT(*) AS quantity
+          COUNT(*) AS quantity,
+          YEAR(created_at) AS year_row
           FROM unity_datas
-          GROUP BY MONTH(created_at), general_case;";
-        $results = DB::select(DB::raw($sqlQuery));
+          WHERE YEAR(created_at) = " . $year . " GROUP BY MONTH(created_at), YEAR(created_at), general_case;";
+        return DB::select(DB::raw($sqlQuery));
+    }
 
+    private function parse_to_highchart_structure($data_to_parse){
         $char = [];
-        foreach ($results as $result) {
+        foreach ($data_to_parse as $result) {
             $char[$result->general_case][$result->date] = $result->quantity;
         }
-        foreach ($results as $result) {
+        foreach ($data_to_parse as $result) {
             for ($y = 1; $y <= ltrim(date('m'), '0'); $y++) {
                 if (!isset($char[$result->general_case][$y])) {
                     $char[$result->general_case][$y] = 0;
                 }
             }
         }
+
+        return $char;
+    }
+
+    public function generate_char_info()
+    {
+
+        $results_2017 = $this->make_char_by_year(2017);
+        $results_2018 = $this->make_char_by_year(2018);
+        $results_2019 = $this->make_char_by_year(2019);
+        $results_2020 = $this->make_char_by_year(2020);
+
+        $char = [];
+        $char['2017'] = $this->parse_to_highchart_structure($results_2017);
+        $char['2018'] = $this->parse_to_highchart_structure($results_2018);
+        $char['2019'] = $this->parse_to_highchart_structure($results_2019);
+        $char['2020'] = $this->parse_to_highchart_structure($results_2020);
 
         return $char;
     }
