@@ -5,7 +5,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <!-- Left Side Of Navbar -->
-        <a class="navbar-brand nav-link " href="{{ url('home') }}">Estacion 22</a>
+        <a class="navbar-brand nav-link " href="{{ url('/') }}">Estacion 22</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 bg-dark">
             @if (Auth::check())
                 @if (Auth::user()->username == 'edvin' | Auth::user()->username == 'fabian'| Auth::user()->name == 'Administrador' | Auth::user()->username == 'reina')

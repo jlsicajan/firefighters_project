@@ -29,11 +29,6 @@ class HomeController extends Controller
     public function index()
     {
         $users = User::all();
-
-        return view('home')->with(['users' => $users]);
-    }
-
-    public function new_index() {
         //Identificar que usuario esta logeado
 
         $user_id_logged = Auth::user()->id; //id del usuario
@@ -41,8 +36,8 @@ class HomeController extends Controller
         $casc_number = $user->number;
         $email = $user->email;
 
-        return view('new_home', array('casc_number' => $casc_number, 'user_id_logged' => $user_id_logged,
-                                            'email' => $email));
+        return view('home')->with(['users' => $users, 'casc_number' => $casc_number, 'user_id_logged' => $user_id_logged,
+            'email' => $email]);
     }
 
     public function reina_index(){
